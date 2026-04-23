@@ -1,0 +1,48 @@
+/* inter-400 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/inter-v20-latin-regular.woff2') format('woff2'),
+       url('../fonts/inter-v20-latin-regular.ttf') format('truetype');
+}
+/* inter-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/inter-v20-latin-700.woff2') format('woff2'),
+       url('../fonts/inter-v20-latin-700.ttf') format('truetype');
+}
+
+/* great-vibes-400 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Great Vibes';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/great-vibes-v21-latin-regular.woff2') format('woff2'),
+       url('../fonts/great-vibes-v21-latin-regular.ttf') format('truetype');
+}
+
+/* helvetica-400 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/HelveticaRegular.woff2') format('woff2'),
+       url('../fonts/HelveticaRegular.ttf') format('truetype');
+}
+
+/* helvetica-700 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/HelveticaBold.woff2') format('woff2'),
+       url('../fonts/HelveticaBold.ttf') format('truetype');
+}
