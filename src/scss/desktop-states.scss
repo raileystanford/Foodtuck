@@ -1,3 +1,107 @@
 @use './modules/variables.scss' as var;
 @use './modules/mixins.scss' as mix;
 @use './modules/templates.scss';
+
+
+.logotype {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &__left, &__right {
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+    transform: scale(1.06);
+
+    .logotype__left {
+      color: var.$orange;
+    }
+
+    .logotype__right {
+      color: var.$white;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.93);
+  }
+}
+
+.nav-menu__link {
+  will-change: transform;
+  transition: all 0.25s;
+  position: relative;
+
+  &::after {
+    content: '';
+    @extend %px-cen;
+    position: absolute;
+    bottom: 2px;
+    width: 0%;
+    height: 2px;
+    background: var.$white;
+    transition: all 0.25s;
+  }
+
+  &:not(.nav-menu__link--active) {
+
+    &:hover, &:focus {
+      
+      color: var.$orange;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: translateY(3px);
+    }
+
+  }
+  
+}
+
+.search__submit, .nav-links__link, .soc-line__link {
+  will-change: transform;
+  transition: all 0.2s;
+  
+  &-icon, .nav-links__icon, .soc-line__icon {
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+    transform: scale(1.15);
+
+    .search__submit-icon, .nav-links__icon {
+      stroke: var.$orange;
+    }
+
+    .soc-line__icon {
+      fill: var.$orange;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.92);
+  }
+}
+
+.btn-circle {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    transform: scale(1.05);
+    border-radius: 10px;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.92);
+  }
+}

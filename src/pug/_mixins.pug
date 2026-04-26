@@ -1,0 +1,156 @@
+mixin nav-menu(links, attr)
+
+  -
+    links = links ?? [
+      { text: 'Home', href: '#', target: "_blank", active: true },
+      { text: 'Menu', href: '#', target: "_blank" },
+      { text: 'Blog', href: '#', target: "_blank" },
+      { text: 'Pages', href: '#', target: "_blank" },
+      { text: 'About ', href: '#', target: "_blank" },
+      { text: 'Shop', href: '#', target: "_blank" },
+      { text: 'Contact', href: '#', target: "_blank" },
+    ]
+
+  ul(class="nav-menu")&attributes(attr)
+
+    each item, index in links
+
+      - let isActive = item.active ? ' nav-menu__link--active' : '';
+    
+      li(class="nav-menu__li")
+        a(href=item.href target=item.target class=`nav-menu__link${isActive} menu-text`)= item.text
+
+mixin nav-links(links, attr)
+
+  -
+    links = links ?? [ 
+      { href: '#', icon: './images/sprite.svg#user' },
+      { href: '#', icon: './images/sprite.svg#cart' },
+    ]
+
+  div(class="nav-links")&attributes(attr)
+
+    each item, index in links 
+
+      a(href=item.href target=item.target class="nav-links__link")
+        svg(class="nav-links__icon")
+          use(xlink:href=item.icon)
+
+mixin search(icon, id, attr)
+
+  - icon = icon ?? './images/sprite.svg#search';
+  - id = id ?? 'search';
+
+  form(action="#" method="post" class="search" data-form)&attributes(attr)
+
+    div(class="search__inner")
+
+      div(class="search__input-area")
+
+        input(type="search" id=id class="search__input menu-text" autocomplete="off" data-validate)
+
+        button(type="submit" class="search__submit")
+          svg(class="search__submit-icon")
+            use(xlink:href=icon)
+
+      span(class="search__warning mini-text" data-warn=id)
+
+mixin soc-line(links, attr)
+
+  -
+    links = links ?? [
+      { href: 'https://www.facebook.com', target: '_blank', icon: './images/sprite.svg#facebook' },
+      { href: 'https://x.com', target: '_blank', icon: './images/sprite.svg#twitter' },
+      { href: 'https://ru.pinterest.com', target: '_blank', icon: './images/sprite.svg#pinterest' },
+    ]
+
+  div(class="soc-line")&attributes(attr)
+
+    each item, index in links
+
+      a(href=item.href target=item.target class="soc-line__link")
+        svg(class="soc-line__icon")
+          use(xlink:href=item.icon)
+    
+mixin heading(content, attr)
+
+  -
+    content = content ?? {
+      //- title1: 'Its Quick & Amusing!', For h1 tag
+      title2: 'Its Quick & Amusing!',
+      sub: '<span class="heading__cl">Th</span>e Art of speed food Quality',
+      //- text
+    }
+
+  div(class="heading")&attributes(attr)
+
+    if content.title1 
+      h1(class="heading__title curvy-text")= content.title1 
+    else 
+      h2(class="heading__title curvy-text")= content.title2
+
+    em(class="heading__subtitle bold-text")!= content.sub
+
+    if content.text 
+      p(class="heading__text menu-text")= content.text
+
+mixin btn-circle(content, attr)
+
+  if typeof content === 'string'
+
+    - content = content ?? 'See Menu';
+
+    button(class="btn-circle menu-text")&attributes(attr)= text
+
+  else
+
+    - content = content ?? { text: 'See Menu', href: '#', target: '_blank' }
+
+    a(href=content.href target=content.target class="btn-circle menu-text")&attributes(attr)= content.text
+  
+mixin food-gravity(attr)
+
+  div(class="food-gravity")&attributes(attr)
+
+    div(class="food-gravity__circle" data-parallax="0.035/0.07/100/normal/once/true")
+
+    picture
+      source(srcset="./images/illustrations/food-grav3.png" type="image/png")
+      img(src="./images/illustrations/food-grav3.png" alt="Dish" class="food-gravity__img food-gravity__img--branch" data-parallax="0.035/0.07/100/normal/once/true")
+
+    picture
+      source(srcset="./images/illustrations/food-grav4.png" type="image/png")
+      img(src="./images/illustrations/food-grav4.png" alt="Dish" class="food-gravity__img food-gravity__img--wood" data-parallax="0.035/0.07/100/normal/once/true")
+
+    picture
+      source(srcset="./images/illustrations/food-grav2.webp" type="image/webp")
+      img(src="./images/illustrations/food-grav2.png" alt="Dish" class="food-gravity__img food-gravity__img--mint" data-parallax="0.035/0.07/100/normal/once/true")
+
+    picture
+      source(srcset="./images/illustrations/leaf-small.png" type="image/webp")
+      img(src="./images/illustrations/leaf-small.png" alt="Dish" class="food-gravity__img food-gravity__img--leaf-s" data-parallax="0.035/0.07/100/normal/once/true")
+
+    picture
+      source(srcset="./images/illustrations/leaf-big.webp" type="image/webp")
+      img(src="./images/illustrations/leaf-big.png" alt="Dish" class="food-gravity__img food-gravity__img--leaf" data-parallax="0.025/0.1/100/normal/once/true")
+
+    picture
+      source(srcset="./images/illustrations/food-grav1.webp" type="image/webp")
+      img(src="./images/illustrations/food-grav1.png" alt="Dish" class="food-gravity__img food-gravity__img--main" data-parallax="0.017/0.06/100/normal/once/true")
+
+
+
+
+
+
+
+
+
+
+
+
+mixin logotype(attr)
+
+  a(href="./index.html" class="logotype logo-text")&attributes(attr)
+    span(class="logotype__left") Food 
+    span(class="logotype__right") tuck

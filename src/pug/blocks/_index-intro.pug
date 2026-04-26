@@ -1,0 +1,23 @@
+div(class="index-intro header__index-intro")
+
+  article(class="index-intro__article")
+
+    +soc-line(null, { class: 'index-intro__soc-line' })
+    
+    div(class="index-intro__body")
+
+      +heading(
+        {
+          title1: 'Its Quick & Amusing!',
+          sub: '<span class="heading__cl">Th</span>e Art of speed food Quality',
+          text: 'Master prep, timing, and ingredient integrity. Never sacrifice taste for speed - excellence can be instant.'
+        },
+        { class: 'index-intro__heading' }
+      )
+
+      +btn-circle(
+        { text: 'See Menu', href: '#', target: '_blank' },
+        { class: 'index-intro__btn-circle' }
+      )
+
+  +food-gravity({ class: "index-intro__food-gravity" })

@@ -3,3 +3,172 @@
 @use './modules/variables.scss' as var;
 @use './modules/templates.scss';
 @use './modules/mixins.scss' as mix;
+@use './modules/typography.scss';
+
+
+.logotype {
+  @include mix.flex(nowrap, 0px);
+  color: var.$white;
+
+  &__right {
+    color: var.$orange;
+  }
+}
+
+.nav-menu {
+  @include mix.flex(wrap, 3px 32px);
+  align-items: center;
+
+  &__li {
+    display: flex;
+  }
+
+  &__link {
+    color: var.$white;
+    padding: 3px 0;
+
+    &--active {
+      color: var.$orange;
+      font-weight: 700;
+      pointer-events: none;
+    }
+  }
+}
+
+.nav-links {
+  @include mix.flex(wrap, 16px);
+  align-items: center;
+
+  &__link {
+    width: 24px;
+    height: 30px;
+    padding: 3px 0;
+  }
+
+  &__icon {
+    @extend %wh-100;
+    display: block;
+    stroke: var.$white;
+    stroke-width: 2px;
+    fill: transparent;
+  }
+}
+
+.search {
+  width: 24px;
+  height: 27px;
+  position: relative;
+
+  &__inner {
+    @include mix.flex-col(3px);
+    position: absolute;
+    top: 0px;
+    right: calc(100% - 24px);
+    width: 27px;
+    transition: all 0.25s;
+  }
+
+  &__input-area {
+    position: relative;
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid var.$orange;
+    height: 31px;
+    color: var.$white;
+    padding: 0 27px 0 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s;
+
+    &.invalid {
+      transition: all 0.2s;
+      border-color: var.$red;
+    }
+  }
+
+  &__submit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 27px;
+    padding: 3px 0;
+  }
+
+  &__submit-icon {
+    @extend %wh-100;
+    display: block;
+    stroke: var.$white;
+    stroke-width: 2px;
+    fill: transparent;
+  }
+
+  &__warning {
+    color: var.$red;
+    opacity: 0;
+    transition: all 0.2s;
+    height: 0px;
+  }
+
+  &.active, &.focused {
+
+    .search__inner {
+      width: 200px;
+    }
+
+    .search__input {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .search__warning.active {
+      opacity: 1;
+    }
+  }
+}
+
+.custom-bg {
+  position: relative;
+
+  &::before {
+    content: '';
+    @extend %px-cen;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    background: var.$black;
+    z-index: -1;
+  }
+}
+
+.navbar {
+  @include mix.flex(nowrap, 29px);
+  align-items: center;
+  justify-content: space-between;
+  background: var.$black;
+  padding: 29px 0;
+
+  &__nav-menu {
+    margin: 1px 0 0 83.5px;
+    max-width: 600px;
+  }
+
+  &__btns {
+    @include mix.flex(wrap, 16px);
+    align-items: center;
+  }
+}
+
+.btn-circle {
+  @extend %flex-cen;
+  padding: 18px 20px;
+  border-radius: 30px;
+  background: var.$orange;
+  color: var.$white;
+  text-align: center;
+}

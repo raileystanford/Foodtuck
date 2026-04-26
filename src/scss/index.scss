@@ -3,3 +3,163 @@
 @use './modules/templates.scss';
 @use './common.scss';
 
+BODY {
+  background: var.$black;
+}
+
+.soc-line {
+  @include mix.flex-col(25px);
+  align-items: center;
+
+  &::before, &::after {
+    content: '';
+    width: 1px;
+    height: 100%;
+    background: var.$white;
+    margin: 0 0 15px 0;
+  }
+
+  &::after {
+    margin: 15px 0 0 0;
+  }
+
+  &__link {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+  }
+
+  &__icon {
+    @extend %wh-100;
+    display: block;
+    fill: var.$white;
+  }
+}
+
+.heading {
+  @include mix.flex-col(8px);
+
+  &__title, &__cl {
+    color: var.$orange;
+  }
+
+  &__subtitle {
+    color: var.$white;
+  }
+
+  &__text {
+    margin: 28px 0 0 0;
+    color: var.$white;
+  }
+}
+
+.food-gravity {
+  position: relative;
+  height: 622px;
+  width: 840px;
+
+  &__circle {
+    width: 68.81%;
+    height: 92.93%;
+    border: 2px solid var.$white;
+    border-radius: 50%;
+    position: absolute;
+    left: 4%;
+    top: 3.6%;
+  }
+
+  &__img {
+    will-change: transform;
+    display: block;
+    position: absolute;
+    filter: saturate(1.3);
+
+    &--main {
+      width: 70.3585%;
+      height: 94.374%;
+      left: 12.6%;
+      top: 5%;
+    }
+
+    &--leaf {
+      width: 48.453%;
+      height: 99.68%;
+      top: 0%;
+      left: 51.35%;
+    }
+
+    &--leaf-s {
+      width: 4.167%;
+      height: 4.985%;
+      left: 10%;
+      top: 76.4%;
+    }
+    
+    &--mint {
+      width: 11.43%;
+      height: 15.757%;
+      left: 7.9%;
+      top: 9%;
+    }
+
+    &--branch {
+      width: 5.953%;
+      height: 9.326%;
+      top: 58.7%;
+      left: 3.1%;
+    }
+
+    &--wood {
+      width: 8.93%;
+      height: 11.737%;
+      top: 36.2%;
+      left: 0%
+    }
+
+  }
+}
+
+.index-intro {
+  @include mix.flex(nowrap, 30px);
+  justify-content: space-between;
+  padding: 118px 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    @extend %px-cen;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(var.$trans-black1, var.$trans-black1), 
+                url(../images/backgrounds/intro-bg.jpg) 0 -90px / cover no-repeat;
+    z-index: -1;
+  }
+
+  &__article {
+    @include mix.flex(nowrap, 40px);
+    align-self: center;
+  }
+
+  &__body {
+    @include mix.flex-col(30px);
+    max-width: 474px;
+    padding: 95px 0;
+  }
+
+  &__btn-circle {
+    width: 190px;
+  }
+
+  &__food-gravity {
+    flex-shrink: 0;
+  }
+}
+
+.header {
+
+  &__index-intro {
+    margin: 0 -70px;
+  }
+}

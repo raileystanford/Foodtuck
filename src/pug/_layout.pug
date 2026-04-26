@@ -1,0 +1,48 @@
+include ./_mixins.pug
+
+doctype html
+html(lang="en")
+
+  head
+
+    block title
+      title Foodtuck
+
+    block meta-tags
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+
+    block fav-icons
+      link(rel="icon" href="./favicon.ico" type="image/x-icon" sizes="any")
+      link(rel="icon" href="./images/favicon.png" type="image/png" sizes="64x64")
+
+    block styles-libs
+
+    block common-styles 
+      link(rel="stylesheet" href="./css/desktop-states.css" media="(min-width: 768px)")
+      link(rel="stylesheet" href="./css/mobile-states.css" media="(max-width: 768px)")
+
+    block styles
+
+    block scripts-libs
+
+    block common-scripts 
+      script(src="./js/common.js" type="module")
+
+    block scripts
+
+  body
+
+    div(class="page-wrapper")
+
+      header(class="header")
+
+        include ./blocks/_header-nav.pug
+
+        block header-content
+
+
+
+      main(class="main")
+
+      footer(class="footer")
