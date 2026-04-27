@@ -1,9 +1,11 @@
-nav(class="navbar custom-bg")
+nav(class="navbar")
 
-  +logotype({ class: 'navbar__logotype' })
-  +nav-menu(null, { class: 'navbar__nav-menu' })
+  div(class="navbar__inner")
 
-  div(class="navbar__btns")
+    +logotype({ class: 'navbar__logotype' })
+    +nav-menu(null, { class: 'navbar__nav-menu' })
 
-    +search(null, null, { class: 'navbar__search' })
-    +nav-links(null, { class: 'navbar__nav-links' })
+    div(class="navbar__btns")
+
+      +search(null, null, { class: 'navbar__search' })
+      +nav-links(null, { class: 'navbar__nav-links' })

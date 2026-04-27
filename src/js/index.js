@@ -5,4 +5,4 @@ import {
 
 // Plugins
 
-new Parallax();
+// new Parallax();

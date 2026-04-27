@@ -1,3 +1,31 @@
 @use './modules/variables.scss' as var;
 @use './modules/mixins.scss' as mix;
 @use './modules/templates.scss';
+
+
+.logotype, .btn-circle {
+  will-change: transform;
+  transition: all 0.1s;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.soc-line__link {
+  will-change: transform;
+  transition: all 0.1s;
+
+  .soc-line__icon {
+    transition: all 0.1s;
+  }
+
+  &:active {
+    transform: scale(0.9);
+
+    .soc-line__icon {
+      fill: var.$orange;
+    }
+
+  }
+}

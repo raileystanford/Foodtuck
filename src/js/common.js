@@ -1,6 +1,12 @@
 import { 
   FormValidator,
+  BurgerMenu,
+  UpdatePageTitle,
 } from "./modules/modules.js";
+
+import { index_titles } from "./modules/dictionary.js";
+
+removeMobileBlocks();
 
 
 // Plugins
@@ -17,6 +23,18 @@ new FormValidator({
   emailInput: {
     // allowedDomains: [ '@gmail.com', '@proton.me' ], // Разрешенные почтовые домены. Если не нужно фильтровать то не пишиф
   },
+});
+
+new BurgerMenu({
+  activationBreakpoint: 768,
+  closeByClickOutOfMenu: true,
+  exceptBtns: '[data-lang-var], .button', // Кроме button с указаными селекторами. При клике на такие кнопки меню не закроется
+  openCallback: function(info) {},
+  closeCallback: function(info) {},
+});
+
+new UpdatePageTitle({
+  dictionary: index_titles,
 });
 
 
@@ -197,9 +215,56 @@ function formValidatorEventsHandler() {
 
 }
 
+function removeMobileBlocks() {
+
+  let mobNavbar = document.querySelector('.mob-navbar');
+  let mobMenu = document.querySelector('.mob-menu');
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (media) return;
+
+  if (mobNavbar) mobNavbar.remove();
+  if (mobMenu) mobMenu.remove();
+
+}
+
+function fixedNavbarState() {
+
+  let desktopNavbar = document.querySelector('.header .navbar');
+  let mobileNavbar = document.querySelector('.mob-navbar');
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!media && !desktopNavbar) return;
+  if (media && !mobileNavbar) return;
+
+  window.addEventListener('scroll', (event) => {
+
+    if (window.pageYOffset > 0) {
+
+      if (!media) {
+        desktopNavbar.classList.add('active');
+      } else {
+        mobileNavbar.classList.add('active');
+      }
+
+    } else {
+
+      if (!media) {
+        desktopNavbar.classList.remove('active');
+      } else {
+        mobileNavbar.classList.remove('active');
+      }
+
+    }
+
+  });
+
+}
+
 
 
 
 focusStateFix();
 searchShowHide();
 formValidatorEventsHandler();
+// fixedNavbarState();

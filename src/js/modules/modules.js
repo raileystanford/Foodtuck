@@ -599,6 +599,182 @@ class Parallax {
 
 }
 
+class BurgerMenu {
+
+  constructor(params) {
+
+    this.params = params ?? {};
+    this.params.exceptBtns = this.params.exceptBtns ?? '';
+    let media = this.params.activationBreakpoint ?? 768;
+    let mediaOk = window.matchMedia(`(max-width: ${media}px)`).matches;
+
+    if (!mediaOk) return;
+
+    this.ownMethodsBinder();
+    this.getElements();
+    this.createOverlay();
+    this.setEventListeners();
+
+  }
+
+  setEventListeners() {
+
+    document.addEventListener('click', (event) => {
+        
+      let target = event.target;
+      let except = this.params.exceptBtns;
+
+      if (target.closest('[data-burger-open]')) {
+        this.openBurgerMenu();
+      } else if (target.closest('[data-burger-close]')) {
+        this.closeBurgerMenu();
+      } else if ((target.closest('a') || target.closest(`button:not(${except})`)) && target.closest('[data-burger-content]')) {
+        this.closeBurgerMenu();
+      } else if (!target.closest('[data-burger-content]') && !target.closest('[data-burger-open]') && this.params.closeByClickOutOfMenu) {
+        this.closeBurgerMenu();
+      }
+
+    });
+
+  }
+
+  openBurgerMenu() {
+    this.openButton.classList.toggle('active');
+    this.content.classList.toggle('active');
+    this.overlay?.classList.toggle('active');
+    
+    this.handlePageOverflow();
+    this.params.openCallback?.({ 
+      button: this.openButton, 
+      content: this.content, 
+      overlay: this.overlay,
+      closeBtn: this.closeButton,
+    });
+  }
+
+  closeBurgerMenu() {
+    this.openButton.classList.remove('active');
+    this.content.classList.remove('active');
+    this.overlay?.classList.remove('active');
+
+    this.handlePageOverflow();
+    this.params.closeCallback?.({ 
+      button: this.openButton, 
+      content: this.content, 
+      overlay: this.overlay,
+      closeBtn: this.closeButton,
+    });
+  }
+
+  handlePageOverflow() {
+    let burgerActive = this.content.matches('.active');
+    let scrollOffset = window.innerWidth - document.documentElement.clientWidth;
+
+    if (burgerActive) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = scrollOffset + 'px';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+  } 
+
+  createOverlay() {
+    if (this.params.needOverlay) {
+      this.overlay = document.createElement('div');
+      this.overlay.classList.add('burger-overlay');
+      document.body.append(this.overlay);
+    }
+  }
+
+  getElements() {
+    this.openButton = document.querySelector('[data-burger-open]');
+    this.closeButton = document.querySelector('[data-burger-close]');
+    this.content = document.querySelector('[data-burger-content]');
+  }
+
+}
+
+class UpdatePageTitle {
+
+  constructor(params) {
+    this.params = params ?? {};
+    this.items = Array.from(document.querySelectorAll('[data-title]'));
+    this.title = document.querySelector('title');
+    let media = window.matchMedia(`(max-width: ${this.params.mobile ?? 768}px)`).matches;
+    
+    if (this.items.length > 0 && !media) {
+      this.ownMethodsBinder();
+      this.createObserver();
+      this.installObserverOnElements();
+      this.translateListener();
+    }
+  
+  }
+
+  installObserverOnElements() {
+
+    this.items.forEach((item) => this.observer.observe(item));
+
+  }
+
+  createObserver() {
+
+    let params = this.params.observer ?? {};
+
+    let options = {
+      root: null,
+      rootMargin: params.rootMargin ?? '0px',
+      threshold: params.threshold ?? 0.4,
+      delay: params.delay ?? 0
+    }
+
+    this.observer = new IntersectionObserver(this.observerHandler, options);
+
+  }
+
+  observerHandler(list, observer) {
+
+    list.forEach((item) => {
+
+      let element = item.target;
+      let msg = element.dataset.title;
+
+      if (item.isIntersecting) {
+        
+        if (this.params.dictionary) {
+          this.title._translateKey = msg; 
+          this.translator();
+        } else {
+          this.title.textContent = msg;
+        }
+  
+      }
+
+    })
+
+  }
+
+  translateListener() {
+
+    if (!this.params.dictionary) return;
+
+    document.addEventListener('translated', (event) => this.translator());
+
+  }
+
+  translator() {
+
+    let lang = document.documentElement.lang;
+    let key = this.title._translateKey;
+    if (!key) return;
+    let text = this.params.dictionary[key][lang];
+    this.title.textContent = text;
+
+  }
+
+}
+
 
 
 
@@ -625,9 +801,13 @@ function setupMixin(...classes) {
 setupMixin(
   FormValidator,
   Parallax,
+  BurgerMenu,
+  UpdatePageTitle,
 );
 
 export {
   FormValidator,
   Parallax,
+  BurgerMenu,
+  UpdatePageTitle,
 }

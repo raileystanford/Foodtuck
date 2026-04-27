@@ -19,7 +19,7 @@ html(lang="en")
     block styles-libs
 
     block common-styles 
-      link(rel="stylesheet" href="./css/desktop-states.css" media="(min-width: 768px)")
+      link(rel="stylesheet" href="./css/desktop-states.css" media="(min-width: 769px)")
       link(rel="stylesheet" href="./css/mobile-states.css" media="(max-width: 768px)")
 
     block styles
@@ -32,6 +32,9 @@ html(lang="en")
     block scripts
 
   body
+
+    include ./blocks/_mob-navbar.pug
+    include ./blocks/_mob-menu.pug
 
     div(class="page-wrapper")
 

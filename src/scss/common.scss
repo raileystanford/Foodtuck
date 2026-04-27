@@ -147,11 +147,35 @@
 }
 
 .navbar {
-  @include mix.flex(nowrap, 29px);
-  align-items: center;
-  justify-content: space-between;
+  display: flex;
+  justify-content: center;
   background: var.$black;
-  padding: 29px 0;
+  padding: 29px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  &::after {
+    content: '';
+    @extend %px-cen;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var.$orange;
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.4s;
+  }
+
+  &__inner {
+    @include mix.flex(nowrap, 29px);
+    align-items: center;
+    justify-content: space-between;
+    width: 1320px;
+  }
 
   &__nav-menu {
     margin: 1px 0 0 83.5px;
@@ -162,13 +186,236 @@
     @include mix.flex(wrap, 16px);
     align-items: center;
   }
+
+  &.active {
+    
+    &::after {
+      opacity: 1;
+    }
+
+  }
 }
 
-.btn-circle {
-  @extend %flex-cen;
-  padding: 18px 20px;
-  border-radius: 30px;
-  background: var.$orange;
-  color: var.$white;
-  text-align: center;
+.header {
+  padding: 90px 0 0 0;
+}
+
+.mob-navbar {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 16px 20px;
+  width: 100%;
+  background: var.$black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  &::after {
+    content: '';
+    @extend %px-cen;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var.$orange;
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.4s;
+  }
+
+  &__logotype {
+    font-size: 27px;
+  }
+
+  &__burger {
+    @include mix.flex-col(6px);
+    width: 39px;
+
+    &.active {
+
+      .mob-navbar__burger-line {
+        background: var.$red;
+
+        &:nth-child(1) {
+          transform: rotate(-45deg) translate(3px, -3.5px);
+        }
+
+        &:nth-child(2) {
+          transition: all 0.2s;
+          opacity: 0;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(45deg);
+        }
+
+      }
+    }
+  }
+
+  &__burger-line {
+    will-change: transform;
+    transform-origin: right;
+    width: 100%;
+    height: 5px;
+    background: var.$white;
+    transition: all 0.3s;
+    background: var.$orange;
+  }
+
+  &.active {
+
+    &::after {
+      opacity: 1;
+    }
+
+  }
+}
+
+.mob-menu {
+  will-change: transform, opacity;
+  display: none;
+  position: fixed;
+  top: 130px;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: teal;
+  z-index: 9;
+  transition: all 0.3s;
+  opacity: 0;
+  visibility: hidden;
+
+  &.active {
+    transition: all 0.3s;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(-70px);
+  }
+}
+
+
+// Media queries
+
+@media (max-width: 1600px) {
+
+  .navbar {
+
+    &__nav-menu {
+      margin: 0;
+    }
+  }
+
+}
+
+@media (max-width: 1400px) {
+
+  .page-wrapper {
+    width: 1200px;
+  }
+
+  .navbar {
+
+    &__inner {
+      width: 1170px;
+    }
+
+    &__nav-menu {
+      max-width: 505px;
+    }
+  }
+
+}
+
+@media (max-width: 1200px) {
+
+  .page-wrapper {
+    width: 996px;
+  }
+
+  .navbar {
+    padding: 21px 15px;
+
+    &__inner {
+      width: 966px;
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-template-rows: auto auto;
+      justify-content: space-between;
+      gap: 15px 25px;
+    }
+
+    &__nav-menu {
+      max-width: 100%;
+      grid-column: span 2;
+      justify-self: center;
+      justify-content: center;
+    }
+
+    &__btns {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+      justify-self: end;
+    }
+  }
+
+  .header {
+    padding: 119px 0 0 0;
+  }
+
+}
+
+@media (max-width: 996px) {
+
+  .page-wrapper {
+    width: 768px;
+  }
+
+  .navbar {
+
+    &__inner {
+      width: 738px;
+    }
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .page-wrapper {
+    width: 576px;
+  }
+
+  .header {
+    padding: 64px 0 0 0;
+  }
+
+  .mob-navbar, .mob-menu {
+    display: flex;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .page-wrapper {
+    width: 420px;
+  }
+
+}
+
+@media (max-width: 420px) {
+
+  .page-wrapper {
+    width: 320px;
+    padding: 0 10px;
+  }
+
 }
