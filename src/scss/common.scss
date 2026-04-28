@@ -233,8 +233,10 @@
   &__burger {
     @include mix.flex-col(6px);
     width: 39px;
+    transition: all 0.2s;
 
     &.active {
+      margin: 2px 0 0 0;
 
       .mob-navbar__burger-line {
         background: var.$red;
@@ -297,26 +299,9 @@
   }
 }
 
-.list {
-  @include mix.flex-col(23px);
-  width: 100%;
-
-  &__li {
-    @include mix.flex(nowrap, 10px);
-    color: var.$white;
-
-    &::before {
-      content: '';
-      width: 17px;
-      height: 12px;
-      background: url(../images/icons/ok-sign.svg) 0 0 / contain no-repeat;
-      flex-shrink: 0;
-      margin: 7px 0 0 0;
-    }
-  }
-}
-
 .main {
+  @include mix.flex-col(120px);
+  width: 100%;
   padding: 120px 0;
 }
 
@@ -423,6 +408,11 @@
     display: none;
   }
 
+  .main {
+    padding: 75px 0;
+    gap: 75px;
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -438,6 +428,15 @@
   .page-wrapper {
     width: 320px;
     padding: 0 10px;
+  }
+
+  .mob-navbar {
+    padding: 16px 10px;
+  }
+
+  .main {
+    padding: 60px 0;
+    gap: 60px;
   }
 
 }

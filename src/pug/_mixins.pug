@@ -147,7 +147,7 @@ mixin list(content, attr)
       'Best practices of serving our guests',
     ]
 
-  ul(class="list")
+  ul(class="list")&attributes(attr)
 
     each item, index in content
 
