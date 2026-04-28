@@ -1,0 +1,31 @@
+article(class="index-about" data-load-block data-title="index-about")
+
+  div(class="index-about__body")
+
+    +heading(
+      {
+        title2: 'About us',
+        sub: '<span class="heading__cl">We</span> Create the best foody product',
+        text: 'Every recipe we develop is carefully tested to balance taste, texture, and nutrition. We source only the freshest natural ingredients, avoiding artificial additives and preservatives. Our team of food experts and chefs works tirelessly to innovate while respecting traditional cooking methods.'
+      },
+      { class: 'index-about__heading' }
+    )
+
+    +list(null, { class: 'index-about__list' })
+
+    +btn-circle(
+      { text: 'Read More', href: '#', target: '_blank' },
+      { class: 'index-about__btn-circle' }
+    )
+
+  picture(class="index-about__pic index-about__pic--big")
+    source(srcset="./images/preloader-green.svg" data-load="./images/illustrations/meal1.webp" type="image/webp")
+    img(src="./images/preloader-green.svg" data-load="./images/illustrations/meal1.jpg" alt="Meal" class="index-about__image")
+
+  picture(class="index-about__pic")
+    source(srcset="./images/preloader-green.svg" data-load="./images/illustrations/meal2.webp" type="image/webp")
+    img(src="./images/preloader-green.svg" data-load="./images/illustrations/meal2.jpg" alt="Meal" class="index-about__image")
+
+  picture(class="index-about__pic")
+    source(srcset="./images/preloader-green.svg" data-load="./images/illustrations/meal3.webp" type="image/webp")
+    img(src="./images/preloader-green.svg" data-load="./images/illustrations/meal3.jpg" alt="Meal" class="index-about__image")

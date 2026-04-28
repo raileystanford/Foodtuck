@@ -2,6 +2,7 @@ import {
   FormValidator,
   BurgerMenu,
   UpdatePageTitle,
+  LazyLoad,
 } from "./modules/modules.js";
 
 import { index_titles } from "./modules/dictionary.js";
@@ -35,6 +36,11 @@ new BurgerMenu({
 
 new UpdatePageTitle({
   dictionary: index_titles,
+});
+
+new LazyLoad({
+  // lazyloaded - событие срабатывающее после полной загрузки материала
+  offset: 800, // Дистанция от блока с картинками с которой начнеться загрузка картинок; (можно не писать 700)
 });
 
 

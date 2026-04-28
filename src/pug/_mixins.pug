@@ -138,6 +138,20 @@ mixin food-gravity(attr)
       source(srcset="./images/illustrations/food-grav1.webp" type="image/webp")
       img(src="./images/illustrations/food-grav1.png" alt="Dish" class="food-gravity__img food-gravity__img--main" data-parallax="0.017/0.06/100/normal/once/true")
 
+mixin list(content, attr)
+
+  -
+    content = content ?? [
+      'Only natural ingredients from our farms to your meal',
+      'Convenience and priority of cooking the best dishes',
+      'Best practices of serving our guests',
+    ]
+
+  ul(class="list")
+
+    each item, index in content
+
+      li(class="list__li list-text")= item
 
 
 

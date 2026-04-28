@@ -775,6 +775,158 @@ class UpdatePageTitle {
 
 }
 
+class LazyLoad {
+
+  constructor(params) {
+    this.params = params ?? {};
+    this.blocks= Array.from(document.querySelectorAll('[data-load-block], [data-load-bg]'));
+
+    if (this.blocks.length > 0) {
+      this.ownMethodsBinder();
+      this.checkWebpSupport();
+    }
+
+  }
+
+  runMethods(event) {
+
+    if (event) {
+
+      let img = event.target;
+
+      if (event.type === 'load') {
+        this.webpSupport = (img.width > 0) && (img.height > 0);
+      } else if (event.type === 'error') {
+        this.webpSupport = false;
+      }
+
+    }
+
+    this.createObserver();
+    this.observeBlocks();
+    this.showLine();
+
+  }
+
+  checkWebpSupport() {
+
+    if (this.params.bgWebpNeed) {
+
+      const img = new Image();
+
+      img.addEventListener('load', this.runMethods);
+      img.addEventListener('error', this.runMethods);
+
+      img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAAQJaQAA3AAA/v3/9gA';
+
+    } else {
+
+      this.runMethods();
+
+    }
+
+  }
+
+  createObserver() {
+    
+    let offset = this.params.offset ?? 700;
+    this.observer = new IntersectionObserver((list, observer) => {
+
+      list.forEach((item) => {
+        if (item.isIntersecting) {
+          this.observerHandler(item.target);
+          observer.unobserve(item.target);
+        }
+      })
+
+    }, { root: null, rootMargin: `${offset}px 0px ${offset}px 0px`, threshold: 0.01 })
+  }
+
+  observerHandler(container) {
+    
+    if (container.matches('[data-load-block]')) {
+
+      let elements = Array.from(container.querySelectorAll('[data-load]'));
+      elements.forEach((element) => {
+
+        let inPicture = element.closest('picture');
+        let inVideo = element.closest('video');
+        let inAudio = element.closest('audio');
+
+        let url = element.dataset.load;
+
+        this.loadHandler(element);
+
+        if (inPicture) {
+          element.tagName === 'IMG' ? element.src = url : element.srcset = url;
+        } else if (inVideo || inAudio) {
+          element.preload = 'auto';
+        } else {
+          element.src = url;
+        }
+
+        element.removeAttribute('data-load');
+
+      });
+
+    } 
+    
+    if (container.matches('[data-load-bg]')) {
+      
+      let path = container.dataset.loadBg;
+      let src = path;
+
+      if (this.webpSupport) src = path.replace(/.\w+$/, '.webp');
+
+      container.style.backgroundImage = `url(${src})`;
+      container.removeAttribute('data-load-bg');
+
+    }
+
+  }
+
+  loadHandler(item) {
+    item.addEventListener('load', (event) => {
+      event.currentTarget.classList.add('loaded');
+      event.currentTarget.dispatchEvent(new CustomEvent('lazyloaded', { bubbles: true }));
+    }, { once: true });
+  }
+
+  observeBlocks() {
+    this.blocks.forEach((block) => {
+
+      let isContent = block.querySelector('[data-load]');
+      let isBgLoad = block.matches('[data-load-bg]');
+      if (isContent || isBgLoad) {
+        this.observer.observe(block);
+      }
+
+    })
+  }
+
+  showLine() {
+    if (this.params.showLine) {
+      let offset = this.params.offset ?? 700;
+      this.blocks.forEach((block) => {
+        block.style.position = 'relative';
+        let line = document.createElement('div');
+        line.style.cssText = `display: block; width: 100vw; height: 2px; background: red; position: absolute; left: 0; top: -${offset}px`;
+        block.prepend(line);
+      })
+    }
+  }
+
+}
+
+   
+   
+   
+   
+   
+   
+
+
+
 
 
 
@@ -803,6 +955,7 @@ setupMixin(
   Parallax,
   BurgerMenu,
   UpdatePageTitle,
+  LazyLoad,
 );
 
 export {
@@ -810,4 +963,5 @@ export {
   Parallax,
   BurgerMenu,
   UpdatePageTitle,
+  LazyLoad,
 }
