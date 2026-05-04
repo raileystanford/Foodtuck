@@ -285,29 +285,28 @@ BODY {
     @include mix.flex-col(11px);
     align-items: flex-end;
     margin: 0 0 0 10px;
+    max-width: 85%;
+  }
+
+  &__discount, &__name {
+    box-shadow: 0 0 6px var.$gray;
+    opacity: 0;
+    padding: 7px 19px;
+    transition: all 0.25s;
+    border-radius: 6px;
   }
 
   &__discount {
     font-weight: 700;
     color: var.$orange;
-    border-radius: 6px;
     background: var.$white;
-    padding: 7px 19px;
-    transition: all 0.25s;
     transform: translateX(130px);
-    opacity: 0;
-    box-shadow: 0 0 6px var.$gray;
   }
 
   &__name {
     color: var.$white;
-    border-radius: 6px;
     background: var.$orange;
-    padding: 7px 19px;
-    transition: all 0.25s;
     transform: translateX(-160px);
-    opacity: 0;
-    box-shadow: 0 0 6px var.$gray;
   }
 }
 
@@ -371,6 +370,13 @@ BODY {
     }
   }
 
+  .food-cat {
+
+    &__cm-slider {
+      height: 270px;
+    }
+  }
+
 }
 
 @media (max-width: 1200px) {
@@ -405,6 +411,13 @@ BODY {
 
     &__body {
       margin: 0 6% 0 0;
+    }
+  }
+
+  .food-cat {
+
+    &__cm-slider {
+      height: 235px;
     }
   }
 
@@ -461,6 +474,14 @@ BODY {
         gap: 16px;
         margin: 28px 0 0 0;
       }
+    }
+  }
+
+  .food-cat {
+    gap: 40px;
+
+    &__cm-slider {
+      height: 240px;
     }
   }
 
@@ -537,6 +558,33 @@ BODY {
 
     &__list {
       gap: 10px;
+    }
+  }
+
+  .cm-slider {
+
+    &__info {
+      align-self: flex-end;
+      align-items: flex-start;
+      gap: 6px;
+      margin: 0 0 6px 6px;
+    }
+
+    &__discount, &__name {
+      opacity: 1;
+      transform: none;
+      font-size: 15px;
+      line-height: 20px;
+      padding: 5px 7px;
+    }
+
+  }
+
+  .food-cat {
+    gap: 35px;
+
+    &__cm-slider {
+      height: 190px;
     }
   }
 
@@ -620,6 +668,10 @@ BODY {
     }
   }
 
+  .food-cat {
+    gap: 30px;
+  }
+
 }
 
 @media (max-width: 420px) {
@@ -646,6 +698,21 @@ BODY {
       .heading__images {
         gap: 10px;
       }
+    }
+  }
+
+  .cm-slider {
+
+    &__discount, &__name {
+      font-size: 17px;
+    }
+
+  }
+
+  .food-cat {
+
+    &__cm-slider {
+      height: 230px;
     }
   }
 

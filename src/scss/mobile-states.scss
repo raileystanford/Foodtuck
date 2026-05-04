@@ -29,3 +29,12 @@
 
   }
 }
+
+.scroll-top {
+  transition: all 0.3s;
+
+  &:active {
+    transition: all 0.06s;
+    background: var.$green;
+  }
+}

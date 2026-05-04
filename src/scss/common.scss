@@ -319,6 +319,7 @@
   opacity: 0;
   visibility: hidden;
   transform: rotate(240deg) scale(0.1);
+  z-index: 10;
 
   &::before {
     content: '';
@@ -349,6 +350,10 @@
     &__nav-menu {
       margin: 0;
     }
+  }
+
+  .scroll-top {
+    right: 40px;
   }
 
 }
@@ -423,6 +428,10 @@
     }
   }
 
+  .scroll-top {
+    right: 30px;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -456,6 +465,12 @@
     width: 420px;
   }
 
+  .scroll-top {
+    width: 60px;
+    height: 60px;
+    right: 20px;
+  }
+
 }
 
 @media (max-width: 420px) {
@@ -472,6 +487,12 @@
   .main {
     padding: 60px 0;
     gap: 60px;
+  }
+
+  .scroll-top {
+    width: 55px;
+    height: 55px;
+    right: 10px;
   }
 
 }

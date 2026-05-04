@@ -7,6 +7,7 @@ import {
 
 // new Parallax();
 
+// AUTOPLAY
 new Swiper('#food-cat', {
   slidesPerView: 4,
   spaceBetween: 33,
@@ -35,6 +36,37 @@ new Swiper('#food-cat', {
 
       window.location.href = url;
 
+    }
+
+  },
+
+  breakpoints: {
+
+    1201: {
+      spaceBetween: 33,
+    },
+
+    997: {
+      slidesPerView: 4,
+      spaceBetween: 22,
+    },
+
+    577: {
+      slidesPerView: 3,
+      spaceBetween: 15,
+      speed: 900,
+    },
+
+    421: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+      speed: 700,
+    },
+
+    1: {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      speed: 700,
     }
 
   }
@@ -80,18 +112,31 @@ function replaceHeaderImgMobile() {
 
 }
 
-function linkImitatorForSlides() {
+function slidersAutoplayViewportController(except = '.a93fj3fds1') {
 
-  let slides = Array.from(document.querySelectorAll('.food-cat .cm-slider__slide'));
+  let sliders = Array.from(document.querySelectorAll(`.swiper:not(${except})`));
 
-  if (!slides.length) return;
+  if (sliders.length === 0) return;
 
-  let links = [ '#', '#', '#', '#', '#', '#', '#', '#' ];
+  let observer = new IntersectionObserver((list, obs) => {
 
-  
+    list.forEach((item) => {
+
+      if (item.isIntersecting) {
+        item.target.swiper?.autoplay.start();
+      } else {
+        item.target.swiper?.autoplay.stop();
+      }
+
+    })
+
+  }, { root: null, threshold: 0.2 });
+
+  sliders.forEach((slider) => observer.observe(slider));
 
 }
 
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
+slidersAutoplayViewportController();

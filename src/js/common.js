@@ -44,9 +44,7 @@ new LazyLoad({
 });
 
 new ScrollToTop({
-  '1024-99999': 860,
-  '300-500': 900,
-  default: 900,
+  default: 1000,
 });
 
 
