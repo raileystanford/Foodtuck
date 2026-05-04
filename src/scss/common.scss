@@ -305,6 +305,41 @@
   padding: 120px 0;
 }
 
+.scroll-top {
+  @extend %flex-cen;
+  will-change: transform;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: var.$orange;
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
+  padding: 7px;
+  opacity: 0;
+  visibility: hidden;
+  transform: rotate(240deg) scale(0.1);
+
+  &::before {
+    content: '';
+    @extend %wh-100;
+    background: url(../images/icons/up-arrow.svg) 0 0 / contain no-repeat;
+    transform: rotate(-90deg);
+  }
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: rotate(0deg) scale(1);
+  }
+
+  &.off.active {
+    opacity: 0;
+    visibility: hidden;
+    transform: rotate(240deg) scale(0.1) !important;
+  }
+}
+
 // Media queries
 
 @media (max-width: 1600px) {

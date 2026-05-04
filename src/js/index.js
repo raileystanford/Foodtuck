@@ -7,6 +7,40 @@ import {
 
 // new Parallax();
 
+new Swiper('#food-cat', {
+  slidesPerView: 4,
+  spaceBetween: 33,
+  speed: 900,
+  loop: true,
+  simulateTouch: true,
+
+  // autoplay: {
+  //   delay: 2000,
+  //   disableOnInteraction: false,
+  //   pauseOnMouseEnter: true,
+  // },
+
+  keyboard: {
+    enabled: true, 
+    onlyInViewport: true,
+    pageUpDown: true, 
+  },
+
+  on: {
+
+    click(swiper) {
+
+      let slide = swiper.clickedSlide;
+      let url = slide.firstElementChild.dataset.link ?? './404.html';
+
+      window.location.href = url;
+
+    }
+
+  }
+
+});
+
 
 // Functions
 
@@ -43,6 +77,18 @@ function replaceHeaderImgMobile() {
   img.classList.remove('index-intro__food-gravity');
   img.classList.add('heading__food-gravity');
   subtitle.after(img);
+
+}
+
+function linkImitatorForSlides() {
+
+  let slides = Array.from(document.querySelectorAll('.food-cat .cm-slider__slide'));
+
+  if (!slides.length) return;
+
+  let links = [ '#', '#', '#', '#', '#', '#', '#', '#' ];
+
+  
 
 }
 

@@ -918,6 +918,74 @@ class LazyLoad {
 
 }
 
+class ScrollToTop {
+
+  constructor(params) {
+    this.params = params ?? {};
+    this.clientWidth = document.documentElement.clientWidth;
+    this.button = document.querySelector('[data-scroll-top]');
+
+    if (this.button) {
+      this.ownMethodsBinder();
+      this.setEventListeners(); 
+      this.scrollHandler(); 
+    }
+  }
+
+  setEventListeners() {
+    window.addEventListener('scroll', this.scrollHandler);
+    window.addEventListener('resize', this.updateClientWidth);
+    this.button.addEventListener('click', this.moveToTop);
+  }
+
+  moveToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+    this.button.blur();
+    this.button.classList.add('off');
+  }
+
+  updateClientWidth() {
+    this.clientWidth = document.documentElement.clientWidth;
+  }
+
+  getActivationCoordinate() {
+    let activationCoordinate;
+    for (let key in this.params) {
+      let [min, max] = key.split('-');
+      min = +min;
+      max = +max;
+      if (this.clientWidth >= min && this.clientWidth <= max) { 
+        activationCoordinate = this.params[key];
+        break;
+      } else {
+        activationCoordinate = this.params.default;
+      }
+    }
+    return activationCoordinate ?? 900;
+  }
+
+  controlButton(state) {
+    if (state) {
+      this.button.classList.add('active');
+    } else {
+      this.button.classList.remove('active');
+      this.button.classList.remove('off');
+    }
+  }
+
+  scrollHandler() {
+    let coordinate = this.getActivationCoordinate();
+    let scrollY = window.pageYOffset;
+    
+    if (scrollY >= coordinate) {
+      this.controlButton(true)
+    } else {
+      this.controlButton(false)
+    }
+  }
+
+}
+
    
    
    
@@ -956,6 +1024,7 @@ setupMixin(
   BurgerMenu,
   UpdatePageTitle,
   LazyLoad,
+  ScrollToTop,
 );
 
 export {
@@ -964,4 +1033,5 @@ export {
   BurgerMenu,
   UpdatePageTitle,
   LazyLoad,
+  ScrollToTop,
 }

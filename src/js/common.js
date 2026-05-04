@@ -3,6 +3,7 @@ import {
   BurgerMenu,
   UpdatePageTitle,
   LazyLoad,
+  ScrollToTop,
 } from "./modules/modules.js";
 
 import { index_titles } from "./modules/dictionary.js";
@@ -39,8 +40,13 @@ new UpdatePageTitle({
 });
 
 new LazyLoad({
-  // lazyloaded - событие срабатывающее после полной загрузки материала
-  offset: 800, // Дистанция от блока с картинками с которой начнеться загрузка картинок; (можно не писать 700)
+  offset: 800,
+});
+
+new ScrollToTop({
+  '1024-99999': 860,
+  '300-500': 900,
+  default: 900,
 });
 
 

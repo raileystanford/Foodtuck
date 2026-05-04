@@ -8,6 +8,10 @@ let index_titles = {
     'en': 'Foodtuck - About us',
   },
 
+  'food-cat': {
+    'en': 'Foodtuck - Food category',
+  },
+
 };
 
 

@@ -153,6 +153,117 @@ mixin list(content, attr)
 
       li(class="list__li list-text")= item
 
+mixin cm-slider(content, attr)
+
+  -
+    content = content ?? [
+
+      {
+        src: './images/illustrations/food-item1.jpg',
+        srcset: './images/illustrations/food-item1.webp',
+        name: 'Bokato salad',
+        discont: 'Save 30%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item2.jpg',
+        srcset: './images/illustrations/food-item2.webp',
+        name: 'Gamburger',
+        discont: 'Save 25%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item3.jpg',
+        srcset: './images/illustrations/food-item3.webp',
+        name: 'Caesar salad',
+        discont: 'Save 35%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item4.jpg',
+        srcset: './images/illustrations/food-item4.webp',
+        name: 'Sweet donut',
+        discont: 'Save 30%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item5.jpg',
+        srcset: './images/illustrations/food-item5.webp',
+        name: 'Fried fish',
+        discont: 'Save 20%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item6.jpg',
+        srcset: './images/illustrations/food-item6.webp',
+        name: 'Matanero',
+        discont: 'Save 25%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item7.jpg',
+        srcset: './images/illustrations/food-item7.webp',
+        name: 'Meat salad',
+        discont: 'Save 30%',
+        lazy: true,
+        //- custom:
+      },
+
+      {
+        src: './images/illustrations/food-item8.jpg',
+        srcset: './images/illustrations/food-item8.webp',
+        name: 'Fruit salad',
+        discont: 'Save 15%',
+        lazy: true,
+        //- custom:
+      },
+
+    ]
+
+  div(class="cm-slider swiper")&attributes(attr)
+    div(class="swiper-wrapper")
+
+      each item, index in content 
+
+        div(class="swiper-slide")
+          div(class="cm-slider__slide")&attributes(item.custom)
+
+            div(class="cm-slider__img-wrapper")
+
+              - let srcseturl = item.srcset ?? item.src;
+              - let type = item.srcset ? 'image/webp' : null;
+
+              if item.lazy
+
+                picture
+                  source(srcset data-load=srcseturl type=type)
+                  img(src="./images/preloader-green.svg" data-load=item.src alt=item.name class="cm-slider__img")
+
+              else 
+
+                picture
+                  source(srcset=srcseturl type=type)
+                  img(src=item.src alt=item.name class="cm-slider__img")
+
+            div(class="cm-slider__info")
+              em(class="cm-slider__discount list-text")= item.discont
+              strong(class="cm-slider__name slide-text")= item.name
+              
+
+
+
 
 
 
