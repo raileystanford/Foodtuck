@@ -261,10 +261,94 @@ mixin cm-slider(content, attr)
               em(class="cm-slider__discount list-text")= item.discont
               strong(class="cm-slider__name slide-text")= item.name
               
+mixin icon-text(img, alt, text, attr)
 
+  -
+    img = img ?? './images/icons/hamburger.svg';
+    alt = alt ?? 'Hamburger';
+    text = text ?? 'Fast Food';
 
+  figure(class="icon-text")&attributes(attr)
 
+    div(class="icon-text__img-wrapper")
+      img(src=img alt=alt class="icon-text__img")
 
+    figcaption(class="icon-text__caption list-text")= text
+
+mixin experience(time, text, attr)
+
+  -
+    time = time ?? '30+';
+    text = text ?? 'Years of <span class="experience__bold">Experience</span>';
+
+  div(class="experience")&attributes(attr)
+
+    em(class="experience__time bold-text")!= time
+    em(class="experience__text slide-text")!= text
+
+mixin img-tabs(images, lazy, attr)
+
+  -
+    images = images ?? [
+
+      {
+        src: './images/illustrations/moz-img1.jpg',
+        srcset: './images/illustrations/moz-img1.webp',
+        alt: 'Food',
+      },
+
+      {
+        src: './images/illustrations/moz-img2.jpg',
+        srcset: './images/illustrations/moz-img2.webp',
+        alt: 'Food',
+      },
+
+      {
+        src: './images/illustrations/moz-img3.jpg',
+        srcset: './images/illustrations/moz-img3.webp',
+        alt: 'Food',
+      },
+
+      {
+        src: './images/illustrations/moz-img4.jpg',
+        srcset: './images/illustrations/moz-img4.webp',
+        alt: 'Food',
+      },
+
+      {
+        src: './images/illustrations/moz-img5.jpg',
+        srcset: './images/illustrations/moz-img5.webp',
+        alt: 'Food',
+      },
+
+      {
+        src: './images/illustrations/moz-img6.jpg',
+        srcset: './images/illustrations/moz-img6.webp',
+        alt: 'Food',
+      },
+
+    ]
+
+  div(class="img-tabs")&attributes(attr)
+
+    each item, index in images
+
+      - let srcseturl = item.srcset ?? item.src;
+      - let type = item.srcset ? 'image/webp' : null;
+
+      if index <= 5
+
+        if lazy
+
+          picture(class="img-tabs__pic")
+            source(srcset data-load=srcseturl type=type)
+            img(src="./images/preloader-green.svg" data-load=item.src alt=item.alt class="img-tabs__image")
+
+        else 
+
+          picture(class="img-tabs__pic")
+            source(srcset=srcseturl type=type)
+            img(src=item.src alt=item.alt class="img-tabs__image")
 
 
 

@@ -139,4 +139,4 @@ function slidersAutoplayViewportController(except = '.a93fj3fds1') {
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
-slidersAutoplayViewportController();
+// slidersAutoplayViewportController();

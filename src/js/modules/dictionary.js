@@ -12,6 +12,10 @@ let index_titles = {
     'en': 'Foodtuck - Food category',
   },
 
+  'choose-us': {
+    'en': 'Foodtuck - Why choose us?',
+  },
+
 };
 
 

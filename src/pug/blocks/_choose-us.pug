@@ -1,0 +1,44 @@
+-
+  let choseUsIcons = [
+
+    {
+      img: img ?? './images/icons/hamburger.svg',
+      alt: alt ?? 'Hamburger',
+      text: text ?? 'Fast Food',
+    },
+
+    {
+      img: img ?? './images/icons/cookie.svg',
+      alt: alt ?? 'Cookie',
+      text: text ?? 'Lunch',
+    },
+
+    {
+      img: img ?? './images/icons/wine.svg',
+      alt: alt ?? 'Wine',
+      text: text ?? 'Dinner',
+    },
+
+  ];
+
+article(class="choose-us" data-title="choose-us")
+
+  +img-tabs(null, true, { class: 'choose-us__img-tabs', 'data-load-block': '' })
+
+  div(class="choose-us__article")
+
+    +heading(
+      {
+        title2: 'Why Choose us',
+        sub: '<span class="heading__cl">Ex</span>tra ordinary taste And Experienced ',
+        text: 'Each flavor carries a memory of experience, of lessons learned and standards never lowered. That is why we trust not just our senses, but the hands and eyes that have done this work before. With every choice we make, we honor the craft that turns the ordinary into something memorable.',
+      }
+    )
+
+    div(class="choose-us__icons")
+
+      each item, index in choseUsIcons
+
+        +icon-text(item.img, item.alt, item.text, { class: 'choose-us__icon-text' })
+
+    +experience(null, null, { class: "choose-us__experience" })
