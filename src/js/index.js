@@ -136,7 +136,25 @@ function slidersAutoplayViewportController(except = '.a93fj3fds1') {
 
 }
 
+function replaceChooseUsImgMobile() {
+
+  let media = window.matchMedia('(max-width: 996px)').matches;
+
+  if (!media) return;
+
+  let subtitle = document.querySelector('.choose-us .heading__subtitle');
+  let img = document.querySelector('.choose-us .img-tabs');
+
+  if (!subtitle || !img) return;
+
+  img.classList.remove('choose-us__img-tabs');
+  img.classList.add('heading__img-tabs');
+  subtitle.after(img);
+
+}
+
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
+replaceChooseUsImgMobile();
 // slidersAutoplayViewportController();
