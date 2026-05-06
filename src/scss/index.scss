@@ -487,7 +487,7 @@ BODY {
 
   &::before {
     background: linear-gradient(var.$trans-black2, var.$trans-black2),
-                url(../images/backgrounds/fish-bg.jpg) 0 0 / cover no-repeat;
+                url(../images/backgrounds/fish-bg.jpg) center 0 / cover no-repeat;
   }
 
   &__stat--plus {
@@ -606,6 +606,11 @@ BODY {
     }
   }
 
+  .stats {
+    padding: 80px 0;
+    gap: 50px;
+  }
+
 }
 
 @media (max-width: 996px) {
@@ -682,6 +687,23 @@ BODY {
         grid-template-columns: 37.9% 15.579% 15.579% 24.47%;
         margin: 32px 0 0 0;
       }
+    }
+  }
+
+  .stat {
+
+    &__icon {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .stats {
+    padding: 60px 0;
+    gap: 30px;
+
+    &__stat {
+      width: 150px;
     }
   }
 
@@ -799,6 +821,18 @@ BODY {
     }
   }
 
+  .stat {
+    gap: 15px;
+  }
+
+  .stats {
+    gap: 70px 30px;
+
+    &__stat {
+      width: calc(50% - 15px);
+    }
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -894,6 +928,23 @@ BODY {
     }
   }
 
+  .stat {
+
+    &__icon {
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  .stats {
+    padding: 50px 0;
+    gap: 60px 30px;
+
+    &__stat {
+      width: calc(45% - 15px);
+    }
+  }
+
 }
 
 @media (max-width: 420px) {
@@ -973,6 +1024,32 @@ BODY {
         grid-template-columns: 34.5% 15.579% 15.579% 24.47%;
         gap: 10px;
       }
+    }
+  }
+
+  .stat {
+    
+    &__icon {
+      width: 80px;
+      height: 80px;
+    }
+
+    &__name {
+      font-size: 19px;
+      line-height: 25px;
+    }
+
+    &__value {
+      font-size: 35px;
+      line-height: 37px;
+    }
+  }
+
+  .stats {
+    justify-content: center;
+
+    &__stat {
+      width: calc(47% - 15px);
     }
   }
 
