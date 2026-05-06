@@ -350,6 +350,25 @@ mixin img-tabs(images, lazy, attr)
             source(srcset=srcseturl type=type)
             img(src=item.src alt=item.alt class="img-tabs__image")
 
+mixin stat(content, attr)
+
+  - 
+    content = content ?? {
+      img: './images/icons/chef-icon.svg',
+      alt: 'Chef',
+      name: 'Professional Chefs',
+      value: '420',
+      //- mod: ''
+    }
+
+  div(class=`stat${content.mod ? content.mod : ''}` data-dig-anim="main")&attributes(attr)
+
+    img(src=content.img alt=content.alt class="stat__icon")
+    strong(class="stat__name logo-text")= content.name
+    span(class="stat__value stat-text" data-dig-anim="increase")= content.value
+
+
+
 
 
 

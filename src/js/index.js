@@ -1,5 +1,6 @@
 import {
   Parallax,
+  DigitsCountingAnimation,
 } from "./modules/modules.js";
 
 
@@ -71,6 +72,17 @@ new Swiper('#food-cat', {
 
   }
 
+});
+
+new DigitsCountingAnimation({
+  intObserverParams: {
+    threshold: 0.1,
+    // delay: 2000,
+    // Также и остальное тоже можно указать
+  },
+  duration: 1500, // Длительность анимации счетчика
+  steps: 30, // Количество шагов за которые пройдет анимация
+  // once: true, // Если тру то анимируется только один раз. Если фолс то анимируется при каждом попадании в область видимости
 });
 
 

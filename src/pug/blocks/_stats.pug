@@ -1,0 +1,39 @@
+-
+  let indexStatsContent = [
+
+    {
+      img: './images/icons/chef-icon.svg',
+      alt: 'Chef',
+      name: 'Professional Chefs',
+      value: '420',
+    },
+
+    {
+      img: './images/icons/soda-icon.svg',
+      alt: 'Soda Gamburger',
+      name: 'Items Of Food',
+      value: '320',
+    },
+
+    {
+      img: './images/icons/fork-icon.svg',
+      alt: 'Meal',
+      name: 'Years Of Experience',
+      value: '30+',
+      mod: ' stats__stat--plus'
+    },
+
+    {
+      img: './images/icons/piza-icon.svg',
+      alt: 'Piza',
+      name: 'Happy Customers',
+      value: '220',
+    },
+
+  ]
+
+div(class="stats custom-bg" data-title="stats")
+
+  each item, index in indexStatsContent
+
+    +stat(item, { class: 'stats__stat' })

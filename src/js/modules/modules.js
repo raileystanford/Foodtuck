@@ -986,6 +986,169 @@ class ScrollToTop {
 
 }
 
+class DigitsCountingAnimation {
+  constructor(params) {
+    this.params = params ?? {};
+    this.containers = Array.from(document.querySelectorAll('[data-dig-anim="main"]'));
+
+    if (this.containers.length) {
+      this.intervals = new Map();
+      this.ownMethodsBinder();
+      this.prepareInitialState();
+      this.observeAllElements();
+    }
+  }
+
+  prepareInitialState() {
+    this.containers.forEach(container => {
+      const elements = container.querySelectorAll('[data-dig-anim]:not([data-dig-anim="main"])');
+
+      elements.forEach(el => {
+        const isReverse = el.dataset.digAnim !== 'increase';
+
+        const text = el.textContent.trim();
+        const separator = text.includes(',') ? ',' : '.';
+
+        const number = parseFloat(text.replace(',', '.').match(/\d+\.?\d*/)[0]);
+
+        el.dataset.originalNumber = number;
+        el.dataset.originalSeparator = separator;
+
+        const decimalPlaces = (number.toString().split('.')[1] || []).length;
+
+        const startValue = isReverse ? number : 0;
+
+        this.setText(el, startValue, decimalPlaces, separator);
+      });
+    });
+  }
+
+  observeAllElements() {
+    const observerSettings = this.params.intObserverParams ?? {};
+
+    this.observer = new IntersectionObserver(this.countingActivation, {
+      root: observerSettings.root || null,
+      rootMargin: observerSettings.rootMargin || '0px',
+      threshold: observerSettings.threshold || 0.01,
+    });
+
+    this.containers.forEach(el => this.observer.observe(el));
+  }
+
+  countingActivation(entries) {
+    entries.forEach(entry => {
+      const container = entry.target;
+
+      if (entry.isIntersecting) {
+        if (this.intervals.has(container)) return;
+
+        this.countingAnimation(container);
+
+        if (this.params.once) {
+          this.observer.unobserve(container);
+        }
+      } else {
+        if (!this.params.once) {
+          this.stopAndReset(container);
+        }
+      }
+    });
+  }
+
+  countingAnimation(container) {
+    const elements = container.querySelectorAll('[data-dig-anim]:not([data-dig-anim="main"])');
+
+    elements.forEach(el => {
+      const isReverse = el.dataset.digAnim !== 'increase';
+
+      const number = parseFloat(el.dataset.originalNumber);
+      const separator = el.dataset.originalSeparator;
+      const decimalPlaces = (number.toString().split('.')[1] || []).length;
+
+      let current = isReverse ? number : 0;
+      this.setText(el, current, decimalPlaces, separator);
+
+      const duration = this.params.duration ?? 2000;
+      const steps = this.params.steps ?? 100;
+      const stepTime = duration / steps;
+      const increment = number / steps;
+
+      const intervalID = setInterval(() => {
+        current += isReverse ? -increment : increment;
+
+        if (isReverse ? current <= 0 : current >= number) {
+          current = isReverse ? 0 : number;
+          this.setText(el, current, decimalPlaces, separator);
+          this.removeInterval(container, intervalID);
+        } else {
+          this.setText(
+            el,
+            decimalPlaces ? current : Math.floor(current),
+            decimalPlaces,
+            separator
+          );
+        }
+      }, stepTime);
+
+      this.addInterval(container, intervalID);
+    });
+  }
+
+  stopAndReset(container) {
+    this.clearBlockIntervals(container);
+
+    const elements = container.querySelectorAll('[data-dig-anim]:not([data-dig-anim="main"])');
+
+    elements.forEach(el => {
+      const isReverse = el.dataset.digAnim !== 'increase';
+
+      const number = parseFloat(el.dataset.originalNumber);
+      const separator = el.dataset.originalSeparator;
+      const decimalPlaces = (number.toString().split('.')[1] || []).length;
+
+      const value = isReverse ? number : 0;
+
+      this.setText(el, value, decimalPlaces, separator);
+    });
+  }
+
+  setText(el, value, decimals, separator) {
+    let formatted = decimals
+      ? value.toFixed(decimals)
+      : value.toString();
+
+    el.textContent = separator === ','
+      ? formatted.replace('.', ',')
+      : formatted;
+  }
+
+  addInterval(block, id) {
+    if (!this.intervals.has(block)) {
+      this.intervals.set(block, []);
+    }
+    this.intervals.get(block).push(id);
+  }
+
+  removeInterval(block, id) {
+    clearInterval(id);
+
+    const arr = this.intervals.get(block);
+    if (!arr) return;
+
+    const i = arr.indexOf(id);
+    if (i !== -1) arr.splice(i, 1);
+
+    if (!arr.length) this.intervals.delete(block);
+  }
+
+  clearBlockIntervals(block) {
+    if (!this.intervals.has(block)) return;
+
+    this.intervals.get(block).forEach(clearInterval);
+    this.intervals.delete(block);
+  }
+}
+
    
    
    
@@ -1025,6 +1188,7 @@ setupMixin(
   UpdatePageTitle,
   LazyLoad,
   ScrollToTop,
+  DigitsCountingAnimation,
 );
 
 export {
@@ -1034,4 +1198,5 @@ export {
   UpdatePageTitle,
   LazyLoad,
   ScrollToTop,
+  DigitsCountingAnimation,
 }

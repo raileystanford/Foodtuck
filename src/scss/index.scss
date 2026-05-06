@@ -460,6 +460,44 @@ BODY {
   }
 }
 
+.stat {
+  @include mix.flex-col(22px);
+  align-items: center;
+
+  &__icon {
+    width: 120px;
+    height: 120px;
+  }
+
+  &__name {
+    color: var.$white;
+    text-align: center;
+  }
+
+  &__value {
+    color: var.$white;
+    text-align: center;
+  }
+}
+
+.stats {
+  @include mix.flex(wrap, 80px 100px);
+  justify-content: space-between;
+  padding: 112px 0;
+
+  &::before {
+    background: linear-gradient(var.$trans-black2, var.$trans-black2),
+                url(../images/backgrounds/fish-bg.jpg) 0 0 / cover no-repeat;
+  }
+
+  &__stat--plus {
+
+    .stat__value::after {
+      content: '+';
+    }
+  }
+}
+
 
 // Media queries
 
