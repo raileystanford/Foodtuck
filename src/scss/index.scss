@@ -511,7 +511,8 @@ BODY {
 
   &__icon {
     width: 100%;
-    max-height: 79px;
+    min-height: 79px;
+    height: 100%;
     object-fit: scale-down;
     border-radius: 6px;
     grid-row: span 3;
@@ -570,7 +571,7 @@ BODY {
   &__tab {
     will-change: transform;
     display: grid;
-    grid-template-columns: 510px 1fr 1fr;
+    grid-template-columns: 38.65% 1fr 1fr;
     grid-template-rows: repeat(4, auto);
     align-items: start;
     gap: 32px 27px;
@@ -677,6 +678,13 @@ BODY {
     }
   }
 
+  .menu-tabs {
+
+    &__big-img {
+      height: 464px;
+    }
+  }
+
 }
 
 @media (max-width: 1200px) {
@@ -732,6 +740,26 @@ BODY {
   .stats {
     padding: 80px 0;
     gap: 50px;
+  }
+
+  .menu-tabs {
+
+    &__controls {
+      gap: 15px 50px;
+    }
+
+    &__tab {
+      grid-template-columns: 40% 40%;
+      grid-template-rows: repeat(5, auto);
+      justify-content: center;
+    }
+
+    &__big-img {
+      height: 400px;
+      width: 100%;
+      grid-column: span 2;
+      grid-row: 1 / 2;
+    }
   }
 
 }
@@ -828,6 +856,18 @@ BODY {
     &__stat {
       width: 150px;
     }
+  }
+
+  .menu-tabs {
+
+    &__controls {
+      gap: 15px 36px;
+    }
+
+    &__tab {
+      grid-template-columns: 1fr 1fr;
+    }
+
   }
 
 }
@@ -956,6 +996,46 @@ BODY {
     }
   }
 
+  .menu-item {
+    grid-template-columns: 100px 1fr;
+    gap: 5px 15px;
+
+    &__name {
+      font-size: 23px;
+    }
+
+    &__text {
+      font-size: 17px;
+      line-height: 20px;
+    }
+
+    &__price {
+      font-size: 22px;
+    }
+
+  }
+
+  .menu-tabs {
+    gap: 45px;
+
+    &__controls {
+      gap: 10px 36px;
+    }
+
+    &__tab {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__big-img {
+      display: none;
+    }
+  }
+  
+  .demo-menu {
+    gap: 35px;
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -1068,6 +1148,18 @@ BODY {
     }
   }
 
+  .menu-tabs {
+
+    &__controls {
+      gap: 0px 30px;
+    }
+
+  }
+
+  .demo-menu {
+    gap: 25px;
+  }
+
 }
 
 @media (max-width: 420px) {
@@ -1174,6 +1266,32 @@ BODY {
     &__stat {
       width: calc(47% - 15px);
     }
+  }
+
+  .menu-item {
+    grid-template-columns: 90px 1fr;
+
+    &__name {
+      font-size: 20px;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+  }
+
+  .menu-tabs {
+    gap: 30px;
+
+    &__button {
+      padding: 3px;
+    }
+
+    &__tab {
+      gap: 25px;
+    }
+
   }
 
 }

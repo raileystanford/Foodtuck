@@ -38,3 +38,11 @@
     background: var.$green;
   }
 }
+
+.menu-tabs__button {
+  transition: all 0.05s;
+
+  &:active {
+    color: var.$orange;
+  }
+}
