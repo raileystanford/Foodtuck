@@ -1,0 +1,600 @@
+-
+  let demoMenuTabs = [
+
+    {
+      trigger: 'Breakfast',
+      tabName: 'tab1',
+      items: [
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+      ]
+    },
+
+    {
+      trigger: 'Lunch',
+      tabName: 'tab2',
+      items: [
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+        
+      ]
+    },
+
+    {
+      trigger: 'Dinner',
+      tabName: 'tab3',
+      items: [
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+      ]
+    },
+
+    {
+      trigger: 'Dessert',
+      tabName: 'tab4',
+      items: [
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+      ]
+    },
+
+    {
+      trigger: 'Drink',
+      tabName: 'tab5',
+      items: [
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+      ]
+    },
+
+    {
+      trigger: 'Snack',
+      tabName: 'tab6',
+      items: [
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+      ]
+    },
+
+    {
+      trigger: 'Meat',
+      tabName: 'tab7',
+      items: [
+
+        {
+          img: './images/illustrations/menu-friedmeat-preview.jpg',
+          name: 'Fried Meat',
+          text: 'Jucy fried meat with portion of fried potato.',
+          price: '15.25$',
+          full: './images/illustrations/menu-friedmeat.jpg',
+          link: 'menu5',
+        },
+
+        {
+          img: './images/illustrations/menu-burger-preview.jpg',
+          name: 'Burger',
+          text: 'Tasty burger with salad, meat and cheese.',
+          price: '12.50$',  
+          full: './images/illustrations/menu-burger.jpg',
+          link: 'menu8',
+        },
+
+        {
+          img: './images/illustrations/menu-smoothie-preview.jpg',
+          name: 'Milk Smoothie',
+          text: 'Milk mixed with orange and strawberries.',
+          price: '8.50$',  
+          full: './images/illustrations/menu-smoothie.jpg',
+          link: 'menu2',
+        },
+
+        {
+          img: './images/illustrations/menu-chocolate-preview.jpg',
+          name: 'Chocolate Cocktail',
+          text: 'Big glass of chocolate mixed with milk.',
+          price: '12.25$',  
+          full: './images/illustrations/menu-chocolate.jpg',
+          link: 'menu4',
+        },
+
+        {
+          img: './images/illustrations/menu-letuce-preview.jpg',
+          name: 'Caesar Salad',
+          text: 'Meat salad with turkey and big green leafs.',
+          price: '12.50$',
+          full: './images/illustrations/menu-letuce.jpg',
+          link: 'menu3',
+        },
+
+        {
+          img: './images/illustrations/menu-pizza-preview.jpg',
+          name: 'Pizza Montanero',
+          text: 'Tasty pizza with cheese, meat and pasta.',
+          price: '13.75$',  
+          full: './images/illustrations/menu-pizza.jpg',
+          link: 'menu7',
+        },
+
+        {
+          img: './images/illustrations/menu-hamburger-preview.jpg',
+          name: 'Hamburger',
+          text: 'Big hamburger with meat, cheese and oil.',
+          price: '14.50$',
+          full: './images/illustrations/menu-hamburger.jpg',
+          link: 'menu1',
+        },
+
+        {
+          img: './images/illustrations/menu-sandwich-preview.jpg',
+          name: 'Sandwich',
+          text: 'Big, tasty sandwich with meat and cheese.',
+          price: '11.50$',  
+          full: './images/illustrations/menu-sandwich.jpg',
+          link: 'menu6',
+        },
+
+      ]
+    },
+
+  ]
+
+article(class="demo-menu" data-title="menu")
+
+  +heading(
+    {
+      title2: 'Choose & pick',
+      sub: '<span class="heading__cl">Fr</span>om Our Menu',
+    },
+    { class: 'demo-menu__heading' }
+  )
+
+  div(class="menu-tabs")
+
+    div(class="menu-tabs__controls")
+
+      each item, index in demoMenuTabs
+
+        button(class="menu-tabs__button slide-text" data-trig=item.tabName)= item.trigger 
+
+    div(class="menu-tabs__content")
+
+      each item, index in demoMenuTabs
+    
+        div(class="menu-tabs__tab" data-load-block data-tab=item.tabName)
+
+          img(src="./images/preloader-green.svg" alt="Food" class="menu-tabs__big-img")
+
+          each menuItem, index in item.items
+
+            +menu-item(menuItem, 
+              { 
+                class: 'menu-tabs__menu-item',
+                'data-full': menuItem.full,
+                'data-link': menuItem.link,
+              }
+            )

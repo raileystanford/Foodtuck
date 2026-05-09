@@ -164,7 +164,7 @@ mixin cm-slider(content, attr)
         name: 'Bokato salad',
         discont: 'Save 30%',
         lazy: true,
-        //- custom:
+        //- custom: 
       },
 
       {
@@ -173,7 +173,7 @@ mixin cm-slider(content, attr)
         name: 'Gamburger',
         discont: 'Save 25%',
         lazy: true,
-        //- custom:
+        //- custom: 
       },
 
       {
@@ -182,7 +182,7 @@ mixin cm-slider(content, attr)
         name: 'Caesar salad',
         discont: 'Save 35%',
         lazy: true,
-        //- custom:
+        //- custom: 
       },
 
       {
@@ -191,43 +191,7 @@ mixin cm-slider(content, attr)
         name: 'Sweet donut',
         discont: 'Save 30%',
         lazy: true,
-        //- custom:
-      },
-
-      {
-        src: './images/illustrations/food-item5.jpg',
-        srcset: './images/illustrations/food-item5.webp',
-        name: 'Fried fish',
-        discont: 'Save 20%',
-        lazy: true,
-        //- custom:
-      },
-
-      {
-        src: './images/illustrations/food-item6.jpg',
-        srcset: './images/illustrations/food-item6.webp',
-        name: 'Matanero',
-        discont: 'Save 25%',
-        lazy: true,
-        //- custom:
-      },
-
-      {
-        src: './images/illustrations/food-item7.jpg',
-        srcset: './images/illustrations/food-item7.webp',
-        name: 'Meat salad',
-        discont: 'Save 30%',
-        lazy: true,
-        //- custom:
-      },
-
-      {
-        src: './images/illustrations/food-item8.jpg',
-        srcset: './images/illustrations/food-item8.webp',
-        name: 'Fruit salad',
-        discont: 'Save 15%',
-        lazy: true,
-        //- custom:
+        //- custom: 
       },
 
     ]
@@ -366,6 +330,24 @@ mixin stat(content, attr)
     img(src=content.img alt=content.alt class="stat__icon")
     strong(class="stat__name logo-text")= content.name
     span(class="stat__value stat-text" data-dig-anim="increase")= content.value
+
+mixin menu-item(content, attr)
+
+  - 
+    content = content ?? {
+      img: './images/illustrations/menu-hamburger-preview.jpg',
+      name: 'Hamburger',
+      text: 'Big hamburger with meat, cheese and oil.',
+      price: '14.5$',
+      full: './images/illustrations/menu-hamburger.jpg',
+    }
+
+  article(class="menu-item")&attributes(attr)
+
+    img(src="./images/preloader-green.svg" data-load=content.img alt=content.name class="menu-item__icon")
+    h2(class="menu-item__name slide-text")= content.name
+    em(class="menu-item__text mini-text")= content.text
+    em(class="menu-item__price list-text")= content.price
 
 
 

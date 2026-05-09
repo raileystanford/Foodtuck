@@ -119,3 +119,55 @@
     transform: rotate(0deg) scale(0.9) !important;
   }
 }
+
+.menu-tabs__button {
+  will-change: transform;
+  transition: all 0.2s;
+  border-radius: 6px;
+
+  &:not(.active) {
+
+    &:hover, &:focus {
+      background: var.$orange;
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.9);
+    }
+
+  }
+  
+}
+
+.menu-item {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &__name {
+    transition: all 0.2s;
+    text-decoration: underline solid transparent;
+  }
+
+  &__price {
+    transition: all 0.2s;
+  }
+
+  &:hover {
+
+    .menu-item__name {
+      color: var.$orange;
+      text-decoration: underline;
+    }
+
+    .menu-item__price {
+      letter-spacing: 2px;
+    }
+
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.94);
+  }
+}

@@ -1,7 +1,10 @@
 import {
   Parallax,
   DigitsCountingAnimation,
+  UpdatePageTitle,
 } from "./modules/modules.js";
+
+import { links, index_titles } from './modules/dictionary.js';
 
 
 // Plugins
@@ -26,19 +29,6 @@ new Swiper('#food-cat', {
     enabled: true, 
     onlyInViewport: true,
     pageUpDown: true, 
-  },
-
-  on: {
-
-    click(swiper) {
-
-      let slide = swiper.clickedSlide;
-      let url = slide.firstElementChild.dataset.link ?? './404.html';
-
-      window.location.href = url;
-
-    }
-
   },
 
   breakpoints: {
@@ -83,6 +73,10 @@ new DigitsCountingAnimation({
   duration: 1500, // Длительность анимации счетчика
   steps: 30, // Количество шагов за которые пройдет анимация
   // once: true, // Если тру то анимируется только один раз. Если фолс то анимируется при каждом попадании в область видимости
+});
+
+new UpdatePageTitle({
+  dictionary: index_titles,
 });
 
 
@@ -165,8 +159,174 @@ function replaceChooseUsImgMobile() {
 
 }
 
+function menuTabsHandler() {
+
+  let block = document.querySelector('.menu-tabs');
+
+  if (!block) return;
+
+  let tabs = Array.from(block.querySelectorAll('.menu-tabs__tab'));
+  let triggers = Array.from(block.querySelectorAll('.menu-tabs__button'));
+  let menuItems = Array.from(block.querySelectorAll('.menu-item'));
+  let screenTimer;
+
+  preloadFullImages();
+  selectInitialTab();
+
+  document.addEventListener('click', (event) => {
+
+    let trigger = event.target.closest('.menu-tabs__button');
+
+    if (trigger) switchTabs(trigger);
+
+  });
+
+  document.addEventListener('pointerover', (event) => {
+
+    let menuItem = event.target.closest('.menu-item');
+
+    if (menuItem) {
+      showImageOnScreen(menuItem);
+    }
+
+  });
+
+  function switchTabs(btn) {
+
+    let tab = block.querySelector(`[data-tab="${btn.dataset.trig}"]`);
+
+    if (!tab) return;
+    if (tab.matches('.active')) return;
+
+    tabs.forEach((tab, index) => {
+
+      tab.classList.remove('active');
+      triggers[index].classList.remove('active');
+      triggers[index].disabled = false;
+
+    });
+
+    btn.classList.add('active');
+    btn.disabled = true;
+
+    setTimeout(() => {
+      tab.classList.add('active');
+      showInitialImageOnScreens();
+    }, 200);
+    
+  }
+
+  function showImageOnScreen(item) {
+
+    let tab = item.closest('.menu-tabs__tab');
+    let screen = tab.querySelector('.menu-tabs__big-img');
+    let full = item.dataset.full;
+    let alt = item.querySelector('.menu-item__icon')?.alt;
+
+    if (screen.currentURL === full) return;
+
+    screen.classList.add('active');
+
+    clearTimeout(screenTimer);
+
+    screenTimer = setTimeout(() => {
+
+      screen.src = full;
+      screen.alt = alt;
+      screen.currentURL = full;
+      screen.classList.remove('active');
+
+    }, 260);
+
+  }
+
+  function preloadFullImages() { 
+
+    let observer = new IntersectionObserver((list, obs) => {
+
+      list.forEach((item) => {
+
+        if (item.isIntersecting) {
+
+          menuItems.forEach((item) => {
+            let img = new Image();
+            img.src = item.dataset.full;
+          });
+
+          showInitialImageOnScreens();
+          obs.disconnect();
+
+        }
+
+      });
+
+    }, { root: null, threshold: 0.01, rootMargin: '1000px 0px' });
+
+    observer.observe(block);
+
+  }
+
+  function showInitialImageOnScreens() {
+
+    tabs.forEach((tab) => {
+
+      let menuItem = tab.querySelector('.menu-item');
+      let screen = tab.querySelector('.menu-tabs__big-img');
+      let full = menuItem.dataset.full;
+      let alt = menuItem.querySelector('.menu-item__icon')?.alt;
+
+      screen.src = full;
+      screen.alt = alt;
+      screen.currentURL = full;
+
+    });
+
+  }
+
+  function selectInitialTab() {
+
+    triggers[0].classList.add('active');
+    triggers[0].disabled = true;
+    tabs[0].classList.add('active');
+
+  }
+
+}
+
+function linkImitator(data) {
+
+  let element = document.querySelector('[data-link]');
+
+  if (!element || !data) return;
+
+  let link = document.createElement('a');
+
+  document.addEventListener('click', (event) => {
+
+    let linkElement = event.target.closest('[data-link]');
+   
+    if (linkElement) runLink(linkElement);
+
+  });
+
+  function runLink(element) {
+
+    let url = data[element.dataset.link]?.url ?? './404.html';
+    let target = data[element.dataset.link]?.target ?? '';
+
+    link.href = url;
+    link.target = target;
+
+    link.click();
+
+  }
+
+}
+
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
 replaceChooseUsImgMobile();
 // slidersAutoplayViewportController();
+menuTabsHandler();
+linkImitator(links);

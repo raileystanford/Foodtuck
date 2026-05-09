@@ -6,8 +6,6 @@ import {
   ScrollToTop,
 } from "./modules/modules.js";
 
-import { index_titles } from "./modules/dictionary.js";
-
 removeMobileBlocks();
 
 
@@ -33,10 +31,6 @@ new BurgerMenu({
   exceptBtns: '[data-lang-var], .button', // Кроме button с указаными селекторами. При клике на такие кнопки меню не закроется
   openCallback: function(info) {},
   closeCallback: function(info) {},
-});
-
-new UpdatePageTitle({
-  dictionary: index_titles,
 });
 
 new LazyLoad({
