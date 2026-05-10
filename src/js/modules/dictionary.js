@@ -24,6 +24,10 @@ let index_titles = {
     'en': 'Foodtuck - Our menu',
   },
 
+  'chefs': {
+    'en': 'Foodtuck - Chefs',
+  },
+
 };
 
 let links = {
@@ -104,6 +108,66 @@ let links = {
   },
 
   'cat-slide8': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef1': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef2': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef3': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef4': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef5': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef6': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef7': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef8': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef9': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef10': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef11': {
+    url: './404.html',
+    target: '_blank',
+  },
+
+  'chef12': {
     url: './404.html',
     target: '_blank',
   },

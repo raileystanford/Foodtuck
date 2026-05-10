@@ -171,3 +171,58 @@
     transform: scale(0.94);
   }
 }
+
+.chef {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &__image {
+    will-change: transform;
+    transition: all 0.3s;
+  }
+
+  &__info, &__name, &__job {
+    transition: all 0.25s;
+  }
+
+  &__info {
+    outline: 3px solid transparent;
+    outline-offset: 0px;
+  }
+
+  &:hover {
+
+    .chef__image {
+      transform: scale(1.1);
+    }
+
+    .chef__info {
+      background: var.$orange;
+      outline-color: var.$orange;
+      outline-offset: 8px;
+    }
+
+    .chef__name, .chef__job {
+      color: var.$white;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.93);
+  }
+}
+
+.outline-btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$orange;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.93);
+  }
+}

@@ -1,0 +1,130 @@
+- 
+  let chefsEmployee = [
+
+    {
+      src: './images/illustrations/chef1.jpg',
+      srcset: './images/illustrations/chef1.webp',
+      name: 'D. Estwood',
+      job: 'Chief Chef',
+      lazy: true,
+      link: 'chef1',
+    },
+
+    {
+      src: './images/illustrations/chef2.jpg',
+      srcset: './images/illustrations/chef2.webp',
+      name: 'D. Scoriesh',
+      job: 'Assistant Chef',
+      lazy: true,
+      link: 'chef2',
+    },
+
+    {
+      src: './images/illustrations/chef8.jpg',
+      srcset: './images/illustrations/chef8.webp',
+      name: 'R. Anderson',
+      job: 'Advertising Chef',
+      lazy: true,
+      link: 'chef8',
+    },
+
+    {
+      src: './images/illustrations/chef4.jpg',
+      srcset: './images/illustrations/chef4.webp',
+      name: 'W. Readfroad',
+      job: 'Chef',
+      lazy: true,
+      link: 'chef4',
+    },
+
+    {
+      src: './images/illustrations/chef5.jpg',
+      srcset: './images/illustrations/chef5.webp',
+      name: 'A. Stanford',
+      job: 'Chef',
+      lazy: true,
+      link: 'chef5',
+    },
+
+    {
+      src: './images/illustrations/chef6.jpg',
+      srcset: './images/illustrations/chef6.webp',
+      name: 'B. Backens',
+      job: 'Assistant Chef',
+      lazy: true,
+      link: 'chef6',
+    },
+
+    {
+      src: './images/illustrations/chef7.jpg',
+      srcset: './images/illustrations/chef7.webp',
+      name: 'B. Jefferson',
+      job: 'Assistant Chef',
+      lazy: true,
+      link: 'chef7',
+    },
+
+    {
+      src: './images/illustrations/chef3.jpg',
+      srcset: './images/illustrations/chef3.webp',
+      name: 'M. William',
+      job: 'Advertising Chef',
+      lazy: true,
+      link: 'chef3',
+    },
+
+    {
+      src: './images/illustrations/chef9.jpg',
+      srcset: './images/illustrations/chef9.webp',
+      name: 'R. Anderson',
+      job: 'Chef',
+      lazy: true,
+      link: 'chef9',
+    },
+
+    {
+      src: './images/illustrations/chef10.jpg',
+      srcset: './images/illustrations/chef10.webp',
+      name: 'S. Vertor',
+      job: 'Chef',
+      lazy: true,
+      link: 'chef10',
+    },
+
+    {
+      src: './images/illustrations/chef11.jpg',
+      srcset: './images/illustrations/chef11.webp',
+      name: 'B. Rojerson',
+      job: 'Co Chef',
+      lazy: true,
+      link: 'chef11',
+    },
+
+    {
+      src: './images/illustrations/chef12.jpg',
+      srcset: './images/illustrations/chef12.webp',
+      name: 'M. Dyson',
+      job: 'Chef',
+      lazy: true,
+      link: 'chef12',
+    },
+
+  ]
+
+article(class="chefs" data-title="chefs")
+
+  +heading(
+    {
+      title2: 'Chefs',
+      sub: '<span class="heading__cl">Me</span>et Our Chef',
+    },
+    { class: 'chefs__heading' }
+  )
+
+  div(class="chefs__content" data-show="show1")
+
+    each item, index in chefsEmployee 
+
+      +chef(item, { class: 'chefs__chef', 'data-load-block': '', 'data-link': item.link })
+
+  +outline-btn(null, { class: 'chefs__outline-btn', 'data-show-trig': 'show1' })

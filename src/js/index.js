@@ -168,6 +168,7 @@ function menuTabsHandler() {
   let tabs = Array.from(block.querySelectorAll('.menu-tabs__tab'));
   let triggers = Array.from(block.querySelectorAll('.menu-tabs__button'));
   let menuItems = Array.from(block.querySelectorAll('.menu-item'));
+  let media = window.matchMedia('(max-width: 768px)').matches;
   let screenTimer;
 
   preloadFullImages();
@@ -181,15 +182,19 @@ function menuTabsHandler() {
 
   });
 
-  document.addEventListener('pointerover', (event) => {
+  if (!media) {
 
-    let menuItem = event.target.closest('.menu-item');
+    document.addEventListener('pointerover', (event) => {
 
-    if (menuItem) {
-      showImageOnScreen(menuItem);
-    }
+      let menuItem = event.target.closest('.menu-item');
 
-  });
+      if (menuItem) {
+        showImageOnScreen(menuItem);
+      }
+
+    });
+
+  }
 
   function switchTabs(btn) {
 
@@ -323,6 +328,65 @@ function linkImitator(data) {
 
 }
 
+function showMoreHandler() {
+
+  let triggers = Array.from(document.querySelectorAll('[data-show-trig]'));
+  let contents = Array.from(document.querySelectorAll('[data-show]'));
+
+  if (!triggers.length || !contents.length) return;
+
+  defineElements();
+
+  document.addEventListener('click', (event) => {
+
+    let trigger = event.target.closest('[data-show-trig]');
+
+    if (trigger) showHideContent(trigger);
+
+  });
+
+  function showHideContent(btn) {
+
+    let content = btn._content
+
+    if (!content) return;
+
+    if (content.matches('.active')) {
+
+      content.classList.remove('active');
+      content.style.height = '';
+
+      btn.classList.remove('active');
+      btn.textContent = btn._initText;
+
+    } else {
+
+      content.classList.add('active');
+      content.style.height = content.scrollHeight + 'px';
+
+      btn.classList.add('active');
+      btn.textContent = 'Hide';
+
+    }
+
+  }
+
+  function defineElements() {
+
+    triggers.forEach((btn) => {
+
+      let content = document.querySelector(`[data-show="${btn.dataset.showTrig}"]`);
+
+      btn._content = content;
+      btn._initText = btn.textContent;
+      content._btn = btn;
+
+    });
+
+  }
+
+}
+
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
@@ -330,3 +394,4 @@ replaceChooseUsImgMobile();
 // slidersAutoplayViewportController();
 menuTabsHandler();
 linkImitator(links);
+showMoreHandler();

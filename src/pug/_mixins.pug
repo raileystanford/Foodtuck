@@ -96,17 +96,17 @@ mixin heading(content, attr)
 
 mixin btn-circle(content, attr)
 
-  if typeof content === 'string'
-
-    - content = content ?? 'See Menu';
-
-    button(class="btn-circle menu-text")&attributes(attr)= text
-
-  else
+  if content !== null && typeof content === 'object'
 
     - content = content ?? { text: 'See Menu', href: '#', target: '_blank' }
 
     a(href=content.href target=content.target class="btn-circle menu-text")&attributes(attr)= content.text
+
+  else
+
+    - content = content ?? 'See Menu';
+
+    button(class="btn-circle menu-text")&attributes(attr)= content
   
 mixin food-gravity(attr)
 
@@ -349,7 +349,59 @@ mixin menu-item(content, attr)
     em(class="menu-item__text mini-text")= content.text
     em(class="menu-item__price list-text")= content.price
 
+mixin chef(content, attr)
 
+  -
+    content = content ?? {
+
+      src: './images/illustrations/chef1.jpg',
+      srcset: './images/illustrations/chef1.webp',
+      name: 'D.Estwood',
+      job: 'Chief Chef',
+      lazy: true,
+
+    }
+
+  div(class="chef")&attributes(attr)
+
+    - let srcset = content.srcset ?? scontent.src;
+    - let type = content.srcset ? 'image/webp' : null;
+
+    if content.lazy
+
+      picture(class="chef__pic")
+        source(srcset data-load=srcset type=type)
+        img(src="./images/preloader-green.svg" data-load=content.src alt=content.name class="chef__image")
+
+    else 
+
+      picture(class="chef__pic")
+        source(srcset=srcset type=type)
+        img(src=content.src alt=content.name class="chef__image")
+
+    div(class="chef__info")
+
+      strong(class="chef__name list-text")= content.name
+      em(class="chef__job mini-text")= content.job
+
+mixin outline-btn(content, attr)
+
+  if content !== null && typeof content === 'object'
+
+    - 
+      content = content ?? {
+        url: './404.html',
+        target: '_blank',
+        text: 'See More',
+      }
+
+    a(href=content.url target=content.target class="outline-btn menu-text")= content.text
+
+  else 
+
+    - content = content ?? 'See More';
+
+    button(class="outline-btn menu-text")&attributes(attr)= content 
 
 
 
