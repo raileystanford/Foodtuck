@@ -46,3 +46,12 @@
     color: var.$orange;
   }
 }
+
+.chef {
+  will-change: transform;
+  transition: all 0.05s;
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

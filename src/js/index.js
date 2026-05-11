@@ -247,6 +247,8 @@ function menuTabsHandler() {
 
   function preloadFullImages() { 
 
+    if (media) return;
+
     let observer = new IntersectionObserver((list, obs) => {
 
       list.forEach((item) => {
@@ -387,10 +389,95 @@ function showMoreHandler() {
 
 }
 
+// AUTOPLAY
+function chefsMobile() {
+
+  let media = window.matchMedia('(max-width: 768px)').matches;
+  let cards = Array.from(document.querySelectorAll('.chefs .chef'));
+
+  if (!media || !cards.length) return;
+
+  let block = document.querySelector('.chefs');
+  let slider;
+
+  removeElements();
+  createSliderStructure();
+  initSlider();
+
+  function createSliderStructure() {
+
+    slider = document.createElement('div');
+    slider.classList.add('swiper', 'chefs__slider');
+
+    let wrapper = document.createElement('div');
+    wrapper.classList.add('swiper-wrapper');
+
+    cards.forEach((card) => {
+
+      let slide = document.createElement('div');
+      slide.classList.add('swiper-slide');
+      slide.append(card);
+      wrapper.append(slide);
+
+    });
+
+    slider.append(wrapper);
+    block.append(slider);
+
+  }
+
+  function removeElements() {
+
+    let btn = document.querySelector('.chefs .outline-btn');
+    cards[0].parentElement.remove();
+    btn?.remove();
+
+  }
+
+  function initSlider() {
+
+    new Swiper(slider, {
+      slidesPerView: 2.3,
+      spaceBetween: 15,
+      speed: 900,
+      loop: true,
+
+      // autoplay: {
+      //   delay: 2000,
+      //   disableOnInteraction: true,
+      //   pauseOnMouseEnter: true,
+      // },
+
+      breakpoints: {
+
+        577: {
+          slidesPerView: 2.3,
+          spaceBetween: 15,
+        },
+
+        421: {
+          slidesPerView: 1.7,
+          spaceBetween: 15,
+        },
+
+        1: {
+          slidesPerView: 1.3,
+          spaceBetween: 15,
+        },
+
+      }
+
+    });
+
+  }
+
+}
+
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
 replaceChooseUsImgMobile();
+chefsMobile();
 // slidersAutoplayViewportController();
 menuTabsHandler();
 linkImitator(links);

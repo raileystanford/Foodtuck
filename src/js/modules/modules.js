@@ -839,7 +839,7 @@ class LazyLoad {
         }
       })
 
-    }, { root: null, rootMargin: `${offset}px 0px ${offset}px 0px`, threshold: 0.01 })
+    }, { root: null, rootMargin: `${offset}px ${offset}px`, threshold: 0.01 })
   }
 
   observerHandler(container) {
