@@ -32,6 +32,10 @@ let index_titles = {
     'en': 'Foodtuck - Testimonials',
   },
 
+  'process': {
+    'en': 'Foodtuck - Cooking Process',
+  },
+
 };
 
 let links = {

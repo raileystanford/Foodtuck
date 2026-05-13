@@ -822,6 +822,126 @@ BODY {
   }
 }
 
+.video-btn {
+  @include mix.flex(nowrap, 12px);
+  align-items: center;
+
+  &__icon-wrapper {
+    @extend %flex-cen;
+    width: 60px;
+    height: 60px;
+    background: var.$orange;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &__icon {
+    width: 15px;
+    height: 18px;
+    margin: 1px 0 0 4px;
+  }
+
+  &__text {
+    color: var.$white;
+    font-weight: 700;
+    text-align: left;
+  }
+}
+
+.video-block {
+  @extend %p-cen;
+  will-change: transform;
+  display: flex;
+  position: fixed;
+  width: 1100px;
+  height: 650px;
+  z-index: 11;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: all 0.2s;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: -37px;
+    right: -37px;
+    color: var.$white;
+    font-size: 60px;
+    line-height: 30px;
+    overflow: hidden;
+  }
+
+  &__video {
+    @extend %wh-100;
+    object-fit: cover;
+  }
+
+  &.active {
+    transition: all 0.3s;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.video-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background: var.$trans-black1;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.process {
+  display: flex;
+  justify-content: flex-end;
+  padding: 112px 0;
+
+  &::before {
+    background: url(../images/backgrounds/process-bg.jpg) 0 0 / cover no-repeat;
+  }
+
+  &__body {
+    @include mix.flex-col(33px);
+    align-items: flex-end;
+    max-width: 700px;
+  }
+
+  &__heading {
+    align-items: flex-end;
+
+    .heading__title, .heading__subtitle, .heading__text {
+      text-align: right;
+    }
+  }
+
+  &__controls {
+    @include mix.flex(wrap, 24px);
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__outline-btn {
+    width: 190px;
+    min-height: 60px;
+    border-radius: 30px;
+  }
+}
+
 
 // Media queries
 

@@ -500,6 +500,207 @@ function chefsMobile() {
 
 }
 
+function videoPlayer() {
+
+  let videoPlayBtn = document.querySelector('.process .video-btn');
+
+  if (!videoPlayBtn) return
+
+  const media = window.matchMedia('(max-width: 768px)').matches;
+  const element = {};
+
+  createVideoBlock();
+  defineElements();
+  preloadVideo(); 
+
+  document.addEventListener('click', (event) => {
+
+    let isPlayBtn = event.target.closest('.process .video-btn');
+    let isCloseBtn = event.target.closest('.video-block__close');
+
+    if (isPlayBtn) {
+
+      if (media) {
+        openMobileVideo();
+      } else {
+        openVideoBlock();
+      }
+      
+    } else if (isCloseBtn) {
+      closeVideoBlock();
+    }
+
+  });
+
+  document.addEventListener('keydown', (event) => {
+
+    if (event.key === 'Escape') {
+
+      if (element.container.matches('.active')) closeVideoBlock();
+
+    }
+
+  });
+
+  element.video.addEventListener('ended', (event) => {
+
+    if (media) {
+      closeMobileVideo();
+    } else {
+      closeVideoBlock();
+    }
+
+    element.video.currentTime = 0;
+
+    if (document.fullscreenElement) {
+
+      element.container.addEventListener('transitionend', (event) => {
+        videoPlayBtn.scrollIntoView({ behavior: "instant", block: "center" });
+      }, { once: true })
+
+      document.exitFullscreen();
+
+      videoPlayBtn.scrollIntoView({ behavior: "instant", block: "center" });
+
+    }
+
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+
+    if (media) {
+      if (!document.fullscreenElement) closeMobileVideo();
+    } else {
+      videoPlayBtn.scrollIntoView({ behavior: "instant", block: "center" });
+    }
+    
+  });
+
+  element.video.addEventListener("webkitendfullscreen", () => {
+    
+    if (media) {
+      closeMobileVideo();
+    } else {
+      videoPlayBtn.scrollIntoView({ behavior: "instant", block: "center" });
+    }
+    
+  });
+
+  async function openMobileVideo() {
+
+    element.container.classList.add('active');
+
+    if (element.video.requestFullscreen) {
+      await element.video.requestFullscreen();
+    } else if (element.video.webkitEnterFullscreen) {
+      await element.video.webkitEnterFullscreen();
+    }
+
+    setTimeout(() => {
+      element.video.play();
+    }, 200);
+    
+  }
+
+  function closeMobileVideo() {
+
+    element.container.classList.remove('active');
+    element.video.pause();
+
+    videoPlayBtn.scrollIntoView({ behavior: "instant", block: "center" });
+
+  }
+
+  function openVideoBlock() {
+
+    if (element.scrollTopBtn) element.scrollTopBtn.style.display = 'none';
+
+    document.body.style.paddingRight = window.innerWidth - document.documentElement.clientWidth + 'px';
+    document.body.style.overflow = 'hidden';
+
+    element.container.addEventListener('transitionend', (event) => element.container.focus(), { once: true });
+
+    element.container.classList.add('active');
+    element.overlay.classList.add('active');
+
+    element.container.focus();
+    
+    clearTimeout(element.timer);
+
+    element.timer = setTimeout(() => {
+      element.video.play();
+    }, 200);
+    
+  }
+
+  function closeVideoBlock() {
+
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+
+    if (element.scrollTopBtn) element.scrollTopBtn.style.display = '';
+
+    element.container.classList.remove('active');
+    element.overlay.classList.remove('active');
+
+    clearTimeout(element.timer);
+    element.video.pause();
+
+  }
+
+  function createVideoBlock() {
+
+    let block = document.createElement('div');
+    block.classList.add('video-block');
+
+    let content = `
+      <button class="video-block__close">&times;</button>
+      <video class="video-block__video" playsinline controls preload="none" src="./videos/process-video.mp4" type="video/mp4">
+    `;
+
+    let overlay = document.createElement('div');
+    overlay.classList.add('video-overlay');
+
+    block.insertAdjacentHTML('beforeend', content);
+    document.body.append(block, overlay);
+
+  }
+
+  function defineElements() {
+
+    element.container = document.querySelector('.video-block');
+    element.video = element.container.querySelector('.video-block__video');
+    element.closeBtn = element.container.querySelector('.video-block__close');
+    element.overlay = document.querySelector('.video-overlay');
+    element.scrollTopBtn = document.querySelector('.scroll-top');
+
+    element.container.tabIndex = -1;
+
+  }
+
+  function preloadVideo() {
+
+    let observer = new IntersectionObserver((list, obs) => {
+
+      list.forEach((item) => {
+
+        if (item.isIntersecting) {
+
+          element.video.preload = 'auto';
+          obs.disconnect();
+
+        }
+
+      })
+
+    }, { root: null, threshold: 1 });
+
+    observer.observe(videoPlayBtn);
+
+  }
+
+}
+
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
@@ -509,3 +710,4 @@ chefsMobile();
 menuTabsHandler();
 linkImitator(links);
 showMoreHandler();
+videoPlayer();

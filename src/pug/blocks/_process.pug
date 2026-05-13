@@ -1,0 +1,22 @@
+article(class="process custom-bg" data-title="process")
+
+  div(class="process__body")
+
+    +heading(
+      {
+        title2: 'Restaurant Active Process',
+        sub: '<span class="heading__cl">We</span> Document Every Food Bean Process untile it is saved',
+        text: 'We document every food bean’s journey from soil to storage. Each cleaning, roasting, and packing step is recorded. Only when safely sealed and saved is the process complete.',
+      },
+      { class: 'process__heading' }
+    )
+
+    div(class="process__controls")
+
+      +outline-btn({
+        url: './404.html',
+        target: '_blank',
+        text: 'Read More',
+      }, { class: 'process__outline-btn' })
+
+      +video-btn(null, { class: 'process__video-btn' })

@@ -457,6 +457,16 @@ mixin testim-slider(slides, attr)
 
     div(class="swiper-pagination testim-slider__pagination")
 
+mixin video-btn(text, attr)
+
+  - text = text ?? 'Play Video';
+
+  button(class="video-btn")&attributes(attr)
+
+    span(class="video-btn__icon-wrapper")
+      img(src="./images/icons/play-icon.svg" class="video-btn__icon")
+
+    span(class="video-btn__text menu-text")= text
 
 
 

@@ -244,3 +244,43 @@
 
   }
 }
+
+.video-btn {
+  will-change: transform;
+  transition: all 0.25s;
+
+  &__icon-wrapper, &__text {
+    transition: all 0.25s;
+  }
+
+  &:hover, &:focus {
+
+    .video-btn__text {
+      color: var.$orange;
+    }
+
+    .video-btn__icon-wrapper {
+      background: var.$green;
+    } 
+    
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
+  }
+}
+
+.video-block__close {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    color: var.$orange;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.85);
+  }
+}
