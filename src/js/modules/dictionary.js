@@ -28,6 +28,10 @@ let index_titles = {
     'en': 'Foodtuck - Chefs',
   },
 
+  'testimonials': {
+    'en': 'Foodtuck - Testimonials',
+  },
+
 };
 
 let links = {

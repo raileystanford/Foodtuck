@@ -55,3 +55,16 @@
     transform: scale(0.9);
   }
 }
+
+.testim-slider .swiper-pagination-bullet {
+  transition: all 0.2s;
+
+  &:not(.swiper-pagination-bullet-active) {
+
+    &:active {
+      transition: all 0.05s;
+      opacity: 1 !important;
+    }
+
+  }
+}
