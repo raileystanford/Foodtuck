@@ -1,0 +1,76 @@
+-
+  let testimonialsSlides = [
+
+    {
+      avSRC: './images/illustrations/testimon2.jpg',
+      avSRCSET: './images/illustrations/testimon2.webp',
+      lazy: true,
+      text: 'I had an amazing experience at this restaurant! The cozy atmosphere, friendly staff, and delicious food made my evening unforgettable. I ordered the grilled salmon, which was perfectly cooked and full of flavor. The dessert menu is also worth trying. Service was fast and attentive throughout. Great value for money.',
+      stars: [5, 5],
+      name: 'Antony Jefferson',
+      job: 'Food Specialist',
+    },
+
+    {
+      avSRC: './images/illustrations/testimon3.jpg',
+      avSRCSET: './images/illustrations/testimon3.webp',
+      lazy: true,
+      text: 'Loved everything about this place! The staff was welcoming, and the service was quick. I tried the pasta and it was absolutely delicious — fresh ingredients and great portion size. The ambiance is cozy and relaxing. Prices are reasonable too. A perfect spot for lunch or dinner. Will definitely return and recommend it to everyone!',
+      stars: [4, 5],
+      name: 'Michael Thomason',
+      job: 'Restaraunt Critic',
+    },
+
+    {
+      avSRC: './images/illustrations/testimon5.jpg',
+      avSRCSET: './images/illustrations/testimon5.webp',
+      lazy: true,
+      text: 'Exceptional in every way! From the warm welcome to the last bite, everything was perfect. I ordered the steak, and it was cooked exactly as requested. The wine selection complements the menu well. Great music, soft lighting, and professional service. Easily one of the best meals I\'ve had in a long time!',
+      stars: [5, 5],
+      name: 'Miranda Jameson',
+      job: 'Food Specialist',
+    },
+
+    {
+      avSRC: './images/illustrations/testimon4.jpg',
+      avSRCSET: './images/illustrations/testimon4.webp',
+      lazy: true,
+      text: 'Absolutely wonderful experience! The atmosphere is warm and inviting, and the service is top-notch. Every dish we ordered was delicious, especially the homemade soup and grilled vegetables. Generous portions and reasonable prices. The staff truly cares about their guests. I left completely satisfied. Without a doubt, one of the best restaurants in town. Highly recommend!',
+      stars: [5, 5],
+      name: 'John Dou',
+      job: 'Restaraunt Critic',
+    },
+
+    {
+      avSRC: './images/illustrations/testimon1.jpg',
+      avSRCSET: './images/illustrations/testimon1.webp',
+      lazy: true,
+      text: 'Fantastic restaurant with a wonderful vibe! The food was fresh, beautifully presented, and full of flavor. I especially enjoyed the homemade dessert — a perfect ending to the meal. The waiters were polite and attentive. Clean, stylish interior and fair prices. I’m so glad I found this place. Highly recommended for anyone who loves good food!',
+      stars: [4, 5],
+      name: 'James Dyson',
+      job: 'Regular Customer',
+    },
+
+    {
+      avSRC: './images/illustrations/testimon6.jpg',
+      avSRCSET: './images/illustrations/testimon6.webp',
+      lazy: true,
+      text: 'This place is a hidden gem! The moment I walked in, I felt welcome. The food is incredibly tasty, especially the seafood pasta. Everything is fresh and well-seasoned. The staff goes above and beyond to make sure you’re happy. Cozy atmosphere, fair prices, and fast service. I’ll definitely come back again!',
+      stars: [5, 5],
+      name: 'Jill Stanford',
+      job: 'Regular Customer',
+    },
+
+  ]
+
+article(class="testimonials")
+
+  +heading(
+    {
+      title2: 'Testimonials',
+      sub: '<span class="heading__cl">Wh</span>at our client are saying',
+    },
+    { class: 'testimonials__heading' }
+  )
+
+  +testim-slider(testimonialsSlides, { class: 'testimonials__testim-slider', 'data-load-block': '', id: 'testim-slider' })

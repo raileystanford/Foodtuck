@@ -226,3 +226,21 @@
     transform: scale(0.93);
   }
 }
+
+.testim-slider .swiper-pagination-bullet {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:not(.swiper-pagination-bullet-active) {
+
+    &:hover, &:focus {
+      opacity: 1 !important;
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.8);
+    }
+
+  }
+}

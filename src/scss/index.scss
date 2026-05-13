@@ -651,10 +651,12 @@ BODY {
   }
 
   &__name {
+    color: var.$black-gray;
     font-weight: 700;
   }
 
   &__job {
+    color: var.$black-gray;
     line-height: 22px;
   }
 }
@@ -714,6 +716,111 @@ BODY {
     width: 155px;
   }
 }
+
+.stars {
+  @include mix.flex(wrap, 8px);
+  align-items: center;
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+}
+
+.testim-slider {
+  width: 100%;
+  padding: 0 0 68px 0;
+
+  &__slide {
+    @include mix.flex-col(32px);
+    align-items: center;
+    position: relative;
+    padding: 0 86px 32px 86px;
+    background: 107.5% 41px / contain no-repeat;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 66px);
+      background: var.$white;
+      z-index: -1;
+    }
+  }
+
+  &__avatar {
+    width: 133px;
+    height: 133px;
+    border-radius: 50%;
+    object-fit: scale-down;
+    flex-shrink: 0;
+
+    &.loaded {
+      object-fit: cover;
+    }
+  }
+
+  &__quotes {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  &__text {
+    color: var.$dark-gray;
+    text-align: center;
+  }
+
+  &__info {
+    @include mix.flex-col(7px);
+    align-items: center;
+  }
+
+  &__name {
+    color: var.$black-gray;
+    margin: 9px 0 0 0;
+  }
+
+  &__job {
+    color: var.$silver;
+  }
+
+  &__pagination {
+    @include mix.flex(wrap, 10px);
+    justify-content: center;
+    bottom: 0 !important;
+
+    .swiper-pagination-bullet {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin: 0 !important;
+      opacity: 0.3 !important;
+      background: var.$orange;
+
+      &:focus {
+        outline: none;
+      }
+
+      &-active {
+        opacity: 1 !important;
+      }
+    }
+  }
+}
+
+.testimonials {
+  @include mix.flex-col(56px);
+
+  &__testim-slider {
+    width: 869px;
+  }
+}
+
 
 // Media queries
 

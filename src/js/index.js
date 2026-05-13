@@ -64,6 +64,33 @@ new Swiper('#food-cat', {
 
 });
 
+// AUTOPLAY
+new Swiper('#testim-slider', {
+  speed: 900,
+  effect: "flip",
+  autoHeight: true,
+  loop: true,
+
+  pagination: {
+    el: '#testim-slider .testim-slider__pagination',
+    type: 'bullets',
+    clickable: true,
+  },
+
+  // autoplay: {
+  //   delay: 3000,
+  //   disableOnInteraction: false,
+  //   pauseOnMouseEnter: true,
+  // },
+
+  keyboard: {
+    enabled: true, 
+    onlyInViewport: true,
+    pageUpDown: true, 
+  },
+
+});
+
 new DigitsCountingAnimation({
   intObserverParams: {
     threshold: 0.1,

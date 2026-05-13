@@ -395,7 +395,7 @@ mixin outline-btn(content, attr)
         text: 'See More',
       }
 
-    a(href=content.url target=content.target class="outline-btn menu-text")= content.text
+    a(href=content.url target=content.target class="outline-btn menu-text")&attributes(attr)= content.text
 
   else 
 
@@ -403,11 +403,88 @@ mixin outline-btn(content, attr)
 
     button(class="outline-btn menu-text")&attributes(attr)= content 
 
+mixin testim-slider(slides, attr)
+
+  -
+    slides = slides ?? [
+
+      {
+        avSRC: './images/illustrations/testimon1.jpg',
+        avSRCSET: './images/illustrations/testimon1.webp',
+        lazy: true,
+        text: 'I had an amazing experience at this restaurant! The cozy atmosphere, friendly staff, and delicious food made my evening unforgettable. I ordered the grilled salmon, which was perfectly cooked and full of flavor. The dessert menu is also worth trying. Service was fast and attentive throughout. Great value for money. Highly recommended for a date night or dinner with friends. I’ll definitely be coming back again soon!',
+        stars: [4, 5], //- n, max
+        name: 'Alamin Hasan',
+        job: 'Food Specialist',
+      },
+
+    ]
+
+  div(class="testim-slider swiper")&attributes(attr)
+    div(class="swiper-wrapper")
+
+      each item, index in slides 
+
+        div(class="swiper-slide")
+
+          div(class="testim-slider__slide" data-load-bg="./images/backgrounds/flowers-bg.png")
+
+            - let srcset = item.avSRCSET ?? avSRC;
+            - let type = item.avSRCSET ? 'image/webp' : null;
+
+            if item.lazy
+
+              picture
+                source(srcset data-load=srcset type=type)
+                img(src="./images/preloader-green.svg" data-load=item.avSRC alt=item.name class="testim-slider__avatar")
+
+            else 
+
+              picture
+                source(srcset=srcset type=type)
+                img(src=item.avSRC alt=item.name class="testim-slider__avatar")
+
+            img(src="./images/icons/quotes.svg" class="testim-slider__quotes")
+
+            strong(class="testim-slider__text tes-text")= item.text
+
+            div(class="testim-slider__info")
+
+              +stars(item.stars[0], item.stars[1], { class: 'testim-slider__stars' })
+
+              em(class="testim-slider__name logo-text")= item.name
+              span(class="testim-slider__job job-text")= item.job
+
+    div(class="swiper-pagination testim-slider__pagination")
 
 
 
 
 
+
+
+
+
+
+
+
+
+mixin stars(n, max, attr)
+
+  - n = n ?? 5;
+  - max = max ?? 5;
+
+  div(class="stars")&attributes(attr)
+
+    - for (let i = 1; i <= max; i++ )
+
+      if i <= n
+
+        img(src="./images/icons/star.svg" class="stars__icon")
+
+      else 
+
+        img(src="./images/icons/star-empty.svg" class="stars__icon")
 
 
 

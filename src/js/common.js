@@ -268,7 +268,7 @@ function fixedNavbarState() {
 
 
 
-focusStateFix();
+focusStateFix('.testim-slider .swiper-pagination-bullet');
 searchShowHide();
 formValidatorEventsHandler();
 // fixedNavbarState();
