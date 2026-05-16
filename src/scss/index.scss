@@ -912,7 +912,7 @@ BODY {
   padding: 112px 0;
 
   &::before {
-    background: url(../images/backgrounds/process-bg.jpg) 0 0 / cover no-repeat;
+    background: url(../images/backgrounds/process-bg.jpg) right 0 / cover no-repeat;
   }
 
   &__body {
@@ -1104,6 +1104,11 @@ BODY {
     }
   }
 
+  .video-block {
+    width: 830px;
+    height: 550px;
+  }
+
 }
 
 @media (max-width: 996px) {
@@ -1251,6 +1256,15 @@ BODY {
     &__testim-slider {
       width: 100%;
     }
+  }
+
+  .video-block {
+    width: 680px;
+    height: 550px;
+  }
+
+  .process {
+    padding: 90px 0;
   }
 
 }
@@ -1454,6 +1468,26 @@ BODY {
 
   .testimonials {
     gap: 35px;
+  }
+
+  .video-btn {
+
+    &__icon-wrapper {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .process {
+    padding: 60px 0;
+
+    &__body {
+      max-width: 100%;
+    }
+
+    &__outline-btn {
+      min-height: auto;
+    }
   }
 
 }
@@ -1764,6 +1798,26 @@ BODY {
     &__text {
       font-size: 16px;
       line-height: 21px;
+    }
+  }
+
+  .process {
+    padding: 50px 0;
+
+    &__heading {
+      
+      .heading__subtitle {
+        font-size: 35px;
+        line-height: 40px;
+      }
+    }
+
+    &__controls {
+      gap: 20px;
+    }
+
+    &__outline-btn {
+      width: 135px;
     }
   }
 

@@ -68,3 +68,30 @@
 
   }
 }
+
+.video-btn {
+
+  &__icon-wrapper, &__text {
+    transition: all 0.05s;
+  }
+
+  &:active {
+
+    .video-btn__text {
+      color: var.$orange;
+    }
+
+    .video-btn__icon-wrapper {
+      background: var.$green;
+    } 
+    
+  }
+}
+
+.outline-btn {
+  transition: all 0.05s;
+
+  &:active {
+    background: var.$orange;
+  }
+}

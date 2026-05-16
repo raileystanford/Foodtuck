@@ -532,15 +532,19 @@ function videoPlayer() {
 
   });
 
-  document.addEventListener('keydown', (event) => {
+  if (!media) {
 
-    if (event.key === 'Escape') {
+    document.addEventListener('keydown', (event) => {
 
-      if (element.container.matches('.active')) closeVideoBlock();
+      if (event.key === 'Escape') {
 
-    }
+        if (element.container.matches('.active')) closeVideoBlock();
 
-  });
+      }
+
+    });
+
+  }
 
   element.video.addEventListener('ended', (event) => {
 
