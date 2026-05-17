@@ -95,3 +95,26 @@
     background: var.$orange;
   }
 }
+
+.news-card__link {
+  transition: all 0.05s;
+
+  &:active {
+    color: var.$orange;
+    text-decoration: underline;
+  }
+}
+
+.like-btn, .share-btn__trigger, .news-card__chat {
+
+  &__icon, &-icon {
+    transition: all 0.05s;
+  }
+
+  &:active {
+
+    .like-btn__icon, .share-btn__trigger-icon, .news-card__chat-icon {
+      stroke: var.$orange;
+    }
+  }
+}

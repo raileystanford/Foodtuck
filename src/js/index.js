@@ -773,6 +773,78 @@ function shareHandler() {
 
 }
 
+// AUTOPLAY
+function blogpostMobile() {
+
+  let container = document.querySelector('.blogpost__body');
+  let cards = Array.from(document.querySelectorAll('.blogpost .news-card'));
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!media || !container || !cards.length) return;
+
+  createSlider();
+  initSlider();
+
+  function createSlider() {
+
+    container.classList.remove('blogpost__body');
+    container.classList.add('swiper', 'blogpost__slider');
+
+    let wrapper = document.createElement('div');
+    wrapper.classList.add('swiper-wrapper');
+
+    cards.forEach((card) => {
+
+      let slide = document.createElement('div');
+      slide.classList.add('swiper-slide');
+      slide.append(card);
+      wrapper.append(slide);
+
+    });
+
+    container.append(wrapper);
+
+  }
+
+  function initSlider() {
+
+    new Swiper(container, {
+      slidesPerView: 2,
+      spaceBetween: 20,
+      speed: 800,
+      loop: true,
+
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+
+      breakpoints: {
+
+        576: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+
+        420: {
+          slidesPerView: 1.3,
+          spaceBetween: 20,
+        },
+
+        1: {
+          slidesPerView: 1.15,
+          spaceBetween: 10,
+        },
+
+      }
+
+    });
+
+  }
+
+}
+
 
 replaceHeaderImgMobile();
 replaceAboutImgMobile();
@@ -785,3 +857,4 @@ showMoreHandler();
 videoPlayer();
 likeCounter();
 shareHandler();
+blogpostMobile();
