@@ -1,0 +1,50 @@
+-
+  let blogpostNewsCards = [
+
+    {
+      lazy: true,
+      src: './images/illustrations/news1.jpg',
+      srcset: './images/illustrations/news1.webp',
+      alt: 'Hamburger',
+      date: '10 February 2022',
+      title: 'New hamburger recipe with increased beef content',
+      link: { text: 'Learn More', url: './404.html', target: '_blank' },
+    },
+
+    {
+      lazy: true,
+      src: './images/illustrations/news2.jpg',
+      srcset: './images/illustrations/news2.webp',
+      alt: 'Pizza',
+      date: '11 February 2022',
+      title: 'Delicate Italian pizza with layers of cheese and salami',
+      link: { text: 'Learn More', url: './404.html', target: '_blank' },
+    },
+
+    {
+      lazy: true,
+      src: './images/illustrations/news3.jpg',
+      srcset: './images/illustrations/news3.webp',
+      alt: 'Taco',
+      date: '10 February 2022',
+      title: 'Incredibly delicious taco with meat, vegetables and spices',
+      link: { text: 'Learn More', url: './404.html', target: '_blank' },
+    }
+
+  ]
+
+article(class="blogpost" data-title="blogpost")
+
+  +heading(
+    {
+      title2: 'Blog Post',
+      sub: '<span class="heading__cl">La</span>test News & Blog',
+    },
+    { class: 'blogpost__heading' }
+  )
+
+  div(class="blogpost__body" data-load-block)
+
+    each item, index in blogpostNewsCards 
+
+      +news-card(item, { class: 'blogpost__news-card' })

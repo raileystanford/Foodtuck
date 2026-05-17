@@ -468,6 +468,93 @@ mixin video-btn(text, attr)
 
     span(class="video-btn__text menu-text")= text
 
+mixin like-btn(attr)
+
+  button(class="like-btn" data-like)
+
+    svg(class="like-btn__icon")
+      use(xlink:href="./images/sprite.svg#like")
+
+    span(class="like-btn__count menu-text")
+
+mixin share-btn(links, attr) 
+
+  -
+    links = links ?? [
+
+      { icon: './images/sprite.svg#facebook', url: 'https://www.facebook.com' },
+      { icon: './images/sprite.svg#pinterest', url: 'https://ru.pinterest.com' },
+      { icon: './images/sprite.svg#twitter', url: 'https://x.com' },
+      { icon: './images/sprite.svg#youtube', url: 'https://www.youtube.com' },
+      { icon: './images/sprite.svg#whatsapp', url: 'https://www.whatsapp.com' },
+      { icon: './images/sprite.svg#instagram', url: 'https://www.instagram.com' },
+
+    ]
+
+  div(class="share-btn")&attributes(attr)
+
+    button(class="share-btn__trigger")
+      svg(class="share-btn__trigger-icon")
+        use(xlink:href="./images/sprite.svg#share")
+
+    div(class="share-btn__content")
+
+      each item, index in links 
+
+        a(href=item.url target="_blank" class="share-btn__link")
+          svg(class="share-btn__link-icon")
+            use(xlink:href=item.icon)
+
+mixin news-card(content, attr)
+
+  -
+    content = content ?? {
+      lazy: true,
+      src: './images/illustrations/news1.jpg',
+      srcset: './images/illustrations/news1.webp',
+      alt: 'Hamburger',
+      date: '10 February 2022',
+      title: 'New hamburger recipe with increased beef content',
+      link: { text: 'Learn more', url: './404.html', target: '_blank' },
+    }
+
+  article(class="news-card")&attributes(attr)
+
+    div(class="news-card__img-wrapper")
+
+      - let srcset = content.srcset ?? content.src;
+      - let type = content.srcset ? 'image/webp' : '';
+      
+      if content.lazy
+
+        picture(class="news-card__pic")
+          source(srcset data-load=srcset type=type)
+          img(src="./images/preloader-green.svg" data-load=content.src alt=content.alt class="news-card__img")
+
+      else 
+
+        picture(class="news-card__pic")
+          source(srcset=srcset type=type)
+          img(src=content.src alt=content.alt class="news-card__img")
+
+    div(class="news-card__info")
+
+      em(class="news-card__date menu-text")= content.date 
+      h2(class="news-card__title logo-text")= content.title
+
+      div(class="news-card__footer")
+
+        a(href=content.link.url target=content.link.target class="news-card__link menu-text")= content.link.text
+
+        div(class="news-card__controls")
+
+          +like-btn({ class: 'news-card__like-btn' })
+
+          a(href="./404.html" target="_blank" class="news-card__chat")
+            svg(class="news-card__chat-icon")
+              use(xlink:href="./images/sprite.svg#chat-msg")
+
+          +share-btn(null, { class: 'news-card__share-btn' })
 
 
 

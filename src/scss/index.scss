@@ -942,6 +942,190 @@ BODY {
   }
 }
 
+.like-btn {
+  @include mix.flex(nowrap, 0px);
+  align-items: center;
+  padding: 3px;
+
+  &__icon {
+    stroke: var.$white;
+    stroke-width: 1.5;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  &__count {
+    color: var.$white;
+    line-height: 100%;
+  }
+
+  &.active {
+    gap: 5px;
+
+    .like-btn__icon {
+      stroke: var.$orange;
+    }
+  }
+}
+
+.share-btn {
+  position: relative;
+  width: 30px;
+  height: 30px;
+
+  &__trigger {
+    @extend %flex-cen;
+    @extend %wh-100;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+
+  &__trigger-icon {
+    @extend %wh-100;
+    stroke: var.$white;
+    stroke-width: 1.5;
+  }
+
+  &__content {
+    @include mix.flex(wrap, 15px);
+    @extend %px-cen;
+    position: absolute;
+    top: 200%;
+    align-items: center;
+    width: 140px;
+    background: var.$black;
+    border: 1px solid var.$white;
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+  }
+
+  &__link {
+    @extend %flex-cen;
+    width: 28px;
+    height: 28px;
+    padding: 3px
+  }
+
+  &__link-icon {
+    @extend %wh-100;
+    fill: var.$white;
+  }
+
+  &.active {
+
+    .share-btn__trigger-icon {
+      stroke: var.$orange;
+    }
+
+    .share-btn__content {
+      visibility: visible;
+      opacity: 1;
+      top: 135%;
+    }
+  }
+}
+
+.news-card {
+  @include mix.flex-col(0px);
+  
+  &__img-wrapper {
+    display: flex;
+    width: 100%;
+    height: 349px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+  &__pic {
+    @extend %wh-100;
+    display: flex;
+  }
+
+  &__img {
+    @extend %wh-100;
+    object-fit: scale-down;
+    filter: saturate(1.3);
+
+    &.loaded {
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    @include mix.flex-col(15px);
+    justify-content: space-between;
+    border: 1px solid var.$white;
+    margin: -2px 0 0 0;
+    padding: 30px 42px;
+    height: 100%;
+  }
+
+  &__date {
+    color: var.$orange;
+  }
+
+  &__title {
+    color: var.$white;
+  }
+
+  &__footer {
+    @include mix.flex(wrap, 5px 25px);
+    align-items: center;
+    justify-content: space-between;
+    margin: 16px 0 0 0;
+  }
+
+  &__link {
+    color: var.$white;
+    padding: 3px 0;
+  }
+
+  &__controls {
+    @include mix.flex(wrap, 7px);
+    align-items: center;
+  }
+
+  &__chat {
+    @extend %flex-cen;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+  }
+
+  &__chat-icon {
+    @extend %wh-100;
+    stroke: white;
+    stroke-width: 1.5;
+  }
+}
+
+.blogpost {
+  @include mix.flex-col(56px);
+  align-items: center;
+
+  &__heading {
+
+    .heading__title, .heading__subtitle {
+      text-align: center;
+    }
+  }
+
+  &__body {
+    @include mix.flex(wrap, 24px);
+    justify-content: center;
+    width: 100%;
+  }
+
+  &__news-card {
+    width: calc(33.33% - 16px);
+  }
+}
+
 
 // Media queries
 
