@@ -84,10 +84,12 @@ mixin heading(content, attr)
 
   div(class="heading")&attributes(attr)
 
-    if content.title1 
-      h1(class="heading__title curvy-text")= content.title1 
-    else 
-      h2(class="heading__title curvy-text")= content.title2
+    if content.title1 || content.title2
+
+      if content.title1 
+        h1(class="heading__title curvy-text")= content.title1 
+      else 
+        h2(class="heading__title curvy-text")= content.title2
 
     em(class="heading__subtitle bold-text")!= content.sub
 
@@ -555,6 +557,139 @@ mixin news-card(content, attr)
               use(xlink:href="./images/sprite.svg#chat-msg")
 
           +share-btn(null, { class: 'news-card__share-btn' })
+
+mixin email(content, attr)
+
+  -
+    content = content ?? {
+      place: 'Enter Your Email',
+      btn: 'Subscribe Now',
+      id: 'email1',
+      form: { action: '#', method: 'post' }
+    }
+
+  form(action=content.form.action method=content.form.method novalidate data-form class="email")&attributes(attr)
+
+    input(type="email" id=content.id class="email__input menu-text" placeholder=content.place data-validate autocomplete="off")
+    span(class="email__warning menu-text" data-warn=content.id)
+    button(type="submit" class="email__button menu-text")= content.btn
+
+mixin time-info(content, attr)
+
+  -
+    content = content ?? {
+      title: 'Opening Hours',
+      text: [ 'Mon - Sat(8.00 - 6.00)', 'Sunday - Closed' ],
+    }
+
+  div(class="time-info")&attributes(attr)
+
+    div(class="time-info__icon-wrapper")
+      img(src="./images/icons/clock.svg" class="time-info__icon")
+
+    strong(class="time-info__title list-text")= content.title 
+
+    each item, index in content.text
+
+      em(class="time-info__text mini-text")= item
+
+mixin nav-list(title, content, attr)
+
+  - 
+    title = title ?? 'Useful Links'
+    content = content ?? [
+
+      { text: 'About', url: './404.html', traget: '_blank', },
+      { text: 'News', url: './404.html', traget: '_blank', },
+      { text: 'Partners', url: './404.html', traget: '_blank', },
+      { text: 'Team', url: './404.html', traget: '_blank', },
+      { text: 'Menu', url: './404.html', traget: '_blank', },
+      { text: 'Contacts', url: './404.html', traget: '_blank', },
+
+    ]
+
+  ul(class="nav-list")&attributes(attr)
+
+    li(class="nav-list__title logo-text")= title
+
+    each item, index in content 
+
+      li(class="nav-list__li slide-text")
+        a(href=item.url target=item.target class="nav-list__link")=item.text
+
+mixin f-posts(title, content, attr)
+
+  -
+    title = title ?? 'Recent Posts';
+    content = content ?? [
+
+      { 
+        date: '20 Feb 2022',
+        img: './images/illustrations/recent-post1.jpg',
+        alt: 'Chicken Wings',
+        text: 'Tasty Chicken Wings',
+        url: './404.html',
+        target: '_target',
+      },
+
+      { 
+        date: '20 Feb 2022',
+        img: './images/illustrations/recent-post2.jpg',
+        alt: 'Meat Soup',
+        text: 'Juicy Meat Soup',
+        url: './404.html',
+        target: '_target',
+      },
+
+      { 
+        date: '20 Feb 2022',
+        img: './images/illustrations/recent-post3.jpg',
+        alt: 'Tacos',
+        text: 'Big Tasty Tacos',
+        url: './404.html',
+        target: '_target',
+      },
+
+    ]
+
+  ul(class="f-posts")&attributes(attr)
+
+    li(class="f-posts__title logo-text")= title
+
+    each item, index in content 
+
+      li(class="f-posts__li")
+
+        a(href=item.url target=item.target class="f-posts__link")
+
+          img(src=item.img alt=item.alt class="f-posts__icon")
+          span(class="f-posts__date menu-text")= item.date 
+          em(class="f-posts__name list-text")= item.text
+
+mixin f-socials(content, attr)
+
+  -
+    content = content ?? [
+
+      {
+        url: 'https://www.facebook.com',
+        target: '_blank',
+        icon: './images/sprite.svg#facebook',
+      },
+
+    ]
+
+  div(class="f-socials")&attributes(attr)
+
+    each item, index in content 
+
+      a(href=item.url target=item.target class="f-socials__link")
+        svg(class="f-socials__icon")
+          use(xlink:href=item.icon)
+
+
+
+
 
 
 

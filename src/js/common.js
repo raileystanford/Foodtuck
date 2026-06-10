@@ -20,9 +20,6 @@ new FormValidator({
     noNumbers: true,
   },
 
-  emailInput: {
-    // allowedDomains: [ '@gmail.com', '@proton.me' ], // Разрешенные почтовые домены. Если не нужно фильтровать то не пишиф
-  },
 });
 
 new BurgerMenu({
@@ -111,10 +108,24 @@ function formValidatorEventsHandler() {
   document.addEventListener('formvalid', (event) => {
 
     let searchBar = event.target.matches('.search');
+    let emailBar = event.target.matches('.email');
 
     if (searchBar) {
+
       formValidatorEventsHandler.clearForm(event.target);
       event.target.classList.remove('active', 'focused');
+
+    } else if (emailBar) {
+
+      let input = event.target.querySelector('input[type="email"]');
+      let btn = event.target.querySelector('button[type="submit"]');
+
+      formValidatorEventsHandler.clearForm(event.target);
+      event.target.classList.add('done');
+      input.setAttribute('disabled', '');
+      btn.setAttribute('disabled', '');
+      setTimeout(() => btn.textContent = 'SUBSCRIBED', 60);
+      
     }
 
   })
@@ -164,6 +175,14 @@ function formValidatorEventsHandler() {
         text = 'Only letters allowed';
       }
 
+    } else if (type === 'email') {
+
+      if (msg === 'Empty field') {
+        text = 'Enter your email address';
+      } else if (msg === 'Wrong email format') {
+        text = 'Wrong email format';
+      }
+
     }
 
     return text;
@@ -195,7 +214,7 @@ function formValidatorEventsHandler() {
         item._warning.textContent = '';
       }
 
-      if (item.type === 'text' || item.type === 'search') {
+      if (item.type === 'text' || item.type === 'search' || item.type === 'email') {
 
         item.value = '';
 

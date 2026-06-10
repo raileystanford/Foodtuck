@@ -1,0 +1,78 @@
+-
+  let navList2 = [
+
+    { text: 'FAQ', url: './404.html', traget: '_blank', },
+    { text: 'Term & Conditions', url: './404.html', traget: '_blank', },
+    { text: 'Reporting', url: './404.html', traget: '_blank', },
+    { text: 'Documentation', url: './404.html', traget: '_blank', },
+    { text: 'Support Policy', url: './404.html', traget: '_blank', },
+    { text: 'Privacy', url: './404.html', traget: '_blank', },
+
+  ];
+
+  let footerSocials = [
+
+    {
+      url: 'https://www.facebook.com',
+      target: '_blank',
+      icon: './images/sprite.svg#facebook',
+    },
+
+    {
+      url: 'https://x.com',
+      target: '_blank',
+      icon: './images/sprite.svg#twitter',
+    },
+
+    {
+      url: 'https://www.instagram.com/',
+      target: '_blank',
+      icon: './images/sprite.svg#instagram',
+    },
+
+    {
+      url: 'https://www.youtube.com',
+      target: '_blank',
+      icon: './images/sprite.svg#youtube',
+    },
+
+    {
+      url: 'https://ru.pinterest.com/',
+      target: '_blank',
+      icon: './images/sprite.svg#pinterest',
+    },
+
+  ];
+
+nav(class="footer-nav" data-title="footer")
+
+  article(class="support footer-nav__support")
+
+    +heading(
+      {
+        sub: '<span class="heading__cl">St</span>ill You Need Our Support?',
+        text: 'Don’t wait make a smart & logical quote here. Its pretty easy.',
+      },
+      { class: 'support__heading' }
+    )
+
+    +email(null, { class: 'support__email' })
+
+  article(class="about-us footer-nav__about-us")
+
+    h2(class="about-us__title logo-text") About Us
+    em(class="about-us__text menu-text") Foodtuck is a chain of restaurants where modern, sophisticated recipes are combined with high-quality cooking. Only the best experience.
+
+    +time-info(null, { class: 'about-us__time-info' })
+
+  +nav-list(null, null, { class: 'footer-nav__nav-list' })
+
+  +nav-list('Help', navList2, { class: 'footer-nav__nav-list' })
+
+  +f-posts(null, null, { class: 'footer-nav__f-posts' })
+
+  address(class="address footer-nav__address custom-bg")
+
+    em(class="address__text menu-text") Copyright © 2022 by Ayeman. All Rights Reserved.
+
+    +f-socials(footerSocials, { class: 'address__f-socials' })

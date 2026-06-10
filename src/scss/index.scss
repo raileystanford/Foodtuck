@@ -1126,6 +1126,56 @@ BODY {
   }
 }
 
+.footer-nav {
+
+  &__address {
+
+    &.custom-bg::before {
+      background: var.$orange;
+    }
+
+  }
+}
+
+.main {
+  position: relative;
+
+  &::after {
+    content: '';
+    @extend %px-cen;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    display: block;
+    z-index: -1;
+    background: url(../images/backgrounds/spice-right-bg.png) right 14.965% / auto no-repeat,
+                url(../images/backgrounds/spice-left-bg.png) left 57.975% / auto no-repeat;
+  }
+
+}
+
+.f-socials__link {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .f-socials__icon {
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+    background: var.$blue;
+
+    .f-socials__icon {
+      fill: var.$white;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.88);
+  }
+}
+
 
 // Media queries
 

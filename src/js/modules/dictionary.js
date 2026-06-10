@@ -40,6 +40,10 @@ let index_titles = {
     'en': 'Foodtuck - Blog Post',
   },
 
+  'footer': {
+    'en': 'Foodtuck - Site Map',
+  },
+
 };
 
 let links = {
