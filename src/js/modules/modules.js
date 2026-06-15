@@ -656,7 +656,7 @@ class BurgerMenu {
     this.openButton.classList.remove('active');
     this.content.classList.remove('active');
     this.overlay?.classList.remove('active');
-
+   
     this.handlePageOverflow();
     this.params.closeCallback?.({ 
       button: this.openButton, 

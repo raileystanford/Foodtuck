@@ -1,3 +1,62 @@
+-
+  let navList = [
+
+    { text: 'FAQ', url: './404.html', traget: '_blank', },
+    { text: 'Term & Conditions', url: './404.html', traget: '_blank', },
+    { text: 'Reporting', url: './404.html', traget: '_blank', },
+    { text: 'Documentation', url: './404.html', traget: '_blank', },
+    { text: 'Support Policy', url: './404.html', traget: '_blank', },
+    { text: 'Privacy', url: './404.html', traget: '_blank', },
+
+  ];
+
+  let socialsList = [
+
+    {
+      url: 'https://www.facebook.com',
+      target: '_blank',
+      icon: './images/sprite.svg#facebook',
+    },
+
+    {
+      url: 'https://x.com',
+      target: '_blank',
+      icon: './images/sprite.svg#twitter',
+    },
+
+    {
+      url: 'https://www.instagram.com/',
+      target: '_blank',
+      icon: './images/sprite.svg#instagram',
+    },
+
+    {
+      url: 'https://www.youtube.com',
+      target: '_blank',
+      icon: './images/sprite.svg#youtube',
+    },
+
+    {
+      url: 'https://ru.pinterest.com/',
+      target: '_blank',
+      icon: './images/sprite.svg#pinterest',
+    },
+
+  ];
+
 nav(class="mob-menu" data-burger-content)
 
-  +nav-menu(null, { class: 'mab-manu__nav-links' })
+  +nav-menu(null, { class: 'mob-menu__nav-menu' })
+
+  div(class="mob-menu__bar")
+
+    +search(null, 'm-search', { class: 'mob-menu__search' })
+    +nav-links(null, { class: 'mob-menu__nav-links' })
+
+  +f-socials(socialsList, { class: 'mob-menu__f-socials' })
+
+  +nav-list(null, null, { class: 'mob-menu__nav-list' })
+
+  +nav-list('Help', navList, { class: 'mob-menu__nav-list' })
+
+  +f-posts(null, null, { class: 'mob-menu__f-posts' })

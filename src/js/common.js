@@ -1,7 +1,6 @@
 import { 
   FormValidator,
   BurgerMenu,
-  UpdatePageTitle,
   LazyLoad,
   ScrollToTop,
 } from "./modules/modules.js";
@@ -24,10 +23,18 @@ new FormValidator({
 
 new BurgerMenu({
   activationBreakpoint: 768,
-  closeByClickOutOfMenu: true,
-  exceptBtns: '[data-lang-var], .button', // Кроме button с указаными селекторами. При клике на такие кнопки меню не закроется
-  openCallback: function(info) {},
-  closeCallback: function(info) {},
+  closeByClickOutOfMenu: false,
+  exceptBtns: '.search .search__submit',
+  openCallback: function(info) {
+    info.button.setAttribute('data-burger-close', '');
+    info.button.removeAttribute('data-burger-open', '');
+  },
+  closeCallback: function(info) {
+    info.button.setAttribute('data-burger-open', '');
+    info.button.removeAttribute('data-burger-close', '');
+    let form = document.querySelector('.search');
+    formValidatorEventsHandler.clearForm(form);
+  },
 });
 
 new LazyLoad({
@@ -62,8 +69,9 @@ function focusStateFix(...selectors) {
 function searchShowHide() {
 
   let search = document.querySelector('.search');
+  let media = window.matchMedia('(max-width: 768px)').matches;
 
-  if (!search) return;
+  if (!search || media) return;
 
   let input = search.querySelector('.search__input');
   let submit = search.querySelector('.search__submit');
@@ -100,6 +108,7 @@ function searchShowHide() {
 function formValidatorEventsHandler() {
 
   let form = document.querySelector('[data-form]');
+  let media = window.matchMedia('(max-width: 768px)').matches;
 
   if (!form) return;
 
@@ -126,6 +135,10 @@ function formValidatorEventsHandler() {
       btn.setAttribute('disabled', '');
       setTimeout(() => btn.textContent = 'SUBSCRIBED', 60);
       
+    }
+
+    if (media && typeof BurgerMenu !== 'undefined') {
+      BurgerMenu.prototype.closeBurgerMenu();
     }
 
   })
@@ -251,6 +264,17 @@ function removeMobileBlocks() {
 
 }
 
+function changeEmailSubmitText() {
+
+  let media = window.matchMedia('(max-width: 420px)').matches;
+  let btn = document.querySelector('.email .email__button');
+
+  if (!btn || !media) return;
+
+  btn.textContent = 'Subscribe';
+
+}
+
 function fixedNavbarState() {
 
   let desktopNavbar = document.querySelector('.header .navbar');
@@ -290,4 +314,5 @@ function fixedNavbarState() {
 focusStateFix('.testim-slider .swiper-pagination-bullet');
 searchShowHide();
 formValidatorEventsHandler();
-// fixedNavbarState();
+changeEmailSubmitText();
+fixedNavbarState();

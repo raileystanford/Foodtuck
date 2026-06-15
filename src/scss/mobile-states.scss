@@ -118,3 +118,100 @@
     }
   }
 }
+
+.email__input {
+  transition: all 0.2s;
+
+  &:not([disabled]) {
+
+    &:focus {
+      background: rgb(255, 125, 11);
+    }
+
+  }
+}
+
+.email__button {
+  transition: all 0.15s;
+
+  &:not([disabled]) {
+
+    &:active {
+      background: var.$blue;
+      color: var.$white;
+    }
+
+  }
+}
+
+.nav-menu__link {
+
+  &:active {
+    color: var.$orange;
+  }
+}
+
+.search__input {
+
+  &:focus {
+    border-color: var.$orange !important;
+  }
+}
+
+.search__submit {
+
+  &:active {
+    
+    .search__submit-icon {
+      stroke: var.$orange;
+    }
+
+  }
+}
+
+.nav-links__link {
+
+  &:active {
+
+    .nav-links__icon {
+      stroke: var.$orange;
+    }
+  }
+}
+
+.f-socials__link {
+  transition: all 0.05s;
+
+  .f-socials__icon {
+    transition: all 0.05s;
+  }
+
+  &:active {
+    background: var.$orange;
+
+    .f-socials__icon {
+      fill: var.$white;
+    }
+
+  }
+}
+
+.nav-list__link {
+
+  &:active {
+    color: var.$orange;
+    text-decoration: underline;
+  }
+}
+
+.f-posts__link {
+
+  &:active {
+
+    .f-posts__name {
+      color: var.$orange;
+      text-decoration: underline;
+    }
+
+  }
+}

@@ -1154,25 +1154,32 @@ BODY {
 
 }
 
-.f-socials__link {
-  will-change: transform;
-  transition: all 0.2s;
+.address {
 
-  .f-socials__icon {
-    transition: all 0.2s;
-  }
+  &__f-socials {
 
-  &:hover, &:focus {
-    background: var.$blue;
+    .f-socials__link {
+      will-change: transform;
+      transition: all 0.2s;
 
-    .f-socials__icon {
-      fill: var.$white;
+      .f-socials__icon {
+        transition: all 0.2s;
+      }
+
+      &:hover, &:focus {
+        background: var.$blue;
+
+        .f-socials__icon {
+          fill: var.$white;
+        }
+      }
+
+      &:active {
+        transition: all 0.05s;
+        transform: scale(0.88);
+      }
     }
-  }
 
-  &:active {
-    transition: all 0.05s;
-    transform: scale(0.88);
   }
 }
 
@@ -1782,6 +1789,34 @@ BODY {
     &__news-card {
       width: 100%;
       height: 100%;
+    }
+  }
+
+  .address {
+
+    &__f-socials {
+
+      .f-socials__link {
+
+        &:hover, &:focus {
+          transform: none;
+          background: var.$white;
+
+          .f-socials__icon {
+            fill: var.$dark-gray;
+          }
+        }
+
+        &:active {
+          background: var.$blue;
+
+          .f-socials__icon {
+            fill: var.$white;
+          }
+        }
+
+      }
+
     }
   }
 
