@@ -114,31 +114,31 @@ mixin food-gravity(attr)
 
   div(class="food-gravity")&attributes(attr)
 
-    div(class="food-gravity__circle" data-parallax="0.035/0.07/100/normal/once/true")
+    div(class="food-gravity__circle" data-anim data-parallax="0.035/0.07/2200/normal/always/true")
 
     picture
       source(srcset="./images/illustrations/food-grav3.png" type="image/png")
-      img(src="./images/illustrations/food-grav3.png" alt="Dish" class="food-gravity__img food-gravity__img--branch" data-parallax="0.035/0.07/100/normal/once/true")
+      img(src="./images/illustrations/food-grav3.png" alt="Dish" class="food-gravity__img food-gravity__img--branch" data-anim data-parallax="0.035/0.07/2200/normal/always/true")
 
     picture
       source(srcset="./images/illustrations/food-grav4.png" type="image/png")
-      img(src="./images/illustrations/food-grav4.png" alt="Dish" class="food-gravity__img food-gravity__img--wood" data-parallax="0.035/0.07/100/normal/once/true")
+      img(src="./images/illustrations/food-grav4.png" alt="Dish" class="food-gravity__img food-gravity__img--wood" data-anim data-parallax="0.035/0.07/2200/normal/always/true")
 
     picture
       source(srcset="./images/illustrations/food-grav2.webp" type="image/webp")
-      img(src="./images/illustrations/food-grav2.png" alt="Dish" class="food-gravity__img food-gravity__img--mint" data-parallax="0.035/0.07/100/normal/once/true")
+      img(src="./images/illustrations/food-grav2.png" alt="Dish" class="food-gravity__img food-gravity__img--mint" data-anim data-parallax="0.035/0.07/2200/normal/always/true")
 
     picture
       source(srcset="./images/illustrations/leaf-small.png" type="image/webp")
-      img(src="./images/illustrations/leaf-small.png" alt="Dish" class="food-gravity__img food-gravity__img--leaf-s" data-parallax="0.035/0.07/100/normal/once/true")
+      img(src="./images/illustrations/leaf-small.png" alt="Dish" class="food-gravity__img food-gravity__img--leaf-s" data-anim data-parallax="0.035/0.07/2200/normal/always/true")
 
     picture
       source(srcset="./images/illustrations/leaf-big.webp" type="image/webp")
-      img(src="./images/illustrations/leaf-big.png" alt="Dish" class="food-gravity__img food-gravity__img--leaf" data-parallax="0.025/0.1/100/normal/once/true")
+      img(src="./images/illustrations/leaf-big.png" alt="Dish" class="food-gravity__img food-gravity__img--leaf" data-anim data-parallax="0.025/0.1/2200/normal/always/true")
 
     picture
       source(srcset="./images/illustrations/food-grav1.webp" type="image/webp")
-      img(src="./images/illustrations/food-grav1.png" alt="Dish" class="food-gravity__img food-gravity__img--main" data-parallax="0.017/0.06/100/normal/once/true")
+      img(src="./images/illustrations/food-grav1.png" alt="Dish" class="food-gravity__img food-gravity__img--main" data-anim data-parallax="0.017/0.06/2200/normal/always/true")
 
 mixin list(content, attr)
 
@@ -214,7 +214,7 @@ mixin cm-slider(content, attr)
               if item.lazy
 
                 picture
-                  source(srcset data-load=srcseturl type=type)
+                  source(srcset="./images/preloader-green.svg" data-load=srcseturl type=type)
                   img(src="./images/preloader-green.svg" data-load=item.src alt=item.name class="cm-slider__img")
 
               else 
@@ -306,13 +306,13 @@ mixin img-tabs(images, lazy, attr)
 
         if lazy
 
-          picture(class="img-tabs__pic")
-            source(srcset data-load=srcseturl type=type)
+          picture(class="img-tabs__pic" data-anim)
+            source(srcset="./images/preloader-green.svg" data-load=srcseturl type=type)
             img(src="./images/preloader-green.svg" data-load=item.src alt=item.alt class="img-tabs__image")
 
         else 
 
-          picture(class="img-tabs__pic")
+          picture(class="img-tabs__pic" data-anim)
             source(srcset=srcseturl type=type)
             img(src=item.src alt=item.alt class="img-tabs__image")
 
@@ -372,7 +372,7 @@ mixin chef(content, attr)
     if content.lazy
 
       picture(class="chef__pic")
-        source(srcset data-load=srcset type=type)
+        source(srcset="./images/preloader-green.svg" data-load=srcset type=type)
         img(src="./images/preloader-green.svg" data-load=content.src alt=content.name class="chef__image")
 
     else 
@@ -437,7 +437,7 @@ mixin testim-slider(slides, attr)
             if item.lazy
 
               picture
-                source(srcset data-load=srcset type=type)
+                source(srcset="./images/preloader-green.svg" data-load=srcset type=type)
                 img(src="./images/preloader-green.svg" data-load=item.avSRC alt=item.name class="testim-slider__avatar")
 
             else 
@@ -446,7 +446,7 @@ mixin testim-slider(slides, attr)
                 source(srcset=srcset type=type)
                 img(src=item.avSRC alt=item.name class="testim-slider__avatar")
 
-            img(src="./images/icons/quotes.svg" class="testim-slider__quotes")
+            img(src="./images/icons/quotes.svg" alt='”' class="testim-slider__quotes")
 
             strong(class="testim-slider__text tes-text")= item.text
 
@@ -466,7 +466,7 @@ mixin video-btn(text, attr)
   button(class="video-btn")&attributes(attr)
 
     span(class="video-btn__icon-wrapper")
-      img(src="./images/icons/play-icon.svg" class="video-btn__icon")
+      img(src="./images/icons/play-icon.svg" alt="Play" class="video-btn__icon")
 
     span(class="video-btn__text menu-text")= text
 
@@ -530,7 +530,7 @@ mixin news-card(content, attr)
       if content.lazy
 
         picture(class="news-card__pic")
-          source(srcset data-load=srcset type=type)
+          source(srcset="./images/preloader-green.svg" data-load=srcset type=type)
           img(src="./images/preloader-green.svg" data-load=content.src alt=content.alt class="news-card__img")
 
       else 
@@ -585,7 +585,7 @@ mixin time-info(content, attr)
   div(class="time-info")&attributes(attr)
 
     div(class="time-info__icon-wrapper")
-      img(src="./images/icons/clock.svg" class="time-info__icon")
+      img(src="./images/icons/clock.svg" alt="Clock" class="time-info__icon")
 
     strong(class="time-info__title list-text")= content.title 
 
@@ -629,7 +629,7 @@ mixin f-posts(title, content, attr)
         alt: 'Chicken Wings',
         text: 'Tasty Chicken Wings',
         url: './404.html',
-        target: '_target',
+        target: '_blank',
       },
 
       { 
@@ -638,7 +638,7 @@ mixin f-posts(title, content, attr)
         alt: 'Meat Soup',
         text: 'Juicy Meat Soup',
         url: './404.html',
-        target: '_target',
+        target: '_blank',
       },
 
       { 
@@ -647,7 +647,7 @@ mixin f-posts(title, content, attr)
         alt: 'Tacos',
         text: 'Big Tasty Tacos',
         url: './404.html',
-        target: '_target',
+        target: '_blank',
       },
 
     ]
@@ -687,20 +687,6 @@ mixin f-socials(content, attr)
         svg(class="f-socials__icon")
           use(xlink:href=item.icon)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 mixin stars(n, max, attr)
 
   - n = n ?? 5;
@@ -712,11 +698,11 @@ mixin stars(n, max, attr)
 
       if i <= n
 
-        img(src="./images/icons/star.svg" class="stars__icon")
+        img(src="./images/icons/star.svg" alt="★" class="stars__icon")
 
       else 
 
-        img(src="./images/icons/star-empty.svg" class="stars__icon")
+        img(src="./images/icons/star-empty.svg" alt="✰" class="stars__icon")
 
 mixin logotype(attr)
 

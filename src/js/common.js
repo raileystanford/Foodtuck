@@ -38,7 +38,7 @@ new BurgerMenu({
 });
 
 new LazyLoad({
-  offset: 800,
+  offset: 900,
 });
 
 new ScrollToTop({
@@ -277,7 +277,7 @@ function changeEmailSubmitText() {
 
 function fixedNavbarState() {
 
-  let desktopNavbar = document.querySelector('.header .navbar');
+  let desktopNavbar = document.querySelector('.navbar');
   let mobileNavbar = document.querySelector('.mob-navbar');
   let media = window.matchMedia('(max-width: 768px)').matches;
 
@@ -307,8 +307,6 @@ function fixedNavbarState() {
   });
 
 }
-
-
 
 
 focusStateFix('.testim-slider .swiper-pagination-bullet');

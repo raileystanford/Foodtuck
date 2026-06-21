@@ -35,24 +35,26 @@ html(lang="en")
 
     include ./blocks/_mob-navbar.pug
     include ./blocks/_mob-menu.pug
+    include ./blocks/_header-nav.pug
 
-    div(class="page-wrapper")
+    div(class="smooth-scroll-wrapper")
+      div(class="smooth-scroll-page")
 
-      header(class="header")
+        div(class="page-wrapper")
 
-        include ./blocks/_header-nav.pug
+          header(class="header")
 
-        block header-content
+            block header-content
 
-      main(class="main")
+          main(class="main")
 
-        block main-content
+            block main-content
 
-      footer(class="footer")
+          footer(class="footer")
 
-        include ./blocks/_footer-nav.pug
+            include ./blocks/_footer-nav.pug
 
-        block footer-content
-        //- div(style="height: 1000px")
+            block footer-content
+            //- div(style="height: 1000px")
 
     include ./blocks/_scroll-top-btn.pug

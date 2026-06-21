@@ -3,6 +3,7 @@
 @use './modules/templates.scss';
 @use './common.scss';
 
+
 BODY {
   background: var.$black;
 }
@@ -1181,6 +1182,12 @@ BODY {
     }
 
   }
+}
+
+[data-anim] {
+  will-change: opacity, transform;
+  opacity: 0;
+  visibility: hidden;
 }
 
 

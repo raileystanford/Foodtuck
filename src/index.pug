@@ -10,6 +10,24 @@ block styles
   link(rel="stylesheet" href="./css/index.css")
 
 block scripts-libs 
+
+  script.
+
+    let media = window.matchMedia('(max-width: 768px)').matches;
+
+    if (!media) {
+
+      let block = document.createElement('div');
+      block.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100; background: black;';
+      document.head.after(block);
+
+      window.addEventListener('load', (event) => block.remove());
+
+    } 
+    
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
   script(src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer)
 
 block scripts 

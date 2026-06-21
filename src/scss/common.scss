@@ -288,7 +288,7 @@
   left: 0;
   width: 100vw;
   height: calc(100% - 63px);
-  background: linear-gradient(var.$trans-black3), 
+  background: linear-gradient(var.$trans-black3, var.$trans-black3), 
               url(../images/backgrounds/fish-bg.jpg) center 0 / cover no-repeat;
   z-index: 9;
   transition: all 0.3s;
@@ -619,6 +619,7 @@
     margin: 58px 0 0 0;
   }
 }
+
 
 // Media queries
 
