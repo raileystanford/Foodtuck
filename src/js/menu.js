@@ -1,0 +1,200 @@
+import {
+  UpdatePageTitle,
+  ImageZoom,
+  DigitsCountingAnimation,
+} from "./modules/modules.js";
+
+import { menu_titles } from './modules/dictionary.js';
+
+
+// Plugins
+
+new UpdatePageTitle({
+  dictionary: menu_titles,
+});
+
+new ImageZoom({
+  mode: 'hover',
+  mobileViewport: 768,
+  strictHoverTarget: true,
+
+  startZoom: 1.2,
+  minZoom: 1,
+  maxZoom: 1.5,
+  zoomStep: 0.2,
+
+  mobile: { // А вот это для мобилки када сработает брекпоинт
+    // startZoom: 2, Можна не писать тошо всегда с 1 будит начинаться
+    minZoom: 1,
+    maxZoom: 4,
+    zoomStep: 0.2,
+  }
+});
+
+new DigitsCountingAnimation({
+  intObserverParams: {
+    threshold: 0.1,
+  },
+  duration: 1500,
+  steps: 30,
+});
+
+
+// Functions
+
+function menuBlocksHandler() {
+
+  let menuBlock = document.querySelector('.menu-block');
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!menuBlock) return;
+
+  preloadImages();
+
+  let screenTimer;
+
+  if (!media) {
+
+    document.addEventListener('pointerover', (event) => {
+
+      let item = event.target.matches('.menu-block__item');
+
+      if (item) {
+
+        let block = event.target.closest('.menu-block');
+
+        showImageOnScreen(event.target);
+
+        block.addEventListener('pointerleave', (event) => {
+          resetInitialImageOnScreen(block);
+        }, { once: true });
+
+      }
+
+    });
+
+  }
+
+  function showImageOnScreen(item) {
+
+    let block = item.closest('.menu-block');
+    let screen = block.querySelector('.menu-block__screen');
+    let url = item.dataset.screen;
+
+    if (screen.getAttribute('src') === url) return;
+
+    clearTimeout(screenTimer);
+
+    screen.parentElement.classList.add('effect');
+
+    screenTimer = setTimeout(() => {
+      screen.src = url;
+      screen.parentElement.classList.remove('effect');
+    }, 200);
+
+  }
+
+  function resetInitialImageOnScreen(block) {
+
+    let item = block.querySelector('.menu-block__item');
+
+    showImageOnScreen(item);
+
+  }
+
+  function preloadImages() {
+    
+    let blocks = Array.from(document.querySelectorAll('.menu-block'));
+    let observer = new IntersectionObserver((list, obs) => {
+
+      list.forEach((item) => {
+        
+        if (item.isIntersecting) {
+
+          let elements = Array.from(item.target.querySelectorAll('.menu-block__item'));
+          elements.forEach((el) => {
+            new Image().src = el.dataset.screen;
+          });
+
+          obs.unobserve(item.target);
+
+        }
+
+      });
+
+    }, { root: document.querySelector('.smooth-scroll-wrapper'), threshold: 0.1, rootMargin: '700px 0px' });
+
+    blocks.forEach((block) => observer.observe(block));
+
+  }
+
+}
+
+function activateFirstblock() {
+
+  let block = document.querySelector('.menu-block');
+  
+  if (!block) return;
+
+  let screen = block.querySelector('.menu-block__screen');
+  screen.classList.add('loaded');
+
+}
+
+function scrollSmoother() {
+
+  try {
+    gsap, ScrollTrigger, ScrollSmoother
+  } catch {
+    console.warn('Missing GSAP component');
+    return;
+  }
+
+  let smoother;
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+  if (ScrollTrigger.isTouch !== 1) {
+
+    smoother = ScrollSmoother.create({ 
+      wrapper: '.smooth-scroll-wrapper',
+      content: '.smooth-scroll-page',
+      smooth: 0.8,
+    });
+
+  }
+
+  document.addEventListener('click', (event) => {
+
+    let link = event.target.closest('a');
+
+    if (link) {
+
+      let anchor = link.href.match(/#\w+$/);
+      let target = document.querySelector(anchor);
+
+      if (target) {
+        event.preventDefault();
+        smoother.scrollTo(target, true, 'top top');
+      }
+
+    }
+
+  });
+
+  window.addEventListener("load", () => {
+
+    let hash = window.location.hash;
+
+    if (hash) {
+      let target = document.querySelector(hash);
+      if (target) smoother.scrollTo(target, true, 'top top');
+    }
+
+  });
+
+}
+
+
+scrollSmoother();
+menuBlocksHandler();
+activateFirstblock();

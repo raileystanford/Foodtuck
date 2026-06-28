@@ -1,0 +1,155 @@
+extends ./pug/_layout.pug
+
+block title
+  title Foodtuck - Menu
+
+block styles 
+  link(rel="stylesheet" href="./css/menu.css")
+
+block scripts-libs 
+    
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
+
+block scripts 
+  script(src="./js/menu.js" type="module")
+
+block header-content 
+
+  +head-line(null, null, { class: 'custom-bg', 'data-title': 'menu' })
+
+block main-content 
+
+  -
+    let menu2 = [
+
+      { 
+        name: 'Big Meat Hamburger', 
+        des: 'Big juicy hamburger with meat and cheese',
+        cal: '970',
+        price: '41',
+        screen: './images/illustrations/menu-dish2.jpg',
+      },
+
+      { 
+        name: 'Omelet With Bacon And Beans', 
+        des: 'Delicious omelette with chicken, beans and bacon',
+        cal: '1200',
+        price: '55',
+        screen: './images/illustrations/menu-dish10.jpg',
+      },
+
+      { 
+        name: 'Mushroom noodles with herbs', 
+        des: 'Vegetarian noodles with mushrooms and herbs',
+        cal: '650',
+        price: '45',
+        screen: './images/illustrations/menu-dish8.jpg',
+      },
+
+      { 
+        name: 'Salad with greens and bread', 
+        des: 'Fresh and juicy salad with herbs and bread',
+        cal: '320',
+        price: '39',
+        screen: './images/illustrations/menu-dish9.jpg',
+      },
+
+    ];
+
+    let menu3 = [
+
+      { 
+        name: 'Hazelnut And Cream Cake', 
+        des: 'Sweet cake with chocolate cream and hazelnut',
+        cal: '850',
+        price: '33',
+        screen: './images/illustrations/menu-dish3.jpg',
+      },
+
+      { 
+        name: 'Chocolate Cake', 
+        des: 'Sweet chocolate cake with strawberries',
+        cal: '1300',
+        price: '62',
+        screen: './images/illustrations/menu-dish17.jpg',
+      },
+
+      { 
+        name: 'Spiced Ice Cream', 
+        des: 'Large serving of ice cream with spices and chocolate',
+        cal: '918',
+        price: '47',
+        screen: './images/illustrations/menu-dish16.jpg',
+      },
+
+      { 
+        name: 'Cream Pie With Ice Cream', 
+        des: 'Delicious pie with butter cream and ice cream',
+        cal: '1100',
+        price: '52',
+        screen: './images/illustrations/menu-dish15.jpg',
+      },
+
+    ];
+
+    let menu4 = [
+
+      { 
+        name: 'Aperol Spritz Capacianno', 
+        des: 'Aperol Spritz cocktail with lemon and juice',
+        cal: '120',
+        price: '28',
+        screen: './images/illustrations/menu-dish4.jpg',
+      },
+
+      { 
+        name: 'Green Tea', 
+        des: 'Fresh green tea with leaves',
+        cal: '80',
+        price: '22',
+        screen: './images/illustrations/menu-dish19.jpg',
+      },
+
+      { 
+        name: 'Coffee Macchiato', 
+        des: 'Original coffee macchiato with milk',
+        cal: '160',
+        price: '26',
+        screen: './images/illustrations/menu-dish20.jpg',
+      },
+
+      { 
+        name: 'Lime Cocktail', 
+        des: 'Сool lime cocktail with juice',
+        cal: '90',
+        price: '29',
+        screen: './images/illustrations/menu-dish18.jpg',
+      },
+
+    ];
+
+  +menu-block(
+    { title: 'First Dishes', img: './images/illustrations/menu-dish1.jpg' }, 
+    null, 
+    { 'data-load-block': '', 'data-title': 'menu' })
+
+  +menu-block(
+    { title: 'Second Dishes', img: './images/illustrations/menu-dish2.jpg', lazy: true }, 
+    menu2, 
+    { class: 'menu-block--right', 'data-load-block': '', 'data-title': 'second-dishes' })
+
+  include ./pug/blocks/_stats.pug
+
+  +menu-block(
+    { title: 'Desserts', img: './images/illustrations/menu-dish3.jpg', lazy: true },
+    menu3, 
+    { 'data-load-block': '', 'data-title': 'desserts' })
+
+  +menu-block(
+    { title: 'Drinks', img: './images/illustrations/menu-dish4.jpg', lazy: true },
+    menu4, 
+    { class: 'menu-block--right', 'data-load-block': '', 'data-title': 'drinks' })
+
+  include ./pug/blocks/_affiliations.pug

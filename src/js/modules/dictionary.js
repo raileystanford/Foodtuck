@@ -33,15 +33,51 @@ let index_titles = {
   },
 
   'process': {
-    'en': 'Foodtuck - Cooking Process',
+    'en': 'Foodtuck - Cooking process',
   },
 
   'blogpost': {
-    'en': 'Foodtuck - Blog Post',
+    'en': 'Foodtuck - Blog post',
   },
 
   'footer': {
-    'en': 'Foodtuck - Site Map',
+    'en': 'Foodtuck - Site map',
+  },
+
+};
+
+let menu_titles = {
+
+  'menu': {
+    'en': 'Foodtuck - Our menu',
+  },
+
+  'first-dishes': {
+    'en': 'Foodtuck - First dishes',
+  },
+
+  'second-dishes': {
+    'en': 'Foodtuck - Second dishes',
+  },
+
+  'desserts': {
+    'en': 'Foodtuck - Desserts',
+  },
+
+  'drinks': {
+    'en': 'Foodtuck - Drinks',
+  },
+
+  'stats': {
+    'en': 'Foodtuck - Our stats',
+  },
+
+  'partners': {
+    'en': 'Foodtuck - Our partners',
+  },
+
+  'footer': {
+    'en': 'Foodtuck - Site map',
   },
 
 };
@@ -192,6 +228,7 @@ let links = {
 
 
 export { 
-  index_titles,
   links,
+  index_titles,
+  menu_titles,
 };

@@ -893,7 +893,6 @@ function GSAPanimation() {
 
   if (ScrollTrigger.isTouch !== 1) {
 
-    // твой page-wrapper должен быть внутри smooth-scroll-page
     smoother = ScrollSmoother.create({ 
       wrapper: '.smooth-scroll-wrapper',
       content: '.smooth-scroll-page',
@@ -915,7 +914,7 @@ function GSAPanimation() {
 
       if (target) {
         event.preventDefault();
-        smoother.scrollTo(target, true, 'top top'); // Это метод самого gsapa для прокрутки к елементу применять к обьекту создания смус скрола
+        smoother.scrollTo(target, true, 'top top');
       }
 
     }

@@ -37,23 +37,6 @@ BODY {
   }
 }
 
-.heading {
-  @include mix.flex-col(8px);
-
-  &__title, &__cl {
-    color: var.$orange;
-  }
-
-  &__subtitle {
-    color: var.$white;
-  }
-
-  &__text {
-    margin: 28px 0 0 0;
-    color: var.$white;
-  }
-}
-
 .food-gravity {
   position: relative;
   height: 622px;
@@ -165,6 +148,16 @@ BODY {
   &__food-gravity {
     flex-shrink: 0;
   }
+}
+
+.nav-menu {
+
+  &__li:first-child &__link {
+    color: var.$orange;
+    font-weight: 700;
+    pointer-events: none;
+  }
+
 }
 
 .header {
@@ -1184,6 +1177,10 @@ BODY {
   }
 }
 
+.footer {
+  padding: 0;
+}
+
 [data-anim] {
   will-change: opacity, transform;
   opacity: 0;
@@ -1533,17 +1530,6 @@ BODY {
     }
   }
 
-  .heading {
-
-    &__text {
-      margin: 24px 0 0 0;
-    }
-
-    &__food-gravity {
-      margin: 24px 0 0 0;
-    }
-  }
-
   .food-gravity {
     height: 345px;
     width: 460px;
@@ -1830,24 +1816,6 @@ BODY {
 }
 
 @media (max-width: 576px) {
-
-  .heading {
-
-    &__title {
-      font-size: 27px;
-      line-height: 32px;
-    }
-
-    &__subtitle {
-      font-size: 40px;
-      line-height: 47px;
-    }
-
-    &__text {
-      font-size: 15px;
-      line-height: 22px;
-    }
-  }
 
   .food-gravity {
     width: 100%;

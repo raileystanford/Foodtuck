@@ -38,7 +38,9 @@ new BurgerMenu({
 });
 
 new LazyLoad({
-  offset: 900,
+  root: '.smooth-scroll-wrapper',
+  anim: true,
+  offset: 800,
 });
 
 new ScrollToTop({

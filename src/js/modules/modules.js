@@ -830,6 +830,8 @@ class LazyLoad {
   createObserver() {
     
     let offset = this.params.offset ?? 700;
+    let root = document.querySelector(`${this.params.root}`);
+      
     this.observer = new IntersectionObserver((list, observer) => {
 
       list.forEach((item) => {
@@ -839,7 +841,8 @@ class LazyLoad {
         }
       })
 
-    }, { root: null, rootMargin: `${offset}px ${offset}px`, threshold: 0.01 })
+    }, { root: root, rootMargin: `${offset}px ${offset}px`, threshold: 0.01 });
+    
   }
 
   observerHandler(container) {
@@ -898,10 +901,16 @@ class LazyLoad {
       let isContent = block.querySelector('[data-load]');
       let isBgLoad = block.matches('[data-load-bg]');
       if (isContent || isBgLoad) {
-        this.observer.observe(block);
+
+        if (this.params.anim) {
+          setTimeout(() => { this.observer.observe(block) }, 300);
+        } else {
+          this.observer.observe(block);
+        }
+        
       }
 
-    })
+    });
   }
 
   showLine() {
@@ -1149,6 +1158,343 @@ class DigitsCountingAnimation {
   }
 }
 
+class ImageZoom {
+
+  constructor(options = {}) {
+
+    this.mode = options.mode ?? 'hover';
+    this.isMobile = window.matchMedia(`(max-width:${options.mobileViewport ?? 768}px)`).matches;
+
+    this.selectOptions(options);
+    this.containers = document.querySelectorAll('[data-zoom]');
+    this.createFullscreen();
+    this.containers.forEach(c => this.initContainer(c));
+
+  }
+
+  selectOptions(options) {
+
+    this.minZoom = options.minZoom ?? 1;
+    this.maxZoom = options.maxZoom ?? 3;
+    this.zoomStep = options.zoomStep ?? 0.15;
+    this.startZoom = options.startZoom ?? 1.6;
+
+    if (!this.isMobile) return;
+
+    let mobile = Object.keys(options.mobile ?? {}).length > 0;
+
+    if (!mobile) return
+
+    this.minZoom = options.mobile.minZoom ?? options.minZoom ?? 1;
+    this.maxZoom = options.mobile.maxZoom ?? options.maxZoom ?? 3;
+    this.zoomStep = options.mobile.zoomStep ?? options.zoomStep ?? 0.15;
+    this.startZoom = options.mobile.startZoom ?? options.startZoom ?? 1.6;
+
+  }
+
+  initContainer(container) {
+
+    const img = container.querySelector('[data-zoom-img]');
+    if (!img) return;
+
+    if (this.isMobile) {
+      container.addEventListener('click', () => this.openFullscreen(img));
+      return;
+    }
+
+    container.style.position = 'relative';
+    container.style.overflow = 'hidden';
+
+    Object.assign(img.style, {
+      position: 'absolute',
+      transformOrigin: '0 0',
+      willChange: 'transform'
+    });
+
+    img.dataset.zoomScale = 1;
+    img.dataset.imgX = 0;
+    img.dataset.imgY = 0;
+
+    this.mode === 'hover'
+      ? this.initHoverZoom(container, img)
+      : this.initClickZoom(container, img);
+
+    container.addEventListener('wheel', e => {
+      e.preventDefault();
+      const { x, y } = this.getCoords(e, container);
+      this.zoomDesktop(img, e.deltaY < 0 ? 1 : -1, x, y, container);
+    }, { passive: false });
+
+    container.addEventListener('dragstart', e => e.preventDefault());
+  }
+
+  initHoverZoom(container, img) {
+
+    let active = false;
+
+    const move = e => {
+      const { x, y } = this.getCoords(e, container);
+
+      if (!active) {
+        img.dataset.zoomScale = this.startZoom;
+        active = true;
+      }
+
+      this.moveDesktop(img, x, y, container);
+    };
+
+    container.addEventListener('mouseenter', () => {
+      container.classList.add('active');
+      container.addEventListener('mousemove', move);
+    });
+
+    container.addEventListener('mouseleave', () => {
+      container.classList.remove('active');
+      container.removeEventListener('mousemove', move);
+      img.dataset.zoomScale = 1;
+      this.applyDesktopTransform(img, 0, 0, container);
+      active = false;
+    });
+  }
+
+  initClickZoom(container, img) {
+
+    let dragging = false;
+    let moved = false;
+    let startX = 0;
+    let startY = 0;
+
+    container.addEventListener('pointerdown', e => {
+      if (+img.dataset.zoomScale === 1) return;
+      dragging = true;
+      moved = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      container.setPointerCapture(e.pointerId);
+    });
+
+    container.addEventListener('pointermove', e => {
+      if (!dragging) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2) moved = true;
+
+      startX = e.clientX;
+      startY = e.clientY;
+
+      this.applyDesktopTransform(
+        img,
+        (+img.dataset.imgX) + dx,
+        (+img.dataset.imgY) + dy,
+        container
+      );
+    });
+
+    container.addEventListener('pointerup', () => dragging = false);
+
+    container.addEventListener('click', e => {
+
+      if (moved) {
+        moved = false;
+        return;
+      }
+
+      if (+img.dataset.zoomScale === 1) {
+        container.classList.add('active');
+        img.dataset.zoomScale = this.startZoom;
+        const { x, y } = this.getCoords(e, container);
+        this.applyDesktopTransform(
+          img,
+          -x * (this.startZoom - 1),
+          -y * (this.startZoom - 1),
+          container
+        );
+      } else {
+        container.classList.remove('active');
+        img.dataset.zoomScale = 1;
+        this.applyDesktopTransform(img, 0, 0, container);
+      }
+    });
+  }
+
+  zoomDesktop(img, dir, x, y, container) {
+
+    let scale = +img.dataset.zoomScale;
+    scale = Math.min(this.maxZoom, Math.max(this.minZoom, scale + this.zoomStep * dir));
+    img.dataset.zoomScale = scale;
+
+    this.applyDesktopTransform(
+      img,
+      -x * (scale - 1),
+      -y * (scale - 1),
+      container
+    );
+  }
+
+  moveDesktop(img, x, y, container) {
+    if (+img.dataset.zoomScale <= 1) return;
+    this.applyDesktopTransform(
+      img,
+      -x * (+img.dataset.zoomScale - 1),
+      -y * (+img.dataset.zoomScale - 1),
+      container
+    );
+  }
+
+  applyDesktopTransform(img, x, y, container) {
+
+    if (!container) return;
+
+    const scale = +img.dataset.zoomScale;
+    const cw = container.clientWidth;
+    const ch = container.clientHeight;
+    const iw = img.offsetWidth * scale;
+    const ih = img.offsetHeight * scale;
+
+    const minX = Math.min(0, cw - iw);
+    const minY = Math.min(0, ch - ih);
+
+    x = Math.min(0, Math.max(minX, x));
+    y = Math.min(0, Math.max(minY, y));
+
+    img.dataset.imgX = x;
+    img.dataset.imgY = y;
+    img.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+  }
+
+  createFullscreen() {
+
+    if (!this.isMobile) return;
+
+    this.fs = document.createElement('div');
+    this.fs.className = 'zoom-fs';
+
+    this.fsImg = document.createElement('img');
+    this.fsImg.classList.add('zoom-fs__img');
+
+    this.closeBtn = document.createElement('button');
+    this.closeBtn.className = 'zoom-fs__close-btn';
+    this.closeBtn.textContent = '✕';
+
+    this.fs.append(this.fsImg, this.closeBtn);
+    document.body.appendChild(this.fs);
+
+    this.initFullscreenGestures();
+
+    this.closeBtn.onclick = () => this.closeFullscreen();
+    this.fs.onclick = e => e.target === this.fs && this.closeFullscreen();
+
+  }
+
+  openFullscreen(sourceImg) {
+
+    this.fsImg.src = sourceImg.src;
+
+    this.scale = 1;
+    this.x = 0;
+    this.y = 0;
+
+    this.applyFullscreenTransform();
+
+    requestAnimationFrame(() => {
+      this.fs.classList.add('active');
+    });
+
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeFullscreen() {
+
+    this.applyFullscreenTransform();
+    this.fs.classList.remove('active');
+    document.body.style.overflow = '';
+
+  }
+
+  initFullscreenGestures() {
+
+    let startDist = 0;
+    let startScale = 1;
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+
+    this.fs.addEventListener('touchstart', e => {
+
+      this.fsImg.style.transition = 'none';
+
+      if (e.touches.length === 2) {
+        startDist = this.getDistance(e.touches[0], e.touches[1]);
+        startScale = this.scale;
+      }
+
+      if (e.touches.length === 1 && this.scale > 1) {
+        dragging = true;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }
+
+    }, { passive: false });
+
+    this.fs.addEventListener('touchmove', e => {
+      e.preventDefault();
+
+      if (e.touches.length === 2) {
+        const dist = this.getDistance(e.touches[0], e.touches[1]);
+        this.scale = Math.min(this.maxZoom, Math.max(this.minZoom, startScale * (dist / startDist)));
+        this.constrainFullscreen();
+        this.applyFullscreenTransform();
+      }
+
+      if (dragging && e.touches.length === 1) {
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        this.x += dx;
+        this.y += dy;
+        this.constrainFullscreen();
+        this.applyFullscreenTransform();
+      }
+
+    }, { passive: false });
+
+    this.fs.addEventListener('touchend', () => dragging = false);
+  }
+
+  constrainFullscreen() {
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const iw = this.fsImg.offsetWidth * this.scale;
+    const ih = this.fsImg.offsetHeight * this.scale;
+
+    const minX = Math.min(0, (vw - iw) / 2);
+    const maxX = Math.max(0, (iw - vw) / 2);
+    const minY = Math.min(0, (vh - ih) / 2);
+    const maxY = Math.max(0, (ih - vh) / 2);
+
+    this.x = Math.min(maxX, Math.max(minX, this.x));
+    this.y = Math.min(maxY, Math.max(minY, this.y));
+  }
+
+  applyFullscreenTransform() {
+    this.fsImg.style.transform = `translate(-50%, -50%) translate(${this.x}px, ${this.y}px) scale(${this.scale})`;
+  }
+
+  getCoords(e, el) {
+    const r = el.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+
+  getDistance(a, b) {
+    return Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+  }
+
+}
+
    
    
    
@@ -1199,4 +1545,5 @@ export {
   LazyLoad,
   ScrollToTop,
   DigitsCountingAnimation,
+  ImageZoom,
 }

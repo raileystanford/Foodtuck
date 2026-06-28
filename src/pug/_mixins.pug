@@ -2,7 +2,7 @@ mixin nav-menu(links, attr)
 
   -
     links = links ?? [
-      { text: 'Home', href: '#', target: "_blank", active: true },
+      { text: 'Home', href: '#', target: "_blank" },
       { text: 'Menu', href: '#', target: "_blank" },
       { text: 'Blog', href: '#', target: "_blank" },
       { text: 'Pages', href: '#', target: "_blank" },
@@ -14,11 +14,9 @@ mixin nav-menu(links, attr)
   ul(class="nav-menu")&attributes(attr)
 
     each item, index in links
-
-      - let isActive = item.active ? ' nav-menu__link--active' : '';
     
       li(class="nav-menu__li")
-        a(href=item.href target=item.target class=`nav-menu__link${isActive} menu-text`)= item.text
+        a(href=item.href target=item.target class='nav-menu__link menu-text')= item.text
 
 mixin nav-links(links, attr)
 
@@ -709,3 +707,114 @@ mixin logotype(attr)
   a(href="./index.html" class="logotype logo-text")&attributes(attr)
     span(class="logotype__left") Food 
     span(class="logotype__right") tuck
+
+mixin head-line(title, loc, attr)
+
+  -
+    title = title ?? 'Our Menu';
+    loc = loc ?? 'Menu';
+
+  article(class="head-line")&attributes(attr)
+
+    h1(class="head-line__title bold-text")= title
+
+    nav(class="head-line__nav")
+
+      a(href="./index.html" class="head-line__link slide-text") Home
+
+      if loc 
+
+        span(class="head-line__text slide-text")= loc
+
+mixin menu-block(init, pieces, attr)
+
+  -
+    init = init ?? { title: 'First Dishes', img: './images/illustrations/menu-dish1.jpg', lazy: true }
+    pieces = pieces ?? [
+      { 
+        name: 'Alder Grilled Chinook Salmon', 
+        des: 'Toasted french bread topped with romano, cheddar',
+        cal: '560',
+        price: '32',
+        screen: './images/illustrations/menu-dish1.jpg',
+      },
+      { 
+        name: 'Berries And Creme Tart', 
+        des: 'Gorgonzola, ricotta, mozzarella, taleggio',
+        cal: '700',
+        price: '43',
+        screen: './images/illustrations/menu-dish5.jpg',
+      },
+      { 
+        name: 'Tormentoso Bush Pizza Pintoage', 
+        des: 'Ground cumin, avocados, peeled and cubed',
+        cal: '1000',
+        price: '14',
+        screen: './images/illustrations/menu-dish6.jpg',
+      },
+      { 
+        name: 'Spicy Vegan Potato Curry', 
+        des: 'Spreadable cream cheese, crumbled blue cheese',
+        cal: '560',
+        price: '35',
+        screen: './images/illustrations/menu-dish7.jpg',
+      },
+    ]
+
+  article(class="menu-block")&attributes(attr)
+
+    div(class="menu-block__screen-wrapper" data-zoom)
+
+      if init.lazy
+
+        img(class="menu-block__screen" alt=init.title src="./images/preloader-green.svg" data-load=init.img data-zoom-img)
+
+      else 
+
+        img(class="menu-block__screen" alt=init.title src=init.img data-zoom-img)
+
+    div(class="menu-block__content")
+
+      h2(class="menu-block__title bold-text")= init.title 
+
+      each item, index in pieces
+
+        article(class="menu-block__item" data-screen=item.screen)
+
+          h3(class="menu-block__name logo-text")= item.name
+          em(class="menu-block__description job-text")= item.des
+          span(class="menu-block__calories job-text")= item.cal
+          span(class="menu-block__price logo-text")= item.price
+
+mixin def-heading(title, sub, attr)
+
+  -
+    title = title ?? 'Partners & Clients';
+    sub = sub ?? 'We work with the best companies';
+
+  div(class="def-heading")&attributes(attr)
+
+    h2(class="def-heading__title list-text")= title 
+    p(class="def-heading__subtitle bold-text")= sub
+
+mixin partners(list, attr)
+
+  -
+    list = list ?? [
+      { img: './images/icons/partner1.png', alt: 'Restaraunt', href: './404.html' },
+      { img: './images/icons/partner2.png', alt: 'Backery', href: './404.html' },
+      { img: './images/icons/partner3.png', alt: 'Fork & Spoon', href: './404.html' },
+      { img: './images/icons/partner4.png', alt: 'Wolf Coffee', href: './404.html' },
+      { img: './images/icons/partner5.png', alt: 'Bistro', href: './404.html' },
+      { img: './images/icons/partner6.png', alt: 'Bakery', href: './404.html' },
+    ]
+
+  div(class="partners")&attributes(attr)
+
+    each item, index in list 
+
+      a(class="partners__link" href=item.href target="_blank")
+        img(class="partners__icon" src=item.img alt=item.alt)
+
+
+
