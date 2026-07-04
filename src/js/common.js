@@ -1,7 +1,6 @@
 import { 
   FormValidator,
   BurgerMenu,
-  LazyLoad,
   ScrollToTop,
 } from "./modules/modules.js";
 
@@ -35,12 +34,6 @@ new BurgerMenu({
     let form = document.querySelector('.search');
     formValidatorEventsHandler.clearForm(form);
   },
-});
-
-new LazyLoad({
-  root: '.smooth-scroll-wrapper',
-  anim: true,
-  offset: 800,
 });
 
 new ScrollToTop({

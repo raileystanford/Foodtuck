@@ -110,6 +110,21 @@
     &:last-child {
       margin: 0 0 15px 0;
     }
+
+    &.active {
+      transition: all 0.2s;
+      border-color: var.$black;
+
+      .menu-block__name {
+        transition: all 0.2s;
+        color: var.$orange;
+      }
+
+      .menu-block__price {
+        transition: all 0.2s;
+        transform: translate(-2px, 5px) scale(1.2);
+      }
+    }
   }
 
   &__name {
@@ -184,9 +199,18 @@
   align-items: center;
 }
 
+
 // Media queries
 
 @media (max-width: 1200px) {
+
+  .menu-block {
+    gap: 50px;
+
+    &__screen-wrapper {
+      width: 400px;
+    }
+  }
 
   .stats {
     padding: 80px 0;
@@ -196,6 +220,31 @@
 }
 
 @media (max-width: 996px) {
+
+  .menu-block {
+    flex-direction: column;
+
+    &__screen-wrapper {
+      height: 370px;
+      width: 100%;
+      margin: 0 0 5px 0;
+    }
+
+    &__content {
+      order: -1;
+    }
+
+    &__title, &__item:last-child {
+      margin: 0;
+    }
+
+    &--right {
+
+      .menu-block__screen-wrapper {
+        order: 0;
+      }
+    }
+  }
 
   .stat {
 
@@ -218,6 +267,30 @@
 
 @media (max-width: 768px) {
 
+  .menu-block {
+
+    &__screen-wrapper {
+      height: 300px;
+    }
+
+    &__content {
+      gap: 18px;
+    }
+
+    &__item {
+      gap: 4px 40px
+    }
+
+  }
+
+  .partners {
+    gap: 30px 50px;
+
+    &__link {
+      height: 100px;
+    }
+  }
+
   .stat {
     gap: 15px;
   }
@@ -233,6 +306,49 @@
 }
 
 @media (max-width: 576px) {
+
+  .menu-block {
+
+    &__screen-wrapper {
+      height: 280px;
+    }
+
+    &__item {
+      gap: 4px 35px
+    }
+
+    &__name {
+      font-size: 20px;
+      line-height: 28px;
+    }
+
+    &__description {
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    &__title {
+      font-size: 40px;
+      line-height: 47px;
+    }
+
+  }
+
+  .partners {
+    gap: 30px 20px;
+
+    &__link {
+      height: 81px;
+    }
+  }
+
+  .def-heading {
+
+    &__subtitle {
+      font-size: 40px;
+      line-height: 47px;
+    }
+  }
 
   .stat {
 
@@ -254,6 +370,28 @@
 }
 
 @media (max-width: 420px) {
+
+  .menu-block {
+
+    &__screen-wrapper {
+      height: 220px;
+    }
+
+    &__name {
+      font-size: 19px;
+      line-height: 25px;
+    }
+
+    &__description {
+      font-size: 13px;
+      line-height: 17px;
+    }
+
+  }
+
+  .partners {
+    gap: 30px 35px;
+  }
 
   .stat {
 

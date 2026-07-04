@@ -1,4 +1,5 @@
 import {
+  LazyLoad,
   Parallax,
   DigitsCountingAnimation,
   UpdatePageTitle,
@@ -851,11 +852,14 @@ function blogpostMobile() {
 
 function runGSAPAnimation() {
 
-  let media = window.matchMedia('(max-width: 831px)').matches;
+  let media = window.matchMedia('(max-width: 768px)').matches;
 
   if (media || (typeof GSAPanimation === 'undefined')) {
     let animElements = Array.from(document.querySelectorAll('[data-anim]'));
     animElements.forEach((item) => item.removeAttribute('data-anim'));
+    new LazyLoad({
+      offset: 800,
+    });
     return;
   }
   
@@ -868,20 +872,19 @@ function GSAPanimation() {
 
   if (sessionStorage.animDisabled === 'true') {
     removeDataAnim();
+    new LazyLoad({
+      offset: 800,
+    });
     return;
   }
-
-  let media = window.matchMedia('(max-width: 768px)').matches;
-
-  if (media) {
-    removeDataAnim();
-    return;
-  } 
 
   try {
     gsap, ScrollTrigger, ScrollSmoother
   } catch {
     removeDataAnim();
+    new LazyLoad({
+      offset: 800,
+    });
     return;
   }
 
@@ -902,6 +905,58 @@ function GSAPanimation() {
   }
 
   window._GSAP = true;
+
+  lazyLoad();
+
+  function lazyLoad() {
+
+    let blocks = Array.from(document.querySelectorAll('[data-load-block]'));
+
+    if (!blocks.length) return;
+
+    function load(info) {
+
+      let block = info.vars.trigger;
+      let elements = Array.from(block.querySelectorAll('[data-load]'));
+
+      elements.forEach((element) => {
+
+        let tag = element.tagName;
+
+        element.addEventListener('load', (event) => {
+          element.classList.add('loaded');
+          element.removeAttribute('data-load');
+          element.dispatchEvent(new CustomEvent('lazyloaded', { bubbles: true, cancelable: true, composed: true }));
+        }, { once: true });
+
+        if (tag === 'SOURCE' && element.parentElement.tagName === 'PICTURE') {
+          element.srcset = element.dataset.load;
+        } else if (tag === 'IMG' || tag === 'IFRAME') {
+          element.src = element.dataset.load;
+        } else if (tag === 'AUDIO' || tag === 'VIDEO') {
+          element.preload = 'auto';
+        } 
+
+      });
+
+    }
+
+    blocks.forEach((block) => {
+
+      ScrollTrigger.create({
+
+        trigger: block,
+        start: "top bottom+=800",
+        once: true,
+
+        onEnter: load,
+        onEnterBack: load,
+
+      });
+
+    });
+
+  }
 
   document.addEventListener('click', (event) => {
 

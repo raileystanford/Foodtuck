@@ -215,3 +215,28 @@
 
   }
 }
+
+.head-line__link {
+  transition: all 0.05s;
+
+  &:active {
+    color: var.$orange;
+    text-decoration: underline;
+  }
+}
+
+.partners__link {
+  will-change: transform;
+  transition: all 0.05s;
+
+  &:active {
+    transform: scale(0.85);
+  }
+}
+
+.zoom-fs__close-btn {
+
+  &:active {
+    color: var.$orange !important;
+  }
+}

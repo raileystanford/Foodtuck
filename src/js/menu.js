@@ -2,6 +2,7 @@ import {
   UpdatePageTitle,
   ImageZoom,
   DigitsCountingAnimation,
+  LazyLoad,
 } from "./modules/modules.js";
 
 import { menu_titles } from './modules/dictionary.js';
@@ -17,16 +18,14 @@ new ImageZoom({
   mode: 'hover',
   mobileViewport: 768,
   strictHoverTarget: true,
-
   startZoom: 1.2,
   minZoom: 1,
   maxZoom: 1.5,
   zoomStep: 0.2,
 
-  mobile: { // А вот это для мобилки када сработает брекпоинт
-    // startZoom: 2, Можна не писать тошо всегда с 1 будит начинаться
+  mobile: {
     minZoom: 1,
-    maxZoom: 4,
+    maxZoom: 1.6,
     zoomStep: 0.2,
   }
 });
@@ -71,6 +70,42 @@ function menuBlocksHandler() {
 
       }
 
+    });
+
+  } else {
+
+    setMobileInitActiveItem();
+
+    document.addEventListener('click', (event) => {
+
+      let item = event.target.closest('.menu-block__item');
+      console.log(item);
+
+      if (item) {
+        setActiveState(item);
+        showImageOnScreen(item);
+      }
+
+    });
+
+  }
+
+  function setActiveState(item) {
+
+    let main = item.closest('.menu-block');
+    let items = Array.from(main.querySelectorAll('.menu-block__item'));
+
+    items.forEach((item) => item.classList.remove('active'));
+    item.classList.add('active');
+
+  }
+
+  function setMobileInitActiveItem() {
+
+    let blocks = Array.from(document.querySelectorAll('.menu-block'));
+    blocks.forEach((block) => {
+      let item = block.querySelector('.menu-block__item');
+      item.classList.add('active');
     });
 
   }
@@ -143,10 +178,22 @@ function activateFirstblock() {
 
 function scrollSmoother() {
 
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (media) {
+    new LazyLoad({
+      offset: 800,
+    });
+    return;
+  }
+
   try {
     gsap, ScrollTrigger, ScrollSmoother
   } catch {
     console.warn('Missing GSAP component');
+    new LazyLoad({
+      offset: 800,
+    });
     return;
   }
 
@@ -159,6 +206,58 @@ function scrollSmoother() {
       wrapper: '.smooth-scroll-wrapper',
       content: '.smooth-scroll-page',
       smooth: 0.8,
+    });
+
+  }
+
+  lazyLoad();
+
+  function lazyLoad() {
+
+    let blocks = Array.from(document.querySelectorAll('[data-load-block]'));
+
+    if (!blocks.length) return;
+
+    function load(info) {
+
+      let block = info.vars.trigger;
+      let elements = Array.from(block.querySelectorAll('[data-load]'));
+
+      elements.forEach((element) => {
+
+        let tag = element.tagName;
+
+        element.addEventListener('load', (event) => {
+          element.classList.add('loaded');
+          element.removeAttribute('data-load');
+          element.dispatchEvent(new CustomEvent('lazyloaded', { bubbles: true, cancelable: true, composed: true }));
+        }, { once: true });
+
+        if (tag === 'SOURCE' && element.parentElement.tagName === 'PICTURE') {
+          element.srcset = element.dataset.load;
+        } else if (tag === 'IMG' || tag === 'IFRAME') {
+          element.src = element.dataset.load;
+        } else if (tag === 'AUDIO' || tag === 'VIDEO') {
+          element.preload = 'auto';
+        } 
+
+      });
+
+    }
+
+    blocks.forEach((block) => {
+
+      ScrollTrigger.create({
+
+        trigger: block,
+        start: "top bottom+=800",
+        once: true,
+
+        onEnter: load,
+        onEnterBack: load,
+
+      });
+
     });
 
   }
@@ -194,7 +293,27 @@ function scrollSmoother() {
 
 }
 
+function menuBlockMobile() {
+
+  let media = window.matchMedia('(max-width: 996px)').matches;
+
+  if (!media) return;
+
+  let blocks = Array.from(document.querySelectorAll('.menu-block'));
+
+  blocks.forEach((block) => {
+
+    let screen = block.querySelector('.menu-block__screen-wrapper');
+    let title = block.querySelector('.menu-block__title');
+
+    title.after(screen);
+
+  });
+
+}
+
 
 scrollSmoother();
 menuBlocksHandler();
 activateFirstblock();
+menuBlockMobile();

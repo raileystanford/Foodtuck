@@ -901,13 +901,7 @@ class LazyLoad {
       let isContent = block.querySelector('[data-load]');
       let isBgLoad = block.matches('[data-load-bg]');
       if (isContent || isBgLoad) {
-
-        if (this.params.anim) {
-          setTimeout(() => { this.observer.observe(block) }, 300);
-        } else {
-          this.observer.observe(block);
-        }
-        
+        this.observer.observe(block);
       }
 
     });
