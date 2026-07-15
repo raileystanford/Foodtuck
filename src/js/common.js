@@ -113,6 +113,7 @@ function formValidatorEventsHandler() {
 
     let searchBar = event.target.matches('.search');
     let emailBar = event.target.matches('.email');
+    let shopSearch = event.target.matches('.market__sidebar');
 
     if (searchBar) {
 
@@ -130,6 +131,13 @@ function formValidatorEventsHandler() {
       btn.setAttribute('disabled', '');
       setTimeout(() => btn.textContent = 'SUBSCRIBED', 60);
       
+    } else if (shopSearch) {
+
+      let input = event.target.querySelector('.shop-search__input');
+      input._lastValue = input.value;
+      event.target.dispatchEvent(new CustomEvent('searchvalid', { bubbles: true, cancelable: true, composed: true }));
+      formValidatorEventsHandler.clearForm(event.target);
+
     }
 
     if (media && typeof BurgerMenu !== 'undefined') {

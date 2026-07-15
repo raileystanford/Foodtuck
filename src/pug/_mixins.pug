@@ -816,5 +816,282 @@ mixin partners(list, attr)
       a(class="partners__link" href=item.href target="_blank")
         img(class="partners__icon" src=item.img alt=item.alt)
 
+mixin custom-select(name, variants, attr)
+
+  -
+    name = name ?? 'Sort By:';
+    variants = variants ?? [
+      { text: 'Default', value: 'default', init: true },
+      { text: 'Newest', value: 'newest' },
+      { text: 'Oldest', value: 'oldest' },
+      { text: 'Expensive', value: 'expensive' },
+      { text: 'Cheap', value: 'cheap' },
+      { text: 'Popular', value: 'popular' },
+    ];
+  
+  div(class="custom-select")&attributes(attr)
+
+    span(class="custom-select__name slide-text")= name
+
+    div(class="custom-select__container")
+
+      div(class="custom-select__body" data-select)
+
+        button(class="custom-select__trigger" data-select-trigger)
+
+          span(class="custom-select__text list-text" data-select-trig-text)
+          svg(class="custom-select__icon")
+            use(xlink:href="./images/sprite.svg#select-arrow")
+
+        div(class="custom-select__variants" data-select-vars)
+
+          each item, index in variants 
+
+            button(class="custom-select__variant" data-select-var=item.value data-select-init=item.init)
+              span(class="custom-select__variant-text list-text" data-select-var-text)= item.text
+
+mixin shop-search(id, attr)
+
+  -
+    id = id ?? 'shop-search';
+
+  div(class="shop-search")&attributes(attr)
+
+    input(class="shop-search__input menu-text" id=id type="search" placeholder="Search" autocomplete="off" data-validate)
+
+    button(class="shop-search__submit" type="submit")
+      svg(class="shop-search__icon")
+        use(xlink:href="./images/sprite.svg#search")
+
+    span(class="shop-search__warning menu-text" data-warn=id)
+
+mixin check-list(list, attr)
+
+  -
+    list = list ?? [
+
+      { text: 'Sandwiches', value: 'cat_sandwich', id: 'cat_sandwich', name: 'category' },
+      { text: 'Burger', value: 'cat_burger', id: 'cat_burger', name: 'category' },
+      { text: 'Fried', value: 'cat_fried', id: 'cat_fried', name: 'category' },
+      { text: 'Drink', value: 'cat_drink', id: 'cat_drink', name: 'category' },
+      { text: 'Pizza', value: 'cat_pizza', id: 'cat_pizza', name: 'category' },
+      { text: 'Salad', value: 'cat_salad', id: 'cat_salad', name: 'category' },
+      { text: 'Dessert', value: 'cat_dessert', id: 'cat_dessert', name: 'category' },
+      { text: 'Cake', value: 'cat_cake', id: 'cat_cake', name: 'category' },
+
+    ];
+
+  ul(class="check-list")&attributes(attr)
+
+    each item, index in list 
+
+      li(class="check-list__item")
+
+        input(class="check-list__input" type="radio" name=item.name id=item.id value=item.value)
+        label(class="check-list__checkbox" for=item.id)
+        label(class="check-list__text tes-text" for=item.id)= item.text
+          
+mixin ad-block(content, attr)
+
+  -
+    content = content ?? {
+      link: { url: './404.html', target: '_blank' },
+      text: 'Perfect Taste',
+      title: 'Classic Restaurant',
+      price: '45.00',
+      bg: {
+        src: './images/illustrations/shop-now.jpg',
+        srcset: './images/illustrations/shop-now.webp',
+        lazy: true,
+      },
+    }
+
+  a(class="ad-block" href=content.link.url target=content.link.target)&attributes(attr)
+
+    em(class="ad-block__text menu-text")= content.text 
+    strong(class="ad-block__title check-text")= content.title
+    span(class="ad-block__price menu-text")= content.price
+
+    - let srcseturl = content.bg.srcset ?? content.bg.src;
+    - let type = content.bg.srcset ? 'image/webp' : null;
+
+    if content.bg.lazy
+
+      picture
+        source(srcset="./images/preloader-green.svg" data-load=srcseturl type=type)
+        img(src="./images/preloader-green.svg" data-load=content.bg.src alt=content.title class="ad-block__image")
+
+    else 
+
+      picture
+        source(srcset=srcseturl type=type)
+        img(src=content.bg.src alt=content.title class="ad-block__image")
+
+    span(class="ad-block__bot-text menu-text") 
+      span Shop Now
+      svg(class="ad-block__icon")
+        use(xlink:href="./images/sprite.svg#circle-arrow")
+
+mixin custom-range(id, attr)
+
+  -
+    id = id ?? 'price-range';
+
+  div(class="custom-range")
+
+    div(id=id)
+
+    span(class="custom-range__info menu-text")
+      | From 
+      span(class="custom-range__value-min") $1
+      |  to 
+      span(class="custom-range__value-max") $150
+
+mixin suggestion(content, attr)
+
+  -
+    content = content ?? {
+      url: './404.html',
+      target: '_blank',
+      title: 'Estero Lagra',
+      img: './images/illustrations/suggest1.jpg',
+      stars: 5,
+      price: '35.00',
+    }
+
+  a(class="suggestion" href=content.url target=content.target)&attributes(attr)
+
+    img(class="suggestion__image" src=content.img alt=content.title)
+
+    em(class="suggestion__title job-text")= content.title
+
+    +stars(content.stars, 5, { class: 'suggestion__stars' })
+
+    span(class="suggestion__price sug-text")= content.price
+
+mixin tags-check(tags, attr)
+
+  - 
+    tags = tags ?? [
+
+      { text: 'Discount', id: 'tag_discount', value: 'tag_discount' },
+      { text: 'Meat', id: 'tag_meat', value: 'tag_meat' },
+      { text: 'Vegeterian', id: 'tag_vegeterian', value: 'tag_vegeterian' },
+      { text: 'New', id: 'tag_new', value: 'tag_new' },
+      { text: 'Organic', id: 'tag_organic', value: 'tag_organic' },
+      { text: 'Salted', id: 'tag_salted', value: 'tag_salted' },
+      { text: 'Sugared', id: 'tag_sugared', value: 'tag_sugared' },
+      { text: 'Seafood', id: 'tag_seafood', value: 'tag_seafood' },
+      { text: 'Milky', id: 'tag_milky', value: 'tag_milky' },
+
+    ]
+
+  ul(class="tags-check")&attributes(attr)
+
+    each item, index in tags 
+
+      li(class="tags-check__li")
+
+        input(class="tags-check__input" type="checkbox" id=item.id value=item.value)
+        label(class="tags-check__trigger menu-text" for=item.id)= item.text
+        
+mixin product-card(content, attr)
+
+  -
+    content = content ?? {
+
+      img: { 
+        src: './images/illustrations/shop-item1.jpg',
+        srcset: './images/illustrations/shop-item1.webp',
+        lazy: true,
+      },
+
+      id: 'product_1',
+      name: 'Fresh Lime',
+      url: './404.html',
+      price: '38.00',
+      oldPrice: '45.00',
+
+      tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+    }
+
+  div(class="product-card" id=content.id)&attributes(attr)
+
+    div(class="product-card__wrapper" data-load-block=content.img.lazy)
+
+      - let srcseturl = content.img.srcset ?? content.img.src;
+      - let type = content.img.srcset ? 'image/webp' : null;
+
+      if content.img.lazy
+
+        picture
+          source(srcset="./images/preloader-green.svg" data-load=srcseturl type=type)
+          img(src="./images/preloader-green.svg" data-load=content.img.src alt=content.name class="product-card__image")
+
+      else 
+
+        picture
+          source(srcset=srcseturl type=type)
+          img(src=content.img.src alt=content.name class="product-card__image")
+
+      if content.tags
+
+        div(class="product-card__tags")
+
+          each item, index in content.tags 
+
+            span(class=`product-card__tag ${item.class} menu-text`)=item.text
+
+      div(class="product-card__controls")
+
+        button(class="product-card__btn product-card__btn--compare")
+          svg(class="product-card__btn-icon")
+            use(xlink:href="./images/sprite.svg#compare")
+
+        a(class="product-card__btn" href="./404.html" target="_blank")
+          svg(class="product-card__btn-icon")
+            use(xlink:href="./images/sprite.svg#cart")
+
+        button(class="product-card__btn product-card__btn--like")
+          svg(class="product-card__btn-icon")
+            use(xlink:href="./images/sprite.svg#heart")
+
+    a(class="product-card__footer" href=content.url target="_blank")
+
+      strong(class="product-card__name list-text")= content.name 
+
+      span(class="product-card__prices menu-text")
+
+        span(class="product-card__price")= content.price 
+
+        if content.oldPrice
+
+          span(class="product-card__old-price")= content.oldPrice
+
+mixin pagination(n, attr)
+
+  - 
+    n = n ?? 3;
+
+  div(class="pagination")&attributes(attr)
+
+    button(class="pagination__btn pagination__btn--prev")
+      svg(class="pagination__icon")
+        use(xlink:href="./images/sprite.svg#pag-arrow")
+
+    div(class="pagination__body")
+
+      - for (let i = 1; i <= 3; i++)
+
+          button(class="pagination__btn menu-text")= i
+
+    button(class="pagination__btn pagination__btn--next")
+      svg(class="pagination__icon")
+        use(xlink:href="./images/sprite.svg#pag-arrow")
+
+
+
+
 
 

@@ -1,0 +1,751 @@
+@use './modules/variables.scss' as var;
+@use './modules/mixins.scss' as mix;
+@use './modules/templates.scss';
+@use './common.scss';
+
+
+.nav-menu {
+
+  &__li:nth-child(6) &__link {
+    color: var.$orange;
+    font-weight: 700;
+    pointer-events: none;
+  }
+
+}
+
+.custom-select {
+  @include mix.flex(nowrap, 16px);
+  align-items: center;
+
+  &__name {
+    font-weight: 400;
+    color: var.$black-gray;
+  }
+
+  &__container {
+    width: 236px;
+    height: 44px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    @include mix.abs();
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid var.$light-silver;
+    z-index: 1;
+    background: var.$white;
+    overflow: hidden;
+
+    &.opened {
+      border-color: var.$orange;
+
+      .custom-select__trigger {
+        background: var.$light-silver;
+      }
+
+      .custom-select__text {
+        color: var.$black;
+      }
+
+      .custom-select__icon {
+        transform: rotate(180deg);
+        stroke: var.$black;
+      }
+
+      .custom-select__variants {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__trigger {
+    @include mix.flex(nowrap, 15px);
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 18px;
+    width: 100%;
+  }
+
+  &__text {
+    color: var.$gray-tuff;
+    text-align: left;
+  }
+
+  &__icon {
+    width: 17px;
+    height: 9px;
+    stroke: var.$gray-tuff;
+    stroke-width: 1.5;
+    fill: transparent;
+    flex-shrink: 0;
+    margin: 2px 0 0 0;
+  }
+
+  &__variants {
+    @include mix.flex-col(0px);
+    width: 100%;
+    height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.35s;
+  }
+
+  &__variant {
+    width: 100%;
+    text-align: left;
+    padding: 9px 18px;
+  }
+
+  &__variant-text {
+    color: var.$black;
+  }
+
+}
+
+.shop-search {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 46px 20px;
+  gap: 4px 0px;
+  width: 100%;
+
+  &__input {
+    @extend %wh-100;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background: var.$trans-orange;
+    padding: 11px 65px 11px 20px;
+    color: var.$black;
+  }
+
+  &__submit {
+    @extend %flex-cen;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    justify-self: end;
+    width: 46px;
+    height: 100%;
+    background: var.$orange;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    stroke: var.$white;
+    stroke-width: 2;
+    fill: transparent;
+  }
+
+  &__warning {
+    font-size: 15px;
+    line-height: 17px;
+    padding: 0 0 0 1px;
+    color: var.$red;
+    opacity: 0;
+    transition: all 0.1s;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
+.check-list {
+  @include mix.flex-col(16px);
+  width: 100%;
+
+  &__item {
+    @include mix.flex(nowrap, 8px);
+    width: fit-content;
+  }
+
+  &__input {
+    visibility: hidden;
+    position: absolute;
+
+    &:checked ~ .check-list__checkbox {
+      border-color: var.$orange;
+
+      &::before {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &__checkbox {
+    @extend %flex-cen;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var.$black-gray;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 3px 0 0 0;
+
+    &::before {
+      content: '';
+      will-change: transform;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: url(../images/icons/done.svg) center center / 80% 80% no-repeat, linear-gradient(#FF9F0D, #FF9F0D);
+      transform: scale(0.1);
+      opacity: 0;
+      transition: all 0.15s;
+    }
+  }
+
+  &__text {
+    color: var.$black-gray;
+    cursor: pointer;
+  }
+
+}
+
+.ad-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 2px;
+  width: 100%;
+  min-height: 286px;
+  position: relative;
+  padding: 29px 23px;
+  overflow: hidden;
+
+  &__title {
+    color: var.$white;
+  }
+  
+  &__text {
+    font-weight: 700;
+    color: var.$white;
+  }
+
+  &__price {
+    font-weight: 700;
+    color: var.$orange;
+    margin: 13px 0 0 0;
+
+    &::after {
+      content: '$';
+    }
+  }
+
+  &__image {
+    @include mix.abs;
+    @extend %wh-100;
+    z-index: -1;
+    filter: saturate(1.3);
+    object-fit: scale-down;
+
+    &.loaded {
+      object-fit: cover;
+    }
+  }
+
+  &__bot-text {
+    @include mix.flex(nowrap, 7px);
+    align-items: center;
+    color: var.$white;
+  }
+
+  &__icon {
+    stroke: var.$white;
+    stroke-width: 2px;
+    fill: transparent;
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+  }
+}
+
+.custom-range {
+  @include mix.flex-col(10px);
+  width: 100%;
+  margin: 1px 0 0 0;
+  
+  .noUi-target {
+    border: none;
+    background: none;
+    box-shadow: none;
+    border-radius: 0px;
+    height: 7px;
+    border-left: 12px solid var.$melt-silver;
+    border-right: 12px solid var.$melt-silver;
+  }
+
+  .noUi-base {
+    background: var.$melt-silver;
+    
+  }
+  
+  .noUi-connect {
+    background: var.$orange;
+  }
+
+  .noUi-handle {
+    @extend %flex-cen;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px var.$trans-black4;
+    top: -9px;
+    cursor: pointer;
+
+    &-lower {
+      right: -11px;
+    }
+
+    &-upper {
+      right: -12px;
+    }
+
+    &::before, &::after  {
+      display: none;
+    }
+  }
+
+  .noUi-touch-area {
+    will-change: transform;
+    width: 14px;
+    height: 14px;
+    background: var.$orange;
+    border-radius: 50%;
+  }
+
+  &__info {
+    color: var.$gray;
+    padding: 0 0 0 1px;
+  }
+
+}
+
+.stars {
+  @include mix.flex(wrap, 4px);
+  align-items: center;
+
+  &__icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+}
+
+.suggestion {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: auto auto auto;
+  width: 100%;
+  gap: 4px 15px;
+
+  &__image {
+    width: 100%;
+    height: 68px;
+    object-fit: cover;
+    filter: saturate(1.3);
+    grid-row: 1 / -1;
+  }
+
+  &__title {
+    color: var.$dark-gray;
+    font-size: 17px;
+  }
+
+  &__stars {
+    grid-column: 2 / 3;
+  }
+
+  &__price {
+    color: var.$dark-gray;
+    grid-column: 2 / 3;
+
+    &::after {
+      content: '$';
+    }
+  }
+}
+
+.tags-check {
+  @include mix.flex(wrap, 8px 20px);
+  align-items: center;
+
+  &__li {
+    display: flex;
+  }
+
+  &__trigger {
+    font-size: 18px;
+    color: var.$dark-gray;
+    text-decoration: underline solid var.$light-silver;
+    text-underline-offset: 5px;
+    padding: 3px 0;
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  &__input {
+    position: absolute;
+    visibility: hidden;
+
+    &:checked ~ .tags-check__trigger {
+      color: var.$orange;
+    }
+  }
+}
+
+.product-card {
+  @include mix.flex-col(8px);
+  will-change: transform;
+  width: 100%;
+
+  &.appear {
+    animation: card-appear 0.4s;
+  }
+
+  @keyframes card-appear {
+    0%{ transform: translateY(70px); opacity: 0 }
+    100%{ transform: translateY(0px); opacity: 1 }
+  }
+
+  &__wrapper {
+    @extend %flex-cen;
+    width: 100%;
+    height: 267px;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+  }
+
+  &__image {
+    @extend %wh-100;
+    @include mix.abs;
+    z-index: -1;
+    object-fit: cover;
+    filter: saturate(1.3);
+  }
+
+  &__tags {
+    @include mix.flex(wrap, 15px);
+    @include mix.abs(20px, 20px);
+  }
+
+  &__tag {
+    font-size: 18px;
+    color: var.$white;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: var.$orange;
+  }
+
+  &__controls {
+    @include mix.flex(wrap, 13px);
+    will-change: transform;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.25s;
+    transform: translateY(150px);
+  }
+
+  &__btn {
+    @extend %flex-cen;
+    width: 40px;
+    height: 40px;
+    background: var.$white;
+    border-radius: 4px;
+    padding: 5px;
+    flex-shrink: 0;
+
+    &.active {
+
+      .product-card__btn-icon {
+        fill: var.$orange;
+      }
+    }
+  }
+
+  &__btn-icon {
+    @extend %wh-100;
+    stroke: var.$orange;
+    stroke-width: 1.5;
+    fill: transparent;
+  }
+
+  &__footer {
+    @include mix.flex-col(4px);
+    width: 100%;
+  }
+
+  &__name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var.$black-gray;
+  }
+
+  &__prices {
+    @include mix.flex(wrap, 8px);
+  }
+
+  &__price {
+    color: var.$orange;
+    font-size: 17px;
+  }
+
+  &__old-price {
+    color: var.$gray;
+    text-decoration: line-through;
+    font-size: 17px;
+  }
+
+  &__price, &__old-price {
+
+    &::before {
+      content: '$';
+    }
+  }
+
+  &:hover {
+
+    .product-card__controls {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+}
+
+.pagination {
+  @include mix.flex(nowrap, 14px);
+
+  &__btn {
+    @extend %flex-cen;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var.$melt-silver;
+    color: var.$orange;
+    padding: 10px;
+    font-size: 17px;
+    flex-shrink: 0;
+
+    &--prev, &--next {
+      padding: 15px;
+    }
+
+    &--next {
+
+      .pagination__icon {
+        transform: rotate(180deg);
+      }
+
+    }
+
+    &.active {
+      background: var.$orange;
+      border-color: var.$orange;
+      color: var.$white;
+      font-weight: 700;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      filter: grayscale(1);
+    }
+  }
+
+  &__icon {
+    @extend %wh-100;
+    fill: var.$orange;
+  }
+
+  &__body {
+    @include mix.flex(wrap, 14px);
+    align-items: center;
+  }
+
+}
+
+.selected-filter {
+  @include mix.flex(nowrap, 5px);
+  align-items: center;
+  border-radius: 7px;
+  background: var.$orange;
+  padding: 8px 53px 8px 12px;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+
+  &.appear {
+    animation: filter-appear 0.3s;
+  }
+
+  @keyframes filter-appear {
+    0%{ transform: scale(0.1); visibility: hidden; opacity: 0; }
+    100%{ transform: scale(1); visibility: visible; opacity: 1; }
+  }
+
+  &__name {
+    color: var.$white;
+  }
+
+  &__value {
+    color: var.$white;
+    font-weight: 700;
+  }
+
+  &__remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var.$white;
+    font-size: 40px;
+    line-height: 0px;
+    padding: 10px;
+    height: 100%;
+    background: var.$red;
+  }
+}
+
+.market {
+  display: grid;
+  grid-template-columns: repeat(4, 312px);
+  grid-template-rows: auto auto auto;
+  gap: 24px;
+
+  &__head {
+    @include mix.flex(wrap, 20px 38px);
+    align-items: center;
+    grid-column: 1 / -1;
+  }
+
+  &__selected-filters {
+    @include mix.flex(wrap, 13px);
+    align-items: center;
+    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    visibility: hidden;
+  }
+
+  &__filters-clear {
+    @extend %flex-cen;
+    border-radius: 8px;
+    background: var.$red;
+    padding: 8px 12px 8px 12px;
+    width: fit-content;
+    color: var.$white;
+  }
+
+  &__goods-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    height: fit-content;
+    gap: 26px 24px;
+    grid-column: 1 / 4;
+    grid-row: 2 / -1;
+    position: relative;
+  }
+
+  &__no-goods {
+    @include mix.flex-col(60px);
+    align-items: center;
+    position: absolute;
+    top: 130px;
+    justify-self: center;
+    font-size: 100px;
+    color: var.$gray-tuff;
+
+    &::after {
+      content: '';
+      width: 150px;
+      height: 150px;
+      background: url(../images/icons/sad-smile.svg) 0 0 / contain no-repeat;
+      flex-shrink: 0;
+    }
+  }
+
+  &__sidebar {
+    @include mix.flex-col(38px);
+    border-radius: 6px;
+    border: 1px solid var.$light-silver;
+    padding: 26px 29px;
+    grid-column: 4 / 5;
+    grid-row: 2 / -1;
+    height: fit-content;
+  }
+
+  &__shop-search {
+    margin: 0 0 -20px 0;
+  }
+
+  &__panel {
+    @include mix.flex-col(15px);
+    width: 100%;
+  }
+
+  &__panel-name {
+    color: var.$black-gray;
+    width: fit-content;
+    margin: 0 0 5px 0;
+  }
+
+  &__pagination {
+    grid-column: 1 / 4;
+    justify-self: center;
+    margin: 30px 0 0 0;
+  }
+
+  &.active {
+
+    .market__goods-content {
+      grid-row: 3 / -1;
+    }
+
+    .market__sidebar {
+      grid-row: 3 / -1;
+    }
+
+    .market__selected-filters {
+      visibility: visible;
+    }
+
+  }
+}
+
+
+// Media queries
+
+@media (max-width: 1200px) {
+
+  
+
+}
+
+@media (max-width: 996px) {
+
+  
+
+}
+
+@media (max-width: 768px) {
+
+  
+
+}
+
+@media (max-width: 576px) {
+
+  
+
+}
+
+@media (max-width: 420px) {
+
+  
+
+}

@@ -571,3 +571,304 @@
     transform: scale(0.9);
   }
 }
+
+.custom-select__body {
+  transition: all 0.2s;
+
+  .custom-select__text, .custom-select__icon {
+    transition: all 0.2s;
+  }
+
+  .custom-select__trigger {
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    border-color: var.$orange;
+
+    .custom-select__text {
+      color: var.$black;
+    }
+
+    .custom-select__icon {
+      stroke: var.$black;
+    }
+  }
+}
+
+.custom-select__variant {
+  transition: all 0.2s;
+
+  .custom-select__variant-text {
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+    background: var.$orange;
+    
+    .custom-select__variant-text {
+      color: var.$white;
+    }
+  }
+
+}
+
+.market__sidebar {
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: var.$gray;
+  }
+}
+
+.shop-search__input {
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$trans-orange2;
+  }
+}
+
+.shop-search__submit {
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$blue;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    background: var.$orange;
+  }
+}
+
+.check-list__item {
+
+  .check-list__text, .check-list__checkbox {
+    transition: all 0.2s;
+  }
+
+  &:hover {
+
+    .check-list__text {
+      color: var.$orange;
+    }
+
+    .check-list__checkbox {
+      border-color: var.$orange;
+    }
+  }
+}
+
+.market__panel {
+
+  .market__panel-name {
+    transition: all 0.2s;
+    text-decoration: underline solid transparent;
+  }
+
+  &:hover {
+
+    .market__panel-name {
+      text-decoration: underline;
+    }
+  }
+}
+
+.ad-block {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &__image {
+    will-change: transform;
+    transition: all 0.3s;
+  }
+
+  &__title {
+    text-decoration: underline solid transparent;
+    transition: all 0.2s;
+  }
+
+  &__bot-text, &__icon {
+    will-change: transform;
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+
+    .ad-block__image {
+      transform: scale(1.1);
+    }
+
+    .ad-block__title {
+      text-decoration: underline;
+    }
+
+    .ad-block__bot-text {
+      color: var.$orange;
+    }
+
+    .ad-block__icon {
+      transform: translateX(7px);
+      stroke: var.$orange;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.96);
+  }
+}
+
+.noUi-handle {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.85);
+  }
+}
+
+.suggestion {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &__title {
+    text-decoration: underline solid transparent;
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+
+    .suggestion__title {
+      color: var.$orange;
+      text-decoration: underline;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.95);
+  }
+}
+
+.tags-check__trigger {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover {
+    color: var.$blue;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
+  }
+}
+
+.product-card {
+
+  &__image {
+    will-change: transform;
+    transition: all 0.3s;
+  }
+
+  &__name {
+    text-decoration: underline solid transparent;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+
+    .product-card__image {
+      transform: scale(1.1);
+    }
+
+    .product-card__name {
+      color: var.$orange;
+      text-decoration: underline;
+    }
+  }
+}
+
+.product-card__btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &-icon {
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background: var.$orange;
+
+    &.active .product-card__btn-icon {
+      fill: var.$white;
+    }
+
+    .product-card__btn-icon {
+      stroke: var.$white;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.88);
+  }
+}
+
+.pagination__btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .pagination__icon {
+    transition: all 0.2s;
+  }
+
+  &:not([disabled], .active) {
+
+    &:hover, &:focus {
+      background: var.$orange;
+      border-color: var.$orange;
+      color: var.$white;
+
+      .pagination__icon {
+        fill: var.$white;
+      }
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.88);
+    }
+
+  }
+}
+
+.selected-filter__remove {
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$black;
+  }
+
+}
+
+.market__filters-clear {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$orange;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.88);
+  }
+}

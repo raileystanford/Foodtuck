@@ -176,7 +176,7 @@ function activateFirstblock() {
 
 }
 
-function scrollSmoother() {
+function pageScrollSmoother() {
 
   let media = window.matchMedia('(max-width: 768px)').matches;
 
@@ -313,7 +313,7 @@ function menuBlockMobile() {
 }
 
 
-scrollSmoother();
+pageScrollSmoother();
 menuBlocksHandler();
 activateFirstblock();
 menuBlockMobile();

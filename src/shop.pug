@@ -1,0 +1,695 @@
+extends ./pug/_layout.pug
+
+block title
+  title Foodtuck - Our shop
+
+block styles-libs
+  link(rel="stylesheet" href="./libs/nouislider/nouislider.min.css")
+
+block styles 
+  link(rel="stylesheet" href="./css/shop.css")
+  
+block scripts-libs 
+    
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
+  script(src="./libs/nouislider/nouislider.min.js" defer)
+
+block scripts 
+  script(src="./js/shop.js" type="module")
+
+block header-content 
+
+  +head-line('Our Shop', 'Shop', { class: 'custom-bg', 'data-title': 'header' })
+
+block main-content 
+
+  -
+    let showSelectVars = [
+      { text: 'Default', value: 'sort_show_default', init: true },
+      { text: '18 items', value: 'sort_show_18' },
+      { text: '21 items', value: 'sort_show_21' },
+      { text: '24 items', value: 'sort_show_24' },
+      { text: '27 items', value: 'sort_show_27' },
+    ];
+
+    let suggestions = [
+
+      {
+        url: './404.html',
+        target: '_blank',
+        title: 'Estero Lagra',
+        img: './images/illustrations/suggest1.jpg',
+        stars: 5,
+        price: '35.00',
+      },
+
+      {
+        url: './404.html',
+        target: '_blank',
+        title: 'Pizza Italiana',
+        img: './images/illustrations/suggest4.jpg',
+        stars: 4,
+        price: '30.00',
+      },
+
+      {
+        url: './404.html',
+        target: '_blank',
+        title: 'Humburger',
+        img: './images/illustrations/suggest2.jpg',
+        stars: 5,
+        price: '25.00',
+      },
+
+      {
+        url: './404.html',
+        target: '_blank',
+        title: 'Sandwich',
+        img: './images/illustrations/suggest3.jpg',
+        stars: 4,
+        price: '22.00',
+      },
+
+    ];
+
+    let goods = [
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item1.jpg',
+          srcset: './images/illustrations/shop-item1.webp',
+        },
+
+        id: 'product_1',
+        name: 'Salad Balonara',
+        url: './404.html',
+        price: '38.00',
+        oldPrice: '45.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+      
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item2.jpg',
+          srcset: './images/illustrations/shop-item2.webp',
+        },
+
+        id: 'product_2',
+        name: 'Meat Tarrado',
+        url: './404.html',
+        price: '45.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item3.jpg',
+          srcset: './images/illustrations/shop-item3.webp',
+        },
+
+        id: 'product_3',
+        name: 'Burger',
+        url: './404.html',
+        price: '21.00',
+        oldPrice: '27.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item4.jpg',
+          srcset: './images/illustrations/shop-item4.webp',
+        },
+
+        id: 'product_4',
+        name: 'Country Burger',
+        url: './404.html',
+        price: '28.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item5.jpg',
+          srcset: './images/illustrations/shop-item5.webp',
+        },
+
+        id: 'product_5',
+        name: 'Aperol Spritz',
+        url: './404.html',
+        price: '25.00',
+        oldPrice: '30.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item6.jpg',
+          srcset: './images/illustrations/shop-item6.webp',
+        },
+
+        id: 'product_6',
+        name: 'Pizza Italiano',
+        url: './404.html',
+        price: '43.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item7.jpg',
+          srcset: './images/illustrations/shop-item7.webp',
+        },
+
+        id: 'product_7',
+        name: 'Fried Potato',
+        url: './404.html',
+        price: '15.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item8.jpg',
+          srcset: './images/illustrations/shop-item8.webp',
+        },
+
+        id: 'product_8',
+        name: 'Sandwich',
+        url: './404.html',
+        price: '17.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item9.jpg',
+          srcset: './images/illustrations/shop-item9.webp',
+        },
+
+        id: 'product_9',
+        name: 'Chicken Chup',
+        url: './404.html',
+        price: '28.00',
+        oldPrice: '33.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item10.jpg',
+        },
+
+        id: 'product_10',
+        name: 'Fried Tuna',
+        url: './404.html',
+        price: '36.00',
+        oldPrice: '40.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item11.jpg',
+        },
+
+        id: 'product_11',
+        name: 'Fried Herring',
+        url: './404.html',
+        price: '32.00',
+        oldPrice: '37.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item12.jpg',
+        },
+
+        id: 'product_12',
+        name: 'Lobster In Sauce',
+        url: './404.html',
+        price: '45.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item13.jpg',
+        },
+
+        id: 'product_13',
+        name: 'Fried Salmon',
+        url: './404.html',
+        price: '51.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item14.jpg',
+        },
+
+        id: 'product_14',
+        name: 'Fried Carp',
+        url: './404.html',
+        price: '41.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item15.jpg',
+        },
+
+        id: 'product_15',
+        name: 'Fried Trout',
+        url: './404.html',
+        price: '44.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item16.jpg',
+        },
+
+        id: 'product_16',
+        name: 'Fried Mackerel',
+        url: './404.html',
+        price: '38.00',
+        oldPrice: '43.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item17.jpg',
+        },
+
+        id: 'product_17',
+        name: 'Lobster With Green',
+        url: './404.html',
+        price: '51.00',
+        oldPrice: '60.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item18.jpg',
+        },
+
+        id: 'product_18',
+        name: 'Lemon Cake',
+        url: './404.html',
+        price: '38.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item19.jpg',
+        },
+
+        id: 'product_19',
+        name: 'Sweet Dessert',
+        url: './404.html',
+        price: '56.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item20.jpg',
+        },
+
+        id: 'product_20',
+        name: 'Cream Cake',
+        url: './404.html',
+        price: '41.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item21.jpg',
+        },
+
+        id: 'product_21',
+        name: 'Orange Cake',
+        url: './404.html',
+        price: '43.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item22.jpg',
+        },
+
+        id: 'product_22',
+        name: 'Chocolate Cake',
+        url: './404.html',
+        price: '36.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item23.jpg',
+        },
+
+        id: 'product_23',
+        name: 'Honey Cake',
+        url: './404.html',
+        price: '46.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item24.jpg',
+        },
+
+        id: 'product_24',
+        name: 'Milky Oreo Cake',
+        url: './404.html',
+        price: '49.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item25.jpg',
+        },
+
+        id: 'product_25',
+        name: 'Berry Cake',
+        url: './404.html',
+        price: '41.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item26.jpg',
+        },
+
+        id: 'product_26',
+        name: 'Margarita Cocktail',
+        url: './404.html',
+        price: '28.00',
+        oldPrice: '33.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item27.jpg',
+        },
+
+        id: 'product_27',
+        name: 'Lemonade',
+        url: './404.html',
+        price: '23.00',
+        oldPrice: '27.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item28.jpg',
+        },
+
+        id: 'product_28',
+        name: 'Daikiri Cocktail',
+        url: './404.html',
+        price: '31.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item29.jpg',
+        },
+
+        id: 'product_29',
+        name: 'Madagascar Cocktail',
+        url: './404.html',
+        price: '28.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item30.jpg',
+        },
+
+        id: 'product_30',
+        name: 'Mojito',
+        url: './404.html',
+        price: '32.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item31.jpg',
+        },
+
+        id: 'product_31',
+        name: 'Latte Macchiato',
+        url: './404.html',
+        price: '20.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item32.jpg',
+        },
+
+        id: 'product_32',
+        name: 'Coffee',
+        url: './404.html',
+        price: '18.00',
+        oldPrice: '21.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item33.jpg',
+        },
+
+        id: 'product_33',
+        name: 'Green Tea',
+        url: './404.html',
+        price: '16.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item34.jpg',
+        },
+
+        id: 'product_34',
+        name: 'Black Tea',
+        url: './404.html',
+        price: '17.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item35.jpg',
+        },
+
+        id: 'product_35',
+        name: 'Salmon Sandwich',
+        url: './404.html',
+        price: '33.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item36.jpg',
+        },
+
+        id: 'product_36',
+        name: 'Bacon Sandwich',
+        url: './404.html',
+        price: '38.00',
+        oldPrice: '44.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item37.jpg',
+        },
+
+        id: 'product_37',
+        name: 'Canaro Salad',
+        url: './404.html',
+        price: '25.00',
+        oldPrice: '28.00',
+
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item38.jpg',
+        },
+
+        id: 'product_38',
+        name: 'Boliwaro Salad',
+        url: './404.html',
+        price: '23.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item39.jpg',
+        },
+
+        id: 'product_39',
+        name: 'Baltimor Salad',
+        url: './404.html',
+        price: '26.00',
+
+      },
+
+      {
+
+        img: { 
+          src: './images/illustrations/shop-item40.jpg',
+        },
+
+        id: 'product_40',
+        name: 'Fried Pork',
+        url: './404.html',
+        price: '41.00',
+
+      },
+
+    ]
+
+  div(class="market" data-title="market")
+
+    div(class="market__head")
+
+      +custom-select(null, null, { class: 'market__custom-select market__custom-select--sortBy' })
+      +custom-select('Show:', showSelectVars, { class: 'market__custom-select market__custom-select--show' })
+
+    div(class="market__selected-filters")
+
+    div(class="market__goods-content")
+
+      each item, index in goods
+
+        +product-card(item, { class: 'market__product-card' })
+
+    form(class="market__sidebar" action="#" method="post" novalidate data-form)
+
+      +shop-search(null, { class: 'market__shop-search' })
+
+      div(class="market__panel")
+
+        span(class="market__panel-name check-text") Category
+
+        +check-list(null, null, { class: 'market__check-list' })
+        +ad-block(null, { class: "market__ad-block", 'data-load-block': '' })
+
+      div(class="market__panel")
+
+        span(class="market__panel-name check-text") Filter By Price
+
+        +custom-range(null, { class: 'market__custom-range' })
+
+      div(class="market__panel")
+
+        span(class="market__panel-name check-text") Latest Products
+
+        each item, index in suggestions
+
+          +suggestion(item, { class: 'market__suggestion' })
+
+      div(class="market__panel")
+
+        span(class="market__panel-name check-text") Product Tags
+
+        +tags-check()
+
+    +pagination(null, { class: 'market__pagination' })

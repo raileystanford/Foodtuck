@@ -1489,6 +1489,199 @@ class ImageZoom {
 
 }
 
+class CustomSelect {
+
+  constructor(params) {
+
+    this.elements = Array.from(document.querySelectorAll('[data-select]'));
+
+    if (!this.elements.length) return;
+
+    this.opt = params ?? {};
+    this.opt.openType = params.openType ?? 'click';
+    this.opt.calcHeight = params.calcHeight ?? true;
+    this.opt.voidClose = params.voidClose ?? true;
+    this.opt.initVar = params.initVar ?? true;
+
+    this.defineComponents();
+    this.selectInitVariant();
+    this.preopenSelect();
+    this.setEventListeners();
+
+  }
+
+  setEventListeners() {
+
+    if (this.opt.openType === 'hover') {
+
+      this.elements.forEach((element) => {
+
+        element.addEventListener('pointerenter', (event) => {
+
+          this.openSelect(event.target);
+
+          element.addEventListener('pointerleave', (event) => {
+
+            this.closeSelect(event.target);
+
+          }, { once: true });
+
+        });
+
+      });
+
+      document.addEventListener('click', (event) => {
+
+        let isVariant = event.target.closest('[data-select-var]');
+
+        if (isVariant) {
+          this.selectVariant(isVariant);
+          this.closeSelect(isVariant);
+        }
+
+      });
+
+    } else {
+
+      document.addEventListener('click', (event) => {
+
+        let isTrigger = event.target.closest('[data-select-trigger]');
+        let isVariant = event.target.closest('[data-select-var]');
+        let isVoid = !event.target.closest('[data-select]');
+
+        if (isTrigger) {
+
+          let block = isTrigger.closest('[data-select]');
+
+          if (block.matches('.opened')) {
+            this.closeSelect(isTrigger);
+          } else {
+            this.openSelect(isTrigger);
+          }
+          
+        } else if (isVariant) {
+          
+          this.selectVariant(isVariant);
+          this.closeSelect(isVariant);
+
+        } else if (isVoid && this.opt.voidClose) {
+
+          this.closeAllSelects();
+
+        }
+
+      });
+
+    }
+
+  }
+
+  preopenSelect() {
+
+    this.elements.forEach((item) => {
+
+      if (item.matches('.opened')) this.openSelect(item);
+
+    });
+
+  }
+
+  selectInitVariant() {
+
+    if (!this.opt.initVar) return;
+
+    this.elements.forEach((item) => {
+
+      let initVar = item.querySelector('[data-select-init]') ?? item._vars[0];
+      this.selectVariant(initVar);
+
+    });
+
+  }
+
+  closeAllSelects() {
+
+    this.elements.forEach((item) => {
+      if (item.matches('.opened')) this.closeSelect(item);
+    });
+
+  }
+
+  updateSelectsList() {
+
+    this.elements = Array.from(document.querySelectorAll('[data-select]'));
+
+  }
+
+  selectVariant(variant) {
+
+    let block = variant.closest('[data-select]');
+    let value = variant.dataset.selectVar;
+    let text = variant.querySelector('[data-select-var-text]').textContent;
+
+    block._selectedVariant = variant;
+    block._triggerText.textContent = text;
+
+    block._vars.forEach((item) => item.classList.remove('selected'));
+    variant.classList.add('selected');
+    
+    variant.dispatchEvent(new CustomEvent('varselected', { bubbles: true, cancelable: true, composed: true, detail: { text, value, variant } }));
+
+  }
+
+  openSelect(element) {
+
+    if (!this.opt.multiple) this.closeAllSelects();
+
+    let block = element.closest('[data-select]');
+    
+    block.classList.add('opened');
+    this.setVarsHeight(block);
+
+    block.dispatchEvent(new CustomEvent('selectopened', { bubbles: true, cancelable: true, composed: true }));
+
+  }
+
+  closeSelect(element) {
+
+    let block = element.closest('[data-select]');
+
+    block.classList.remove('opened');
+    this.setVarsHeight(block);
+
+    block.dispatchEvent(new CustomEvent('selectclosed', { bubbles: true, cancelable: true, composed: true }));
+
+  }
+
+  setVarsHeight(block) {
+
+    if (!this.opt.calcHeight) return;
+
+    let isOpened = block.matches('.opened');
+
+    if (isOpened) {
+      block._varsBlock.style.height = block._varsBlock.scrollHeight + 'px';
+    } else {
+      block._varsBlock.style.height = '';
+    }
+    
+  }
+
+  defineComponents() {
+
+    this.elements.forEach((element) => {
+
+      element._trigger = element.querySelector('[data-select-trigger]');
+      element._triggerText = element.querySelector('[data-select-trig-text]');
+      element._varsBlock = element.querySelector('[data-select-vars]');
+      element._vars = Array.from(element.querySelectorAll('[data-select-var]'));
+
+    });
+
+  }
+
+}
+
    
    
    
@@ -1540,4 +1733,5 @@ export {
   ScrollToTop,
   DigitsCountingAnimation,
   ImageZoom,
+  CustomSelect,
 }
