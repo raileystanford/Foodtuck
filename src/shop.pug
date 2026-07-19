@@ -645,10 +645,12 @@ block main-content
       },
 
     ]
-
+  
   div(class="market" data-title="market")
 
     div(class="market__head")
+
+      button(class="market__filters-trig slide-text") Filters
 
       +custom-select(null, null, { class: 'market__custom-select market__custom-select--sortBy' })
       +custom-select('Show:', showSelectVars, { class: 'market__custom-select market__custom-select--show' })

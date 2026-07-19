@@ -20,6 +20,8 @@ new CustomSelect({
   initVar: true,
 });
 
+mobileFiltersSidebar();
+
 
 // Functions
 
@@ -579,6 +581,8 @@ function goodsSortHandler() {
         <span class="market__no-goods bold-text">No products found</span>
       `;
 
+      pagination.style.display = 'none';
+
       return;
 
     }
@@ -596,6 +600,7 @@ function goodsSortHandler() {
     });
 
     goodsArea.append(fragment);
+    pagination.style.display = '';
 
   }
 
@@ -688,8 +693,127 @@ function goodsSortHandler() {
 
 }
 
+function mobileSortLine() {
+
+  let line = document.querySelector('.market__head');
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!line || !media) return;
+
+  let selects = Array.from(document.querySelectorAll('[data-select]'));
+  let navbar = document.querySelector('.mob-navbar');
+  let height = document.documentElement.clientHeight - navbar.offsetHeight - 8;
+
+  setObserver();
+  setCustomSelectsTitle();
+
+  function setObserver() {
+
+    let observer = new IntersectionObserver((list, obs) => {
+
+      list.forEach((item) => {
+
+        if (item.isIntersecting) {
+          item.target.classList.add('active');
+        } else {
+          item.target.classList.remove('active');
+        }
+
+      });
+
+    }, { root: null, rootMargin: `0px 0px -${height}px 0px`, threshold: 0.001 });
+
+    observer.observe(line);
+
+  }
+
+  function setCustomSelectsTitle() {
+
+    selects.forEach((select) => {
+
+      let trigger = select.querySelector('[data-select-trigger]');
+      let trigText = trigger.querySelector('.custom-select__text');
+
+      if (trigger.closest('.market__custom-select--sortBy')) {
+        trigText.textContent = 'Sort By';
+      } else if (trigger.closest('.market__custom-select--show')) {
+        trigText.textContent = 'Show';
+      }
+
+    });
+
+  }
+
+}
+
+function mobileFiltersSidebar() {
+
+  let sidebar = document.querySelector('.market__sidebar');
+  let media = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!media || !sidebar) return;
+
+  let market = document.querySelector('.market');
+  let overlay, closeBtn;
+
+  addCloseBtn();
+
+  document.addEventListener('formvalid', (event) => {
+
+    if (event.target.matches('.market__sidebar')) openCloseSidebar();
+
+  });
+
+  document.addEventListener('click', (event) => {
+
+    let isFiltersTrigger = event.target.closest('.market__filters-trig');
+    let isCloseBtn = event.target.closest('.market__sidebar-close');
+    let isBurgerTrigger = event.target.closest('.mob-navbar__burger');
+    let isLink = event.target.closest('a');
+
+    if (isFiltersTrigger || isCloseBtn || isLink) {
+      openCloseSidebar();
+    } else if (isBurgerTrigger && sidebar.matches('.active')) {
+      openCloseSidebar();
+    }
+
+  });
+
+  function openCloseSidebar() {
+
+    if (sidebar.matches('.active')) {
+      sidebar.classList.remove('active');
+      closeBtn.classList.remove('active');
+      document.body.style.overflow = '';
+      overlay.classList.remove('active');
+    } else {
+      sidebar.classList.add('active');
+      closeBtn.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      overlay.classList.add('active');
+    }
+
+  }
+
+  function addCloseBtn() {
+
+    overlay = document.createElement('div');
+    overlay.classList.add('filters-overlay');
+
+    closeBtn = document.createElement('button');
+    closeBtn.classList.add('market__sidebar-close');
+    closeBtn.innerHTML = '&times;';
+
+    market.append(closeBtn);
+    document.body.append(overlay);
+
+  }
+
+}
+
 
 pageScrollSmoother();
 customRange();
 favoriteButtonHandler();
 goodsSortHandler();
+mobileSortLine();

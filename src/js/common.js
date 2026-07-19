@@ -114,7 +114,7 @@ function formValidatorEventsHandler() {
     let searchBar = event.target.matches('.search');
     let emailBar = event.target.matches('.email');
     let shopSearch = event.target.matches('.market__sidebar');
-
+   
     if (searchBar) {
 
       formValidatorEventsHandler.clearForm(event.target);
@@ -147,7 +147,7 @@ function formValidatorEventsHandler() {
   })
 
   document.addEventListener('invalidinput', (event) => {
-
+    
     event.detail.forEach((item) => showWarning(item));
 
   });
@@ -155,14 +155,13 @@ function formValidatorEventsHandler() {
   document.addEventListener('resetinput', (event) => {
 
     let warning = event.detail.input._warning;
-   
     warning.classList.remove('active');
     warning.style.height = '';
 
   })
 
   function showWarning(data) {
-
+    
     let warnField = data.input._warning;
     let text = getWarningText(data.input.type, data.msg);
 
