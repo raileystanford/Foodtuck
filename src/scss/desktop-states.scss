@@ -872,3 +872,166 @@
     transform: scale(0.88);
   }
 }
+
+.demo-controls__btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .demo-controls__text, .demo-controls__icon {
+    transition: all 0.2s;
+  }
+
+  &:not(:disabled) {
+
+    &:hover, &:focus {
+
+      .demo-controls__text {
+        color: var.$orange;
+      }
+
+      .demo-controls__icon {
+        stroke: var.$orange;
+      }
+
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.9);
+    }
+
+  }
+  
+}
+
+.good-description__reviews {
+  display: block;
+  will-change: transform;
+  text-decoration: underline solid transparent;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    color: var.$orange;
+    text-decoration: underline;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: translateY(3px);
+  }
+}
+
+.counter__btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .counter__btn-icon {
+    transition: all 0.2s;
+  }
+
+  &:not([disabled]) {
+
+    &:hover, &:focus {
+      background: var.$orange;
+      border-color: var.$orange;
+
+      .counter__btn-icon {
+        stroke: var.$white;
+      }
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.9);
+    }
+
+  }
+  
+}
+
+.counter__input {
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    border-color: var.$orange;
+  }
+}
+
+.common-btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$blue;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
+  }
+}
+
+.common-btn--light {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .common-btn__text, .common-btn__icon {
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+    background: none;
+
+    .common-btn__text {
+      color: var.$orange;
+    }
+
+    .common-btn__icon {
+      stroke: var.$orange;
+    }
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.92);
+  }
+}
+
+.info-line__value {
+  will-change: transform;
+  transition: all 0.2s;
+  text-decoration: underline solid transparent;
+
+  &:hover, &:focus {
+    color: var.$orange;
+    text-decoration: underline;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: translateY(3px);
+  }
+}
+
+.rounded-socials__link {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$orange;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
+  }
+}
+
+.demonstrator__img {
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    outline-color: var.$orange;
+  }
+
+}

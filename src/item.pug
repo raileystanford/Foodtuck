@@ -1,0 +1,103 @@
+extends ./pug/_layout.pug
+
+block title
+  title Foodtuck - Shop details
+
+block styles-libs
+  //- link(rel="stylesheet" href="./libs/nouislider/nouislider.min.css")
+  link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css")
+
+block styles 
+  link(rel="stylesheet" href="./css/item.css")
+  
+block scripts-libs 
+    
+  //- script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
+  //- script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
+  //- script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer) 
+  //- script(src="./libs/nouislider/nouislider.min.js" defer)
+
+block scripts 
+  script(src="./js/item.js" type="module")
+
+block header-content 
+
+  +head-line('Shop Details', 'Shop Details', { class: 'custom-bg', 'data-title': 'header' })
+
+block main-content 
+
+  article(class="good-description")
+
+    +demonstrator(null, { id: 'demo1', class: 'good-description__demonstrator' })
+
+    div(class="good-description__section")
+
+      div(class="good-description__head")
+
+        span(class="good-description__tag mini-text") In stock
+
+        +demo-controls({ class: 'good-description__demo-controls' })
+  
+      h2(class="good-description__name bold-text") Yummy Chicken Chup
+
+      p(class="good-description__text list-text") Big portion of tasty Chicken Chup with chicken meat, vegetables, spagetti and sauce. Our special receipt provide you unforgetable taste of all ingridients. Only natural and organic components with high quality cooking and serving.
+
+    div(class="good-description__section")
+
+      em(class="good-description__price price-text") 54.00$  
+
+      ul(class="good-description__popularity")
+
+        li(class="good-description__li")
+          +stars(5, 5, { class: 'good-description__stars' })
+
+        li(class="good-description__li")
+          span(class="good-description__rate menu-text") 5.0 Rating
+        
+        li(class="good-description__li")
+          a(class="good-description__reviews menu-text" href="./404.html" target="_blank") 22 Review
+
+      span(class="good-description__components list-text") Dictum/Cursus/Risus
+
+      div(class="good-description__cart-controls")
+
+        +counter({ class: 'good-description__counter' })
+        +common-btn(null, './images/sprite.svg#cart', { class: 'good-description__common-btn' })
+          
+    div(class="good-description__section")
+
+      div(class="good-description__group")
+
+        div(class="good-description__controls")
+
+          +common-btn('Add to Wishlist', './images/sprite.svg#heart', { class: 'good-description__common-btn common-btn--light', 'data-btn': '' })
+          +common-btn('Compare', './images/sprite.svg#compare', { class: 'good-description__common-btn common-btn--light' })
+
+        div(class="info-line good-description__info-line")
+
+          span(class="info-line__title list-text") Category:
+
+          div(class="info-line__content")
+            a(href="./404.html" target="_blank" class="info-line__value list-text") Fried 
+
+        div(class="info-line good-description__info-line")
+
+          span(class="info-line__title list-text") Tags:
+
+          div(class="info-line__content")
+            a(href="./404.html" target="_blank" class="info-line__value list-text") Meat 
+            a(href="./404.html" target="_blank" class="info-line__value list-text") Discount
+            a(href="./404.html" target="_blank" class="info-line__value list-text") Salted
+
+      div(class="info-line good-description__info-line")
+
+        span(class="info-line__title list-text") Share: 
+
+        div(class="info-line__content")
+          +rounded-socials(null, { class: 'info-line__rounded-socials' })
+
+
+
+
+

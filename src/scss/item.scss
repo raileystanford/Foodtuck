@@ -1,0 +1,312 @@
+@use './modules/variables.scss' as var;
+@use './modules/mixins.scss' as mix;
+@use './modules/templates.scss';
+@use './common.scss';
+
+
+.demonstrator {
+  @include mix.flex(nowrap, 24px);
+  width: 100%;
+  height: 596px;
+
+  &__thumbs {
+    width: 132px;
+    height: 100%;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__img {
+    @extend %wh-100;
+    display: block;
+    object-fit: cover;
+    border-radius: 6px;
+    filter: saturate(1.3);
+    outline: 4px solid transparent;
+    outline-offset: -4px;
+  }
+
+  &__screen {
+    width: 491px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+
+    &.active .demonstrator__big-img {
+      transition: all 0.1s;
+    }
+  }
+
+  &__big-img {
+    @extend %wh-100;
+    border-radius: 6px;
+    display: block;
+    object-fit: cover;
+    filter: saturate(1.3);
+    transition: all 0.3s;
+
+    &.active {
+      filter: saturate(1.3) blur(20px);
+    }
+  }
+
+  .swiper-slide-active {
+    
+    .demonstrator__img {
+      outline-color: var.$orange;
+    }
+
+  }
+
+  
+
+}
+
+.demo-controls {
+  @include mix.flex(nowrap, 16px);
+  align-items: center;
+
+  &__btn {
+    @include mix.flex(nowrap, 7px);
+    align-items: center;
+
+    &--prev {
+
+      .demo-controls__icon {
+        order: -1;
+      }
+
+    }
+
+    &--next {
+
+      .demo-controls__icon {
+        transform: rotate(180deg);
+      }
+
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  }
+
+  &__text {
+    color: var.$silver;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    stroke: var.$silver;
+    fill: transparent; 
+    stroke-width: 1.5;
+    flex-shrink: 0;
+  }
+}
+
+.stars {
+  @include mix.flex(wrap, 8px);
+  align-items: center;
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+.counter {
+  @include mix.flex(nowrap, 0px);
+  align-items: center;
+  height: 50px;
+  width: 180px;
+
+  &__btn {
+    @extend %flex-cen;
+    @extend %wh-100;
+    font-size: 30px;
+    line-height: 0px;
+    padding: 10px;
+    border: 1px solid var.$silver;
+    
+    &--minus {
+      border-right: none;
+    }
+
+    &--plus {
+      border-left: none;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0.35;
+    }
+  }
+
+  &__btn-icon {
+    width: 22px;
+    height: 22px;
+    stroke: var.$black;
+    stroke-width: 1.5px;
+  }
+
+  &__input {
+    @extend %wh-100;
+    text-align: center;
+    color: var.$black-gray;
+    padding: 10px;
+    border: 1px solid var.$silver;
+  }
+  
+}
+
+.info-line {
+  @include mix.flex(nowrap, 8px);
+  align-items: flex-start;
+  width: 100%;
+
+  &__content {
+    @include mix.flex(wrap, 3px 8px);
+    align-items: center;
+    width: 100%;
+  }
+
+  &__title {
+    color: var.$black-gray;
+  }
+
+  &__value {
+    color: var.$dark-gray;
+  }
+}
+
+.rounded-socials {
+  @include mix.flex(wrap, 16px);
+  align-items: center;
+  width: 100%;
+
+  &__link {
+    @extend %flex-cen;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var.$dark-gray;
+    padding: 6px;
+    flex-shrink: 0;
+  }
+
+  &__icon {
+    @extend %wh-100;
+    fill: var.$white;
+  }
+}
+
+
+
+.good-description {
+  display: grid;
+  grid-template-columns: 647px 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 27px 55px;
+  align-items: start;
+
+  &__demonstrator {
+    grid-row: span 3;
+  }
+
+  &__section {
+    @include mix.flex-col(20px);
+    align-items: flex-start;
+    width: 100%;
+    padding: 0 0 25px 0;
+    border-bottom: 1px solid var.$light-silver;
+  }
+  
+  &__head {
+    @include mix.flex(wrap, 20px 30px);
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__tag {
+    @extend %flex-cen;
+    padding: 7px 17px;
+    background: var.$orange;
+    color: var.$white;
+    border-radius: 6px;
+  }
+
+  &__name {
+    color: var.$black-gray;
+  }
+
+  &__text {
+    color: var.$dark-gray;
+  }
+
+  &__price {
+    color: var.$black-gray;
+  }
+
+  &__popularity {
+    @include mix.flex(wrap, 15px);
+    align-items: center;
+  }
+
+  &__li {
+    
+    &:not(:first-child) {
+      padding: 0 0 0 15px;
+      border-left: 1px solid var.$gray-tuff;
+    }
+
+  }
+
+  &__rate, &__reviews {
+    color: var.$silver;
+    line-height: 20px;
+  }
+
+  &__components {
+    color: var.$black-gray;
+  }
+
+  &__cart-controls {
+    @include mix.flex(wrap, 16px);
+    align-items: center;
+  }
+
+  &__common-btn {
+
+    &:not(.common-btn--light) {
+      width: 190px;
+    }
+    
+    &[data-btn].active {
+
+      .common-btn__text {
+        color: var.$orange;
+      }
+
+      .common-btn__icon{
+        fill: var.$orange;
+        stroke: var.$orange;
+      }
+
+    } 
+  }
+
+  &__group {
+    @include mix.flex-col(14px);
+    width: 100%;
+  }
+
+  &__controls {
+    @include mix.flex(wrap, 5px 16px);
+    align-items: center;
+  }
+}

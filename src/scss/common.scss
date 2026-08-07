@@ -735,6 +735,43 @@
 
 }
 
+.common-btn {
+  @include mix.flex(nowrap, 8px);
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 12px 20px;
+  background: var.$orange;
+
+  &__text {
+    color: var.$white;
+    text-align: left;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    stroke: var.$white;
+    fill: transparent;
+    stroke-width: 1.5px;
+    flex-shrink: 0;
+  }
+
+  &--light {
+    background: none;
+    padding: 5px 0;
+    min-height: initial;
+
+    .common-btn__text {
+      color: var.$dark-gray;
+    }
+
+    .common-btn__icon {
+      stroke: var.$dark-gray;
+    }
+  }
+}
+
 
 // Media queries
 

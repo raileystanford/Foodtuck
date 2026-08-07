@@ -1090,6 +1090,106 @@ mixin pagination(n, attr)
       svg(class="pagination__icon")
         use(xlink:href="./images/sprite.svg#pag-arrow")
 
+mixin demonstrator(content, attr)
+
+  -
+    content = content ?? [
+
+      { src: './images/illustrations/good-mini1.jpg', full: './images/illustrations/good-full1.jpg', alt: 'Yummy Chicken Chup' },
+      { src: './images/illustrations/good-mini2.jpg', full: './images/illustrations/good-full2.jpg', alt: 'Yummy Chicken Chup' },
+      { src: './images/illustrations/good-mini3.jpg', full: './images/illustrations/good-full3.jpg', alt: 'Yummy Chicken Chup' },
+      { src: './images/illustrations/good-mini4.jpg', full: './images/illustrations/good-full4.jpg', alt: 'Yummy Chicken Chup' },
+      { src: './images/illustrations/good-mini5.jpg', full: './images/illustrations/good-full5.jpg', alt: 'Yummy Chicken Chup' },
+
+    ]
+
+  div(class="demonstrator")&attributes(attr)
+
+    div(class="demonstrator__thumbs swiper")
+
+      div(class="swiper-wrapper")
+
+        each item, index in content
+
+          div(class="swiper-slide")
+            img(src=item.src data-full=item.full alt=item.alt class="demonstrator__img")
+
+    div(class="demonstrator__screen" data-zoom)
+
+      img(class="demonstrator__big-img" src="./images/preloader-green.svg" alt="image" data-zoom-img)
+
+mixin demo-controls(attr)
+
+  div(class="demo-controls")&attributes(attr)
+
+    button(class="demo-controls__btn demo-controls__btn--prev")
+      span(class="demo-controls__text list-text" ) Prev
+      svg(class="demo-controls__icon")
+        use(xlink:href="./images/sprite.svg#arrow-horiz")
+
+    button(class="demo-controls__btn demo-controls__btn--next list-text") 
+      span(class="demo-controls__text list-text" ) Next
+      svg(class="demo-controls__icon")
+        use(xlink:href="./images/sprite.svg#arrow-horiz")
+
+mixin counter(attr)
+
+  div(class="counter")&attributes(attr)
+
+    button(class="counter__btn counter__btn--minus")
+      svg(class="counter__btn-icon")
+        use(xlink:href="./images/sprite.svg#minus")
+
+    input(class="counter__input check-text" type="number" value="1")
+
+    button(class="counter__btn counter__btn--plus")
+      svg(class="counter__btn-icon")
+        use(xlink:href="./images/sprite.svg#plus")
+
+mixin common-btn(content, icon, attr)
+
+  -
+    content = content ?? 'Add to cart';
+
+  if typeof content === 'string'
+
+    button(class="common-btn")&attributes(attr)
+
+      if icon 
+
+        svg(class="common-btn__icon")
+          use(xlink:href=icon)
+
+      span(class="common-btn__text list-text")= content 
+
+  else 
+
+    a(class="common-btn" href=content.url target=content.target)&attributes(attr)
+
+      if icon 
+
+        svg(class="common-btn__icon")
+          use(xlink:href=icon)
+
+      span(class="common-btn__text list-text")= content.text 
+
+mixin rounded-socials(links, attr)
+
+  -
+    links = links ?? [
+      { href: 'https://www.facebook.com', target: '_blank', icon: './images/sprite.svg#facebook' },
+      { href: 'https://x.com', target: '_blank', icon: './images/sprite.svg#twitter' },
+      { href: 'https://ru.pinterest.com', target: '_blank', icon: './images/sprite.svg#pinterest' },
+      { href: 'https://instagram.com', target: '_blank', icon: './images/sprite.svg#instagram' },
+    ]
+
+  div(class="rounded-socials")&attributes(attr)
+
+    each item, index in links 
+
+      a(class="rounded-socials__link" href=item.href target=item.target)
+        svg(class="rounded-socials__icon")
+          use(xlink:href=item.icon)
 
 
 
