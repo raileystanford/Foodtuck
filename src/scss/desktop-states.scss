@@ -1028,10 +1028,16 @@
 }
 
 .demonstrator__img {
+  will-change: transform;
   transition: all 0.2s;
 
   &:hover, &:focus {
     outline-color: var.$orange;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
   }
 
 }

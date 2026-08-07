@@ -356,3 +356,108 @@
     background: var.$black;
   }
 }
+
+.demonstrator__img {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
+  }
+}
+
+.counter__btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .counter__btn-icon {
+    transition: all 0.2s;
+  }
+
+  &:not([disabled]) {
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.9);
+      background: var.$orange;
+      border-color: var.$orange;
+  
+      .counter__btn-icon {
+        transition: all 0.05s;
+        stroke: var.$white;
+      }
+    }
+
+  }
+  
+}
+
+.counter__input {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:focus {
+    border-color: var.$orange;
+  }
+}
+
+.common-btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.9);
+    background: var.$blue;
+  }
+}
+
+.common-btn--light {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .common-btn__text, .common-btn__icon {
+    transition: all 0.2s;
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.92);
+    background: none;
+
+    .common-btn__text {
+      transition: all 0.05s;
+      color: var.$orange;
+    }
+
+    .common-btn__icon {
+      transition: all 0.05s;
+      stroke: var.$orange;
+    }
+  }
+}
+
+.info-line__value {
+  will-change: transform;
+  transition: all 0.2s;
+  text-decoration: underline solid transparent;
+
+  &:active {
+    transition: all 0.05s;
+    transform: translateY(3px);
+    color: var.$orange;
+    text-decoration: underline;
+  }
+}
+
+.rounded-socials__link {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.85);
+    background: var.$orange;
+  }
+}

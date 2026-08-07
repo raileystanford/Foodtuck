@@ -7,6 +7,8 @@ import {
 
 import { item_titles } from './modules/dictionary.js';
 
+mobileGoodDescription();
+
 
 // Plugins
 
@@ -16,15 +18,15 @@ new UpdatePageTitle({
 
 new Demonstrator('#demo1', {
 
-  scrollToClick: true, // Если тру то при клике на слайд свайпер скролит к нему ленту если фолс то ниче не делветсся, па умолчанию тру
+  scrollToClick: true,
 
-  // autoplayOnViewport: { // Если не написать то автоплей будет крутить не зависимо от того в вьюпорте он или нет
-  //   margin: 0,
-  //   threshold: 0.05,  
-  // }, 
+  autoplayOnViewport: {
+    margin: 0,
+    threshold: 0.05,  
+  }, 
 
   extraSlide: true,
-  showDelay: [200, 300], // Первый задержка загрузки картинки второй задержка для класса скрина ето для ефектов появления картинки. По умолчанию все по 0
+  showDelay: [200, 300],
 
   slider: {
 
@@ -40,11 +42,37 @@ new Demonstrator('#demo1', {
       prevEl: '.demo-controls .demo-controls__btn--prev',
     },
 
-    autoplay: { // Остановка автоплея при ховере не работает если изначально в настройке автоплея стоит енаблед фолс
-      enabled: false,
+    autoplay: {
+      enabled: true,
       delay: 2000,
       disableOnInteraction: false,
       pauseOnMouseEnter: true,
+    },
+
+    breakpoints: {
+
+      996: {
+        direction: 'vertical',
+      },
+
+      768: {
+        slidesPerView: 4,
+        direction: 'horizontal',
+        spaceBetween: 24,
+      },
+
+      576: {
+        slidesPerView: 4,
+        direction: 'horizontal',
+        spaceBetween: 20,
+      },
+
+      0: {
+        slidesPerView: 3,
+        direction: 'horizontal',
+        spaceBetween: 15,
+      }
+
     },
 
     on: {
@@ -64,15 +92,14 @@ new ImageZoom({
   mobileViewport: 768,
   strictHoverTarget: true,
 
-  startZoom: 1.2, // Вот это для десктопа пишеш
+  startZoom: 1.2,
   minZoom: 1,
   maxZoom: 1.6,
   zoomStep: 0.2,
 
-  mobile: { // А вот это для мобилки када сработает брекпоинт
-    // startZoom: 2, Можна не писать тошо всегда с 1 будит начинаться
+  mobile: {
     minZoom: 1,
-    maxZoom: 2,
+    maxZoom: 1.8,
     zoomStep: 0.2,
   }
 });
@@ -311,6 +338,19 @@ function wishlistBtn() {
 
 }
 
+function mobileGoodDescription() {
+
+  let media = window.matchMedia('(max-width: 996px)').matches;
+  let block = document.querySelector('.good-description');
+
+  if (!media || !block) return;
+
+  let demonstrator = block.querySelector('.demonstrator');
+  let name = block.querySelector('.good-description__name');
+
+  name.after(demonstrator);
+
+}
 
 
 // pageScrollSmoother();

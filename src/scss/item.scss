@@ -205,8 +205,6 @@
   }
 }
 
-
-
 .good-description {
   display: grid;
   grid-template-columns: 647px 1fr;
@@ -309,4 +307,200 @@
     @include mix.flex(wrap, 5px 16px);
     align-items: center;
   }
+}
+
+
+// Media queries
+
+@media (max-width: 1600px) {
+
+  
+
+}
+
+@media (max-width: 1400px) {
+
+  .good-description {
+    grid-template-columns: 610px 1fr;
+  }
+
+}
+
+@media (max-width: 1200px) {
+
+  .good-description {
+    gap: 27px 40px;
+    grid-template-columns: 520px 1fr;
+  }
+
+}
+
+@media (max-width: 996px) {
+
+  .demonstrator {
+    flex-direction: column;
+    height: auto;
+
+    &__screen {
+      width: 100%;
+      height: 400px;
+    }
+
+    &__thumbs {
+      width: 100%;
+      height: 120px;
+      order: 1;
+    }
+  }
+
+  .demo-controls {
+    display: none;
+  }
+
+  .good-description {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+
+    &__section {
+      height: 100%;
+
+      &:first-child {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .demonstrator {
+    gap: 20px;
+
+    &__screen {
+      height: 300px;
+    }
+
+    &__thumbs {
+      height: 100px;
+    }
+  }
+
+  .good-description {
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .demonstrator {
+    gap: 15px;
+
+    &__screen {
+      height: 260px;
+    }
+  }
+
+  .good-description {
+    gap: 20px;
+
+    &__name {
+      font-size: 37px;
+      line-height: 40px;
+    }
+
+    &__text {
+      font-size: 16px;
+      line-height: 23px;
+    }
+
+    &__section {
+      padding: 0 0 20px 0;
+    }
+  }
+
+}
+
+@media (max-width: 420px) {
+
+  .demonstrator {
+
+    &__screen {
+      height: 240px;
+    }
+
+    &__thumbs {
+      height: 75px;
+    }
+  }
+
+  .counter {
+    width: 150px;
+    height: 46px;
+
+    &__btn {
+      padding: 5px;
+    }
+  }
+
+  .good-description {
+
+    &__section {
+      gap: 15px;
+    }
+
+    &__popularity {
+      gap: 6px;
+    }
+
+    &__stars {
+      gap: 5px;
+
+      .stars__icon {
+        width: 19px;
+        height: 18px;
+      }
+    }
+
+    &__li:not(:first-child) {
+      padding: 0 0 0 6px;
+      border-left: 1px solid #BDBDBD;
+    }
+
+    &__cart-controls {
+      gap: 10px;
+    }
+
+    &__common-btn {
+
+      &:not(.common-btn--light) {
+        width: 140px;
+        padding: 12px 10px;
+
+        .common-btn__text {
+          font-size: 16px;
+        }
+      }
+      
+      &[data-btn].active {
+
+        .common-btn__text {
+          color: var.$orange;
+        }
+
+        .common-btn__icon{
+          fill: var.$orange;
+          stroke: var.$orange;
+        }
+
+      } 
+    }
+
+    &__group {
+      gap: 10px;
+    }
+  }
+
 }
