@@ -352,7 +352,69 @@ function mobileGoodDescription() {
 
 }
 
+function tabletsHandler() {
+
+  let tabs = Array.from(document.querySelectorAll('[data-tabs]'));
+
+  if (!tabs.length) return;
+
+  let currentTabsBlock;
+  defineElements();
+  selectInitTab();
+
+  document.addEventListener('click', (event) => {
+
+    let trigger = event.target.closest('[data-tab-trig]');
+
+    if (trigger) {
+      showSelectedTab(trigger);
+    }
+
+  });
+
+  function showSelectedTab(trigger) {
+
+    currentTabsBlock = trigger.closest('[data-tabs]');
+
+    let tab = currentTabsBlock.querySelector(`[data-tab="${trigger.dataset.tabTrig}"]`);
+
+    if (!tab || tab.matches('.active')) return;
+
+    currentTabsBlock._tabs.forEach((tab) => tab.classList.remove('active'));
+    currentTabsBlock._triggers.forEach((trig) => trig.classList.remove('active'));
+
+    trigger.classList.add('active');
+    tab.classList.add('active');
+    tab.parentElement.style.height = tab.scrollHeight + 'px';
+
+  }
+
+  function selectInitTab() {
+
+    tabs.forEach((item) => {
+      item._triggers[0].classList.add('active');
+      item._tabs[0].classList.add('active');
+
+      let container = item._tabs[0].parentElement;
+      container.style.height = item._tabs[0].offsetHeight + 'px';
+      container.style.overflow = 'hidden';
+    })
+
+  }
+
+  function defineElements() {
+
+    tabs.forEach((item) => {
+      item._triggers = Array.from(item.querySelectorAll('[data-tab-trig]'));
+      item._tabs = Array.from(item.querySelectorAll('[data-tab]'));
+    })
+
+  }
+
+}
+
 
 // pageScrollSmoother();
 itemCounter();
 wishlistBtn();
+tabletsHandler();

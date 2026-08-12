@@ -1177,6 +1177,7 @@ mixin rounded-socials(links, attr)
 
   -
     links = links ?? [
+      { href: 'https://www.youtube.com', target: '_blank', icon: './images/sprite.svg#youtube' },
       { href: 'https://www.facebook.com', target: '_blank', icon: './images/sprite.svg#facebook' },
       { href: 'https://x.com', target: '_blank', icon: './images/sprite.svg#twitter' },
       { href: 'https://ru.pinterest.com', target: '_blank', icon: './images/sprite.svg#pinterest' },
@@ -1190,6 +1191,49 @@ mixin rounded-socials(links, attr)
       a(class="rounded-socials__link" href=item.href target=item.target)
         svg(class="rounded-socials__icon")
           use(xlink:href=item.icon)
+
+mixin common-list(title, content, attr)
+
+  - 
+    content = content ?? [
+      'Organic components',
+      'Low fat rate, hight protein rate',
+      'Incredible taste',
+      'Healthy food without GMO',
+      'Big portion'
+    ];
+
+  ul(class="common-list")&attributes(attr)
+
+    if title
+
+      li(class="common-list__title tes-text")= title
+
+    each item, index in content 
+
+      li(class="common-list__li mini-text")= item
+
+mixin review(content, attr)
+
+  -
+    content = content ?? {
+      name: 'John Dickens',
+      rate: 5,
+      date: '02.11.2022',
+      text: 'Very impresive food',
+      avatar: './images/illustrations/testimon1.jpg',
+    }
+
+  div(class="review")&attributes(attr)
+
+    img(class="review__avatar" src=content.avatar alt=content.name)
+    span(class="review__name list-text")= content.name
+    span(class="review__date menu-text")= content.date 
+    +stars(content.rate, 5, { class: 'review__stars' })
+    +rounded-socials(null, { class: 'review__rounded-socials' })
+    p(class="review__text list-text")= content.text
+
+
 
 
 

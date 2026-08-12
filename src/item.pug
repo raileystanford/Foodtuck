@@ -4,7 +4,6 @@ block title
   title Foodtuck - Shop details
 
 block styles-libs
-  //- link(rel="stylesheet" href="./libs/nouislider/nouislider.min.css")
   link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css")
 
 block styles 
@@ -12,11 +11,10 @@ block styles
   
 block scripts-libs 
     
-  //- script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
-  //- script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
-  //- script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
   script(src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer) 
-  //- script(src="./libs/nouislider/nouislider.min.js" defer)
 
 block scripts 
   script(src="./js/item.js" type="module")
@@ -26,6 +24,59 @@ block header-content
   +head-line('Shop Details', 'Shop Details', { class: 'custom-bg', 'data-title': 'header' })
 
 block main-content 
+
+  -
+    let reviewsContent = [
+
+      {
+        name: 'John Dickens',
+        rate: 5,
+        date: '02.11.2022',
+        text: "Yummy Chicken Chup isn't just a meal, it's an orchestral performance of textures. From the very first bite, you are met with a symphony: the sharp, satisfying crack of the golden, craggy crust gives way to the impossibly juicy, tender pull of the chicken within. It's a textural paradox that keeps you engaged from the first piece to the last. The coating is a masterpiece of crunch. It's not a thick, bready shell that overwhelms the meat, but rather a light, shatteringly crisp layer that seems to be fused with the skin itself. You can hear the crunch across the table, a sound that is both nostalgic and deeply satisfying. The chicken beneath is the real star.",
+        avatar: './images/illustrations/testimon1.jpg',
+      },
+
+      {
+        name: 'Antony Woods',
+        rate: 5,
+        date: '05.11.2022',
+        text: "For those who live for a culinary kick, the Yummy Chicken Chup is a revelation. It’s a dish that doesn't just promise heat, it delivers a thoughtful, layered spice experience that is as complex as it is fiery. This is not a one-note, blunt-force heat, it's a sophisticated dance of flavors that builds and evolves with every bite. The signature flavor is a beautiful blend of sweet, savory, and a significant, noticeable heat. It's the kind of heat that comes from gochujang or a similar fermented chili paste",
+        avatar: './images/illustrations/testimon2.jpg',
+      },
+
+      {
+        name: 'Mark Raynolds',
+        rate: 4,
+        date: '12.11.2022',
+        text: "Finding a meal that satisfies the diverse palates of a modern family can be a battle, but the Yummy Chicken Chup was a resounding victory in our household. It was, quite literally, the perfect centerpiece for a stress-free and delicious dinner that everyone could agree on. The flavor profile is sophisticated enough for adults to enjoy, but the sweetness and crunch make it a guaranteed hit with kids. It felt like a special meal, but without the hours of prep and cleanup.",
+        avatar: './images/illustrations/testimon3.jpg',
+      },
+
+      {
+        name: 'Nick Wesker',
+        rate: 5,
+        date: '25.11.2022',
+        text: "As someone who is mindful of what I eat, I often feel like I have to sacrifice flavor and enjoyment for the sake of a healthy meal. The Yummy Chicken Chup masterfully proves that you can have it all. While it’s undeniably a treat, its construction demonstrates a clear focus on quality and balance that a discerning eater can truly appreciate.",
+        avatar: './images/illustrations/testimon4.jpg',
+      },
+
+      {
+        name: 'Ann Madison',
+        rate: 5,
+        date: '28.11.2022',
+        text: "I’ll be honest: I’ve had enough \"trendy\" chicken dishes to be deeply cynical. When I heard about the Yummy Chicken Chup, I dismissed it as another overhyped meal destined to be a disappointment. My expectations were incredibly low; I expected dry chicken and a sickly-sweet, generic sauce. I was prepared to be unimpressed.",
+        avatar: './images/illustrations/testimon5.jpg',
+      },
+
+      {
+        name: 'Sara Johnson',
+        rate: 5,
+        date: '03.12.2022',
+        text: "In our fast-paced world, the holy grail of food is finding something that is both incredibly convenient and exceptionally delicious. Usually, you have to choose one or the other. The Yummy Chicken Chup is the rare exception that excels at both, proving that a high-quality, flavor-packed meal doesn't require hours in the kitchen.",
+        avatar: './images/illustrations/testimon6.jpg',
+      }
+
+    ]
 
   article(class="good-description")
 
@@ -56,7 +107,7 @@ block main-content
           span(class="good-description__rate menu-text") 5.0 Rating
         
         li(class="good-description__li")
-          a(class="good-description__reviews menu-text" href="./404.html" target="_blank") 22 Review
+          a(class="good-description__reviews menu-text" href="./404.html" target="_blank") 6 Reviews
 
       span(class="good-description__components list-text") Dictum/Cursus/Risus
 
@@ -97,7 +148,32 @@ block main-content
         div(class="info-line__content")
           +rounded-socials(null, { class: 'info-line__rounded-socials' })
 
+  div(class="tabs-block" data-tabs)
 
+    div(class="tabs-block__controls")
+
+      button(class="tabs-block__trigger job-text" data-tab-trig="description") Description
+      button(class="tabs-block__trigger job-text" data-tab-trig="reviews") Reviews (6)
+
+    div(class="tabs-block__content")
+
+      div(class="tabs-block__tab" data-tab="description")
+
+        p(class="tabs-block__paragraph menu-text") The Yummy Chicken Chup is our signature masterpiece, a celebration of texture and taste that redefines the art of comfort food. This is not merely fried chicken, it is a meticulously orchestrated symphony of crunch, heat, and a tantalizing hint of sweetness that will linger on your palate long after the last bite. We use only boneless, succulent thigh meat, ensuring every piece is juicy and moist on the inside.
+        p(class="tabs-block__paragraph menu-text") We present the Yummy Chicken Chup as more than just an entrée, it is a culinary centerpiece. It arrives at your table on a sizzling platter, adorned with a vibrant garnish of fresh spring onions, crunchy sesame seeds, and a delicate sprinkling of red pepper flakes. The aromatic steam alone is enough to whet the appetite. It is a versatile dish that satisfies on its own or pairs beautifully with our fluffy, steamed jasmine rice or a crisp, refreshing pickled radish salad.
+
+        +common-list('Key Benefits', null, { class: "tabs-block__common-list" })
+
+      div(class="tabs-block__tab" data-tab="reviews")
+
+        each item, index in reviewsContent
+
+          +review(item, { class: 'tabs-block__review' })
+
+        
+
+
+  div(class="extended-info")
 
 
 

@@ -461,3 +461,13 @@
     background: var.$orange;
   }
 }
+
+.good-description__reviews {
+  text-decoration: underline solid transparent;
+  transition: all 0.05s;
+
+  &:active {
+    color: var.$orange;
+    text-decoration: underline;
+  }
+}

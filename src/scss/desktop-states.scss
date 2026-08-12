@@ -1041,3 +1041,23 @@
   }
 
 }
+
+.tabs-block__trigger {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:hover, &:focus {
+    background: var.$orange;
+    color: var.$white;
+  }
+
+  &:not(.active) {
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.9);
+    }
+
+  }
+  
+}
