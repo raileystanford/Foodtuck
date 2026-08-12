@@ -413,8 +413,40 @@ function tabletsHandler() {
 
 }
 
+function mobileShareBtn() {
+
+  let media = window.matchMedia('(max-width: 576px)').matches;
+  let button = document.querySelector('.review__mob-share');
+
+  if (!media || !button) return;
+
+  document.addEventListener('click', (event) => {
+
+    let shareBtn = event.target.closest('.review__mob-share');
+
+    if (shareBtn) share();
+
+  });
+
+  async function share() {
+
+    try {
+      await navigator.share({
+        title: document.title,
+        text: 'Let see this review!',
+        url: window.location.href
+      });
+    } catch (err) {
+      alert('Sharing is not supported on your device')
+    }
+
+  }
+
+}
+
 
 // pageScrollSmoother();
 itemCounter();
 wishlistBtn();
 tabletsHandler();
+mobileShareBtn();

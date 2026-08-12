@@ -1232,6 +1232,10 @@ mixin review(content, attr)
     +stars(content.rate, 5, { class: 'review__stars' })
     +rounded-socials(null, { class: 'review__rounded-socials' })
     p(class="review__text list-text")= content.text
+    button(class="review__mob-share")
+      svg(class="review__share-icon")
+        use(xlink:href="./images/sprite.svg#share")
+
 
 
 

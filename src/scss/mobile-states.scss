@@ -471,3 +471,19 @@
     text-decoration: underline;
   }
 }
+
+.tabs-block__trigger {
+  transition: all 0.2s;
+}
+
+.review__mob-share {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.88);
+    background: var.$orange;
+  }
+
+}
