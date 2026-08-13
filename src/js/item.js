@@ -104,6 +104,32 @@ new ImageZoom({
   }
 });
 
+new Swiper('#prodSlider', {
+  slidesPerView: 4, 
+  spaceBetween: 24,
+  speed: 800,
+
+  navigation: {
+    nextEl: '.product-slider .product-slider__btn--next',
+    prevEl: '.product-slider .product-slider__btn--prev',
+  },
+
+  // autoplay: {
+  //   delay: 2000,
+  //   disableOnInteraction: false,
+  //   pauseOnMouseEnter: true,
+  // },
+
+  on: {
+
+    // afterInit: function(swiper) {
+    //   if (typeof pauseSliderOnControlsHover !== 'undefined') pauseSliderOnControlsHover(swiper);
+    // }
+
+  }
+
+});
+
 
 // Functions
 
@@ -444,9 +470,86 @@ function mobileShareBtn() {
 
 }
 
+function favoriteButtonHandler() {
 
-// pageScrollSmoother();
+  let btn = document.querySelector('.product-card__btn--like');
+
+  if (!btn) return;
+
+  document.addEventListener('click', (event) => {
+
+    let favBtn = event.target.closest('.product-card__btn--like');
+    if (favBtn) favBtn.classList.toggle('active');
+
+  });
+
+}
+
+function slidersAutoplayViewportController(except = '.a93fj3fds1') {
+
+  let sliders = Array.from(document.querySelectorAll(`.swiper:not(${except})`));
+
+  if (sliders.length === 0) return;
+
+  let observer = new IntersectionObserver((list, obs) => {
+
+    list.forEach((item) => {
+
+      if (item.isIntersecting) {
+        item.target.swiper?.autoplay.start();
+      } else {
+        item.target.swiper?.autoplay.stop();
+      }
+
+    })
+
+  }, { root: null, threshold: 0.15 });
+
+  sliders.forEach((slider) => observer.observe(slider));
+
+}
+
+function pauseSliderOnControlsHover(swiper) {
+
+  let controls = document.querySelector('.product-slider__controls');
+
+  if (!controls) return;
+
+  controls.addEventListener('pointerenter', (event) => {
+
+    autoplayController(event);
+
+    controls.addEventListener('pointerleave', (event) => {
+
+      autoplayController(event);
+
+    }, { once: true });
+
+  });
+
+  function autoplayController(event) {
+
+    let area = event.target;
+    let type = event.type;
+    let container = area.closest('.product-slider');
+    let slider = container.querySelector('.swiper');
+    let swiper = slider.swiper;
+
+    if (type === 'pointerenter') {
+      swiper.autoplay.stop();
+    } else if (type === 'pointerleave') {
+      swiper.autoplay.start();
+    }
+
+  }
+
+}
+
+
+pageScrollSmoother();
 itemCounter();
 wishlistBtn();
 tabletsHandler();
 mobileShareBtn();
+favoriteButtonHandler();
+// slidersAutoplayViewportController('.demonstrator__thumbs.swiper');

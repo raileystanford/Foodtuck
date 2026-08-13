@@ -1061,3 +1061,29 @@
   }
   
 }
+
+.product-slider__btn {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .product-slider__btn-icon {
+    transition: all 0.2s;
+  }
+
+  &:not([disabled]) {
+
+    &:hover, &:focus {
+      background: var.$blue;
+
+      .product-slider__btn-icon {
+        stroke: var.$white;
+      }
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.88);
+    }
+
+  }
+}

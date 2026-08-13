@@ -1236,7 +1236,124 @@ mixin review(content, attr)
       svg(class="review__share-icon")
         use(xlink:href="./images/sprite.svg#share")
 
+mixin product-slider(params, slides, attr)
 
+  -
+    params = params ?? {
+      title: 'Similar Products',
+      lazy: true,
+      sliderId: 'prodSlider',
+    };
+
+    slides = slides ?? [
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item1.jpg',
+          srcset: './images/illustrations/shop-item1.webp',
+          lazy: true,
+        },
+        name: 'Salad Balonara',
+        url: './404.html',
+        price: '38.00',
+        oldPrice: '45.00',
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+      },
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item2.jpg',
+          srcset: './images/illustrations/shop-item2.webp',
+          lazy: true,
+        },
+        name: 'Meat Tarrado',
+        url: './404.html',
+        price: '45.00',
+      },
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item3.jpg',
+          srcset: './images/illustrations/shop-item3.webp',
+          lazy: true,
+        },
+        name: 'Burger',
+        url: './404.html',
+        price: '21.00',
+        oldPrice: '27.00',
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+      },
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item6.jpg',
+          srcset: './images/illustrations/shop-item6.webp',
+          lazy: true,
+        },
+        name: 'Pizza Italiano',
+        url: './404.html',
+        price: '43.00',
+      },
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item7.jpg',
+          srcset: './images/illustrations/shop-item7.webp',
+          lazy: true,
+        },
+        name: 'Fried Potato',
+        url: './404.html',
+        price: '15.00',
+      },
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item8.jpg',
+          srcset: './images/illustrations/shop-item8.webp',
+          lazy: true,
+        },
+        name: 'Sandwich',
+        url: './404.html',
+        price: '17.00',
+      },
+
+      {
+        img: { 
+          src: './images/illustrations/shop-item9.jpg',
+          srcset: './images/illustrations/shop-item9.webp',
+          lazy: true,
+        },
+        name: 'Chicken Chup',
+        url: './404.html',
+        price: '28.00',
+        oldPrice: '33.00',
+        tags: [ { text: 'Sale', class: 'product-card__tag--sale' } ]
+      },
+
+    ];
+
+  article(class="product-slider" data-load-block=params.lazy)&attributes(attr)
+
+    h2(class="product-slider__title price-text")= params.title 
+
+    div(class="product-slider__controls")
+
+      button(class="product-slider__btn product-slider__btn--prev")
+        svg(class="product-slider__btn-icon")
+          use(xlink:href="./images/sprite.svg#arrow-horiz")
+
+      button(class="product-slider__btn product-slider__btn--next")
+        svg(class="product-slider__btn-icon")
+          use(xlink:href="./images/sprite.svg#arrow-horiz")
+
+    div(class="product-slider__slider swiper" id=params.sliderId)
+      div(class="swiper-wrapper")
+
+        each item, index in slides 
+
+          div(class="swiper-slide")
+
+            +product-card(item, { class: 'product-slider__product-card' })
 
 
 
