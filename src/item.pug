@@ -78,7 +78,7 @@ block main-content
 
     ];
 
-  article(class="good-description")
+  article(class="good-description" data-title="header")
 
     +demonstrator(null, { id: 'demo1', class: 'good-description__demonstrator' })
 
@@ -148,7 +148,7 @@ block main-content
         div(class="info-line__content")
           +rounded-socials(null, { class: 'info-line__rounded-socials' })
 
-  div(class="tabs-block" data-tabs)
+  div(class="tabs-block" data-tabs data-title="info")
 
     div(class="tabs-block__controls")
 
@@ -170,6 +170,4 @@ block main-content
 
           +review(item, { class: 'tabs-block__review' })
 
-  +product-slider
-
-
+  +product-slider(null, null, { 'data-title': 'similar' })

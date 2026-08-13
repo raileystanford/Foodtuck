@@ -104,6 +104,14 @@ let item_titles = {
     'en': 'Foodtuck - Shop details',
   },
 
+  'info': {
+    'en': 'Foodtuck - Item info',
+  },
+
+  'similar': {
+    'en': 'Foodtuck - Similar products',
+  },
+
   'footer': {
     'en': 'Foodtuck - Site map',
   },

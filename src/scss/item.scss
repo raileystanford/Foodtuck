@@ -593,7 +593,7 @@
     height: 40px;
     border-radius: 50%;
     background: var.$orange;
-    padding: 9px;
+    padding: 10px;
 
     &--next .product-slider__btn-icon {
       transform: rotate(180deg);
@@ -652,12 +652,12 @@
     grid-template-columns: 520px 1fr;
   }
 
-  // .product-card {
+  .product-card {
 
-  //   &__wrapper {
-  //     height: 200px;
-  //   }
-  // }
+    &__wrapper {
+      height: 200px;
+    }
+  }
 
 }
 
@@ -696,6 +696,13 @@
     }
   }
 
+  .product-card {
+
+    &__wrapper {
+      height: 220px;
+    }
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -715,6 +722,13 @@
   .good-description {
     display: flex;
     flex-direction: column;
+  }
+
+  .product-card {
+
+    &__wrapper {
+      height: 200px;
+    }
   }
 
 }
@@ -793,22 +807,35 @@
     }
   }
 
-  // .product-card {
+  .product-card {
 
-  //   &__wrapper {
-  //     height: 180px;
-  //   }
+    &__wrapper {
+      height: 180px;
+    }
 
-  //   &__tags {
-  //     top: 10px;
-  //     left: 10px;
-  //   }
+    &__tags {
+      top: 10px;
+      left: 10px;
+    }
 
-  //   &__btn {
-  //     width: 35px;
-  //     height: 35px;
-  //   }
-  // }
+    &__btn {
+      width: 35px;
+      height: 35px;
+    }
+
+    &__footer {
+      gap: 0px;
+    }
+  }
+
+  .product-slider {
+    grid-column: 1fr;
+    gap: 20px 0px;
+
+    &__controls {
+      display: none;
+    }
+  }
 
 }
 
@@ -893,29 +920,37 @@
     }
   }
 
-  // .product-card {
+  .product-card {
 
-  //   &__wrapper {
-  //     padding: 10px;
-  //     height: 160px;
-  //   }
+    &__wrapper {
+      padding: 10px;
+      height: 180px;
+    }
 
-  //   &__controls {
-  //     gap: 10px;
-  //   }
+    &__controls {
+      gap: 10px;
+    }
 
-  //   &__footer {
-  //     gap: 0px;
-  //   }
+    &__footer {
+      gap: 0px;
+    }
 
-  //   &__name {
-  //     font-size: 17px;
-  //   }
+    &__name {
+      font-size: 17px;
+    }
 
-  //   &__price, &__old-price {
-  //     font-size: 15px;
-  //     line-height: 19px;
-  //   }
-  // }
+    &__price, &__old-price {
+      font-size: 15px;
+      line-height: 19px;
+    }
+  }
+
+  .product-slider {
+
+    &__title {
+      font-size: 28px;
+      line-height: 33px;
+    }
+  }
 
 }

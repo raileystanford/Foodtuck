@@ -114,17 +114,63 @@ new Swiper('#prodSlider', {
     prevEl: '.product-slider .product-slider__btn--prev',
   },
 
-  // autoplay: {
-  //   delay: 2000,
-  //   disableOnInteraction: false,
-  //   pauseOnMouseEnter: true,
-  // },
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  },
+
+  breakpoints: {
+
+    996: {
+      slidesPerView: 4,
+      spaceBetween: 24, 
+    },
+
+    769: {
+      slidesPerView: 3,
+      spaceBetween: 24, 
+
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+    },
+
+    768: {
+      slidesPerView: 2.65, 
+      spaceBetween: 15,
+    },
+
+    576: {
+      slidesPerView: 2.65,
+      spaceBetween: 15, 
+    },
+
+    420: {
+      slidesPerView: 2,
+      spaceBetween: 15,
+    },
+
+    0: {
+      slidesPerView: 1.6,
+      spaceBetween: 10,
+
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true,
+      },
+    }
+
+  },
 
   on: {
 
-    // afterInit: function(swiper) {
-    //   if (typeof pauseSliderOnControlsHover !== 'undefined') pauseSliderOnControlsHover(swiper);
-    // }
+    afterInit: function(swiper) {
+      if (typeof pauseSliderOnControlsHover !== 'undefined') pauseSliderOnControlsHover(swiper);
+    }
 
   }
 
@@ -552,4 +598,4 @@ wishlistBtn();
 tabletsHandler();
 mobileShareBtn();
 favoriteButtonHandler();
-// slidersAutoplayViewportController('.demonstrator__thumbs.swiper');
+slidersAutoplayViewportController('.demonstrator__thumbs.swiper');
