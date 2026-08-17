@@ -1355,6 +1355,82 @@ mixin product-slider(params, slides, attr)
 
             +product-card(item, { class: 'product-slider__product-card' })
 
+mixin mini-counter(value = 1, attr)
+
+  - let isDisabled = value === 1;
+
+  div(class="mini-counter")&attributes(attr)
+
+    button(class="mini-counter__btn mini-counter__btn--minus" disabled=isDisabled)
+      svg(class="mini-counter__icon")
+        use(xlink:href="./images/sprite.svg#minus")
+
+    input(class="mini-counter__input menu-text" type="number" value=value)
+
+    button(class="mini-counter__btn mini-counter__btn--plus")
+      svg(class="mini-counter__icon")
+        use(xlink:href="./images/sprite.svg#plus")
+
+mixin cart(content, attr)
+
+  -
+    content = content ?? [
+
+      {
+        img: './images/illustrations/menu-burger-preview.jpg',
+        name: 'Hamburger',
+        weight: 250,
+        price: '35.00',
+        qantity: 1,
+        total: '35.00',
+      },
+
+    ];
+
+  table(class="cart")&attributes(attr)
+
+    tr(class="cart__row cart__row--head")
+
+      th(class="cart__th list-text") Product
+      th(class="cart__th list-text") Price
+      th(class="cart__th list-text") Quantity
+      th(class="cart__th list-text") Total
+      th(class="cart__th list-text") Remove
+
+    each item, index in content 
+
+      tr(class="cart__row")
+
+        td(class="cart__td")
+          div(class="cart__item")
+
+            img(class="cart__item-img" src=item.img alt=item.name)
+            em(class="cart__item-name list-text")= item.name
+            span(class="cart__item-weight menu-text")= item.weight
+
+        td(class="cart__td")
+          div(class="cart__td-inner")
+
+            span(class="cart__item-price job-text")= item.price
+
+        td(class="cart__td")
+          div(class="cart__td-inner")
+
+            +mini-counter(1, { class: 'cart__mini-counter' })
+
+        td(class="cart__td")
+          div(class="cart__td-inner")
+
+            span(class="cart__total menu-text")= item.total
+
+        td(class="cart__td")
+          div(class="cart__td-inner")
+
+            button(class="cart__remove")
+              svg(class="cart__remove-icon")
+                use(xlink:href="./images/sprite.svg#close-cross")
+          
+
 
 
 

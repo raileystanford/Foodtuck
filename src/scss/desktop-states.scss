@@ -1087,3 +1087,99 @@
 
   }
 }
+
+.mini-counter {
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var.$orange;
+  }
+}
+
+.mini-counter__btn {
+  transition: all 0.2s;
+
+  .mini-counter__icon {
+    transition: all 0.2s;
+  }
+
+  &:not([disabled]) {
+
+    &:hover, &:focus {
+      background: var.$orange;
+
+      .mini-counter__icon {
+        stroke: var.$white;
+      }
+    }
+
+    &:active {
+      transition: all 0.05s;
+      background: var.$blue;
+    }
+
+  }
+
+  
+}
+
+.cart__remove {
+  will-change: transform;
+  transition: all 0.2s;
+
+  .cart__remove-icon {
+    transition: all 0.2s;
+  }
+
+  &:hover, &:focus {
+
+    .cart__remove-icon {
+      stroke: var.$red;
+    }
+
+  }
+
+  &:active {
+    transition: all 0.05s;
+    transform: scale(0.85);
+  }
+}
+
+.cart__row {
+  transition: all 0.2s;
+
+  &:not(:first-child):hover {
+    background: var.$light-orange;
+  }
+}
+
+.input-area__input {
+  transition: all 0.2s;
+
+  &:not([disabled]) {
+
+    &:hover, &:focus {
+      border-color: var.$orange;
+    }
+
+  }
+}
+
+.input-area__button {
+  will-change: transform;
+  transition: all 0.2s;
+
+  &:not([disabled]) {
+
+    &:hover, &:focus {
+      background: var.$blue;
+    }
+
+    &:active {
+      transition: all 0.05s;
+      transform: scale(0.92);
+    }
+
+  }
+  
+}

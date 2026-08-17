@@ -118,6 +118,18 @@ let item_titles = {
 
 }
 
+let cart_titles = {
+
+  'header': {
+    'en': 'Foodtuck - Shopping Cart',
+  },
+
+  'footer': {
+    'en': 'Foodtuck - Site map',
+  },
+
+}
+
 let goods_info = [
 
   {
@@ -674,4 +686,5 @@ export {
   shop_titles,
   goods_info,
   item_titles,
+  cart_titles,
 };

@@ -1,0 +1,115 @@
+extends ./pug/_layout.pug
+
+block title
+  title Foodtuck - Shopping Cart
+
+block styles 
+  link(rel="stylesheet" href="./css/cart.css")
+  
+block scripts-libs 
+    
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js" defer)
+  script(src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer)
+
+block scripts 
+  script(src="./js/cart.js" type="module")
+
+block header-content 
+
+  +head-line('Shopping Cart', 'Shopping Cart', { class: 'custom-bg', 'data-title': 'header' })
+
+block main-content 
+
+  -
+    let cartContent = [
+
+      {
+        img: './images/illustrations/menu-burger-preview.jpg',
+        name: 'Hamburger',
+        weight: 250,
+        price: '35.00',
+        qantity: 1,
+        total: '35.00',
+      },
+
+      {
+        img: './images/illustrations/menu-chocolate-preview.jpg',
+        name: 'Chocolate Cocktail',
+        weight: 300,
+        price: '30.00',
+        qantity: 1,
+        total: '30.00',
+      },
+
+      {
+        img: './images/illustrations/menu-sandwich-preview.jpg',
+        name: 'Sandwich',
+        weight: 200,
+        price: '25.00',
+        qantity: 1,
+        total: '25.00',
+      },
+
+      {
+        img: './images/illustrations/menu-friedmeat-preview.jpg',
+        name: 'Fried Meat',
+        weight: 400,
+        price: '50.00',
+        qantity: 1,
+        total: '50.00',
+      },
+
+      {
+        img: './images/illustrations/menu-letuce-preview.jpg',
+        name: 'Letuce',
+        weight: 250,
+        price: '28.00',
+        qantity: 1,
+        total: '28.00',
+      },
+
+    ];
+
+  +cart(cartContent, { 'data-title': 'header' })
+
+  div(class="cart-empty")
+
+    span(class="cart-empty__text bold-text") Your cart is empty!
+    img(class="cart-empty__img" src="./images/icons/sad-smile.svg" alt="sad smile")
+    +common-btn({ url: './shop.html', text: 'Go to Shop' }, null, { class: 'cart-empty__common-btn' })
+
+  div(class="cart-summary" data-title="header")
+
+    div(class="cart-summary__area")
+
+      strong(class="cart-summary__title price-text") Coupon Code
+
+      div(class="cart-summary__content")
+
+        em(class="cart-summary__text list-text") Use your coupon code here to get various loyalty benefits and discounts of regular customer.
+
+        div(class="input-area cart-summary__input-area")
+          input(class="input-area__input menu-text" type="text" placeholder="Enter Code Here")
+          button(class="input-area__button list-text") Apply
+          span(class="input-area__warning menu-text") asdasd
+  
+    div(class="cart-summary__area")
+
+      strong(class="cart-summary__title price-text") Total Bill
+
+      div(class="cart-summary__content cart-summary__content--total")
+
+        div(class="cart-summary__line")
+          span(class="cart-summary__service check-text") Cart Subtotal
+          span(class="cart-summary__price cart-summary__price--subtotal check-text") 120.00
+
+        div(class="cart-summary__line")
+          span(class="cart-summary__service list-text") Shipping Charge
+          span(class="cart-summary__price cart-summary__price--shipping list-text") 10.00
+
+        div(class="cart-summary__line cart-summary__line--total")
+          span(class="cart-summary__service check-text") Total Amount
+          span(class="cart-summary__price cart-summary__price--total check-text") 130.00
+
+      +common-btn({ url: './404.html', text: 'Proceed to Checkout' }, './images/sprite.svg#proceed', { class: 'cart-summary__common-btn' })
