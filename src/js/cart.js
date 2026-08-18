@@ -23,6 +23,9 @@ function cartCalculatioHandler() {
   if (!cart || !summary) return;
 
   let rows = Array.from(document.querySelectorAll('.cart__row:not(.cart__row--head)'));
+
+  mobileView();
+
   let numberFormatter = new Intl.NumberFormat('ru');
   let isDiscountActivated = false;
 
@@ -66,6 +69,58 @@ function cartCalculatioHandler() {
     }
     
   });
+
+  document.addEventListener('focusin', (event) => {
+    
+    miniCounterFocusState(event.target, 'focus');
+
+    event.target.addEventListener('focusout', (event) => miniCounterFocusState(event.target));
+
+  });
+
+  function miniCounterFocusState(elem, state) {
+
+    let counter = elem.closest('.mini-counter');
+
+    rows.forEach((row) => row._counter.classList.remove('active'));
+
+    if (counter && (state === 'focus')) counter.classList.add('active');
+
+  }
+
+  function mobileView() {
+
+    let media = window.matchMedia('(max-width: 768px)').matches;
+
+    if (!media) return;
+
+    let mobCart = document.createElement('div');
+    mobCart.classList.add('cart');
+
+    let lines = [];
+
+    rows.forEach((row) => {
+
+      let line = document.createElement('div');
+      line.classList.add('cart__row');
+
+      let item = row.querySelector('.cart__item');
+      let itemPrice = row.querySelector('.cart__item-price');
+      let counter = row.querySelector('.mini-counter');
+      let itemTotal = row.querySelector('.cart__total');
+      let cartRemove = row.querySelector('.cart__remove');
+
+      line.append(item, itemPrice, counter, itemTotal, cartRemove);
+      lines.push(line);
+
+    });
+
+    rows = lines;
+    mobCart.append(...lines);
+    cart.replaceWith(mobCart);
+    cart = mobCart;
+
+  }
 
   function removeItemFromCart(elem) {
 
@@ -255,10 +310,11 @@ function cartCalculatioHandler() {
       row._price = parseFloat(row.querySelector('.cart__item-price').textContent);
       row._totalEl = row.querySelector('.cart__total');
       row._total = parseFloat(row._totalEl.textContent);
+      row._counter = counter;
 
     });
 
-  }
+  } 
 
 }
 
